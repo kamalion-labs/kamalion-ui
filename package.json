@@ -1,8 +1,19 @@
 {
   "name": "@kamalion/ui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "./dist/index.js",
   "types": "./types/index.d.ts",
+  "description": "UI Lib",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamalion-labs/kamalion-ui.git"
+  },
+  "author": "Rony Moura <ronymmoura@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kamalion-labs/kamalion-ui/issues"
+  },
+  "homepage": "https://github.com/kamalion-labs/kamalion-ui#readme",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",

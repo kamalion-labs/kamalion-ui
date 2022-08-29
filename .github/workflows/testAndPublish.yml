@@ -3,12 +3,17 @@ name: Test and Publish
 on:
   push:
     branches: ['master']
+
   pull_request:
     branches: ['master']
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
 
     strategy:
       matrix:
@@ -23,6 +28,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
+          scope: '@kamalion'
+
       - name: Run npm install
         run: npm install
 
