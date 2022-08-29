@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Alert should render danger alert 1`] = `
+<div
+  className="my-2 w-full rounded-md px-4 py-2 bg-[#f17573] text-white undefined"
+>
+  Danger
+</div>
+`;
+
+exports[`Alert should render info alert 1`] = `
+<div
+  className="my-2 w-full rounded-md px-4 py-2 bg-[#48b0f7] text-white undefined"
+>
+  Info
+</div>
+`;
+
+exports[`Alert should render success alert 1`] = `
+<div
+  className="my-2 w-full rounded-md px-4 py-2 bg-[#10cfbd] text-white undefined"
+>
+  Success
+</div>
+`;
+
+exports[`Alert should render warning alert 1`] = `
+<div
+  className="my-2 w-full rounded-md px-4 py-2 bg-[#f8d053] text-white undefined"
+>
+  Warning
+</div>
+`;
