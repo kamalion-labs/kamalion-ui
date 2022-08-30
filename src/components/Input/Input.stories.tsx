@@ -1,5 +1,5 @@
+import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { FaBeer } from 'react-icons/fa';
 import { Input } from '.';
 
 export default {
@@ -9,5 +9,17 @@ export default {
 
 const Template: ComponentStory<typeof Input> = (args) => <Input {...args} />;
 
-export const Text = Template.bind({});
-Text.args = {};
+export const Default = Template.bind({});
+Default.args = {
+  onChange: (value) => {
+    console.log({ value });
+  }
+};
+
+export const Number = Template.bind({});
+Number.args = {
+  maskType: 'money',
+  onChange: (value) => {
+    console.log({ value });
+  }
+};
