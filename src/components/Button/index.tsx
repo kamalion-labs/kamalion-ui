@@ -61,7 +61,7 @@ export const Button: React.FC<IProps> = ({
         </div>
       )}
 
-      <div className="px-5 py-1 flex items-center">
+      <div className="px-5 py-1 items-center text-center w-full">
         {!icon && isLoading && (
           <>
             <FaSpinner className="icon-spin mr-2" />
