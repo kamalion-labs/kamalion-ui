@@ -6,7 +6,7 @@ export type ButtonSize = 'small' | 'normal' | 'large';
 
 interface IProps {
   children: any;
-  onClick?: () => Promise<void>;
+  onClick?: (e: any) => Promise<void>;
   type?: ButtonType;
   size?: ButtonSize;
   icon?: any;
@@ -32,10 +32,10 @@ export const Button = React.forwardRef<any, IProps>(
     // const buttonType = colors[type];
     const buttonType = 'button-' + type;
 
-    const handleOnClick = async () => {
+    const handleOnClick = async (e: any) => {
       if (usesLoader) setLoading(true);
 
-      await onClick!();
+      await onClick!(e);
 
       if (usesLoader) setLoading(false);
     };
