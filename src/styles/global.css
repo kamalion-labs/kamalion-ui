@@ -33,7 +33,7 @@
   }
 
   .button-icon {
-    @apply flex rounded-l-md min-w-[28px] max-w-[28px] bg-opacity-20 bg-black h-full items-center justify-center;
+    @apply flex rounded-l-md min-w-[32px] max-w-[32px] bg-opacity-20 bg-black h-full items-center justify-center;
   }
 
   .icon-spin {

@@ -41,10 +41,10 @@ export const Button = React.forwardRef<any, IProps>(
 
     return (
       <button onClick={handleOnClick} className={`button ${buttonType} ${className}`} type={submit ? 'submit' : 'button'} ref={ref}>
-        {icon && !isLoading && <div className="button-icon">{icon}</div>}
+        {icon && !isLoading && <div className={`button-icon ${!children && 'rounded-r-md'}`}>{icon}</div>}
 
         {icon && isLoading && (
-          <div className="button-icon">
+          <div className={`button-icon ${!children && 'rounded-r-md'}`}>
             <FaSpinner className="icon-spin" />
           </div>
         )}

@@ -21,6 +21,11 @@ Icon.args = {
   icon: <FaBeer />
 };
 
+export const IconOnly = Template.bind({});
+IconOnly.args = {
+  icon: <FaBeer />
+};
+
 export const Loader = Template.bind({});
 Loader.args = {
   children: <>Loader</>,
