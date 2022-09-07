@@ -48,11 +48,7 @@ export const Button: React.FC<IProps> = ({
   };
 
   return (
-    <button
-      onClick={handleOnClick}
-      className={`flex h-[32px] flex-row rounded-md ${background} ${text} border-1 ${border} my-1 text-sm font-semibold transition hover:opacity-75 ${className}`}
-      type={submit ? 'submit' : 'button'}
-    >
+    <button onClick={handleOnClick} className={`button ${background} ${text} ${border} ${className}`} type={submit ? 'submit' : 'button'}>
       {icon && !isLoading && <div className="button-icon">{icon}</div>}
 
       {icon && isLoading && (
