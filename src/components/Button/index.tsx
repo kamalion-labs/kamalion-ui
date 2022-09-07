@@ -49,16 +49,18 @@ export const Button = React.forwardRef<any, IProps>(
           </div>
         )}
 
-        <div className="px-5 py-1 items-center text-center w-full">
-          {!icon && isLoading && (
-            <>
-              <FaSpinner className="icon-spin mr-2" />
-              {loadingText}
-            </>
-          )}
-          {!isLoading && children}
-          {isLoading && icon && loadingText}
-        </div>
+        {children && (
+          <div className="px-5 py-1 items-center text-center w-full">
+            {!icon && isLoading && (
+              <>
+                <FaSpinner className="icon-spin mr-2" />
+                {loadingText}
+              </>
+            )}
+            {!isLoading && children}
+            {isLoading && icon && loadingText}
+          </div>
+        )}
       </button>
     );
   }
