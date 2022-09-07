@@ -6,7 +6,7 @@ export type ButtonSize = 'small' | 'normal' | 'large';
 
 interface IProps {
   children: any;
-  onClick?: (e: any) => Promise<void>;
+  onClick?: (e?: any) => void | Promise<void>;
   type?: ButtonType;
   size?: ButtonSize;
   icon?: any;
