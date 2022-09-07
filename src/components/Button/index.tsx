@@ -16,58 +16,51 @@ interface IProps {
   submit?: boolean;
 }
 
-export const Button: React.FC<IProps> = ({
-  children,
-  onClick,
-  icon,
-  className,
-  type = 'primary',
-  usesLoader = false,
-  loadingText = 'Loading...',
-  submit = false
-}) => {
-  const [isLoading, setLoading] = useState(false);
+export const Button = React.forwardRef<any, IProps>(
+  ({ children, onClick, icon, className, type = 'primary', usesLoader = false, loadingText = 'Loading...', submit = false }, ref) => {
+    const [isLoading, setLoading] = useState(false);
 
-  // const colors = {
-  //   primary: 'button-primary',
-  //   secondary: 'button-secondary',
-  //   danger: 'button-danger',
-  //   warn: 'button-warn',
-  //   info: 'button-info',
-  //   success: 'button-success'
-  // };
+    // const colors = {
+    //   primary: 'button-primary',
+    //   secondary: 'button-secondary',
+    //   danger: 'button-danger',
+    //   warn: 'button-warn',
+    //   info: 'button-info',
+    //   success: 'button-success'
+    // };
 
-  // const buttonType = colors[type];
-  const buttonType = 'button-' + type;
+    // const buttonType = colors[type];
+    const buttonType = 'button-' + type;
 
-  const handleOnClick = async () => {
-    if (usesLoader) setLoading(true);
+    const handleOnClick = async () => {
+      if (usesLoader) setLoading(true);
 
-    await onClick!();
+      await onClick!();
 
-    if (usesLoader) setLoading(false);
-  };
+      if (usesLoader) setLoading(false);
+    };
 
-  return (
-    <button onClick={handleOnClick} className={`button ${buttonType} ${className}`} type={submit ? 'submit' : 'button'}>
-      {icon && !isLoading && <div className="button-icon">{icon}</div>}
+    return (
+      <button onClick={handleOnClick} className={`button ${buttonType} ${className}`} type={submit ? 'submit' : 'button'} ref={ref}>
+        {icon && !isLoading && <div className="button-icon">{icon}</div>}
 
-      {icon && isLoading && (
-        <div className="button-icon">
-          <FaSpinner className="icon-spin" />
-        </div>
-      )}
-
-      <div className="px-5 py-1 items-center text-center w-full">
-        {!icon && isLoading && (
-          <>
-            <FaSpinner className="icon-spin mr-2" />
-            {loadingText}
-          </>
+        {icon && isLoading && (
+          <div className="button-icon">
+            <FaSpinner className="icon-spin" />
+          </div>
         )}
-        {!isLoading && children}
-        {isLoading && icon && loadingText}
-      </div>
-    </button>
-  );
-};
+
+        <div className="px-5 py-1 items-center text-center w-full">
+          {!icon && isLoading && (
+            <>
+              <FaSpinner className="icon-spin mr-2" />
+              {loadingText}
+            </>
+          )}
+          {!isLoading && children}
+          {isLoading && icon && loadingText}
+        </div>
+      </button>
+    );
+  }
+);
