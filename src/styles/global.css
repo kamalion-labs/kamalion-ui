@@ -8,6 +8,30 @@
     @apply flex h-[32px] flex-row rounded-md border-1 my-1 text-sm font-semibold transition hover:opacity-75;
   }
 
+  .button-primary {
+    @apply bg-[#6D6EF0] text-white;
+  }
+
+  .button-secondary {
+    @apply bg-white text-[#6D6EF0];
+  }
+
+  .button-danger {
+    @apply bg-[#f17573] text-white;
+  }
+
+  .button-warn {
+    @apply bg-[#f8d053] text-white;
+  }
+
+  .button-info {
+    @apply bg-[#48b0f7] text-white;
+  }
+
+  .button-success {
+    @apply bg-[#10cfbd] text-white;
+  }
+
   .button-icon {
     @apply flex rounded-l-md min-w-[28px] max-w-[28px] bg-opacity-20 bg-black h-full items-center justify-center;
   }

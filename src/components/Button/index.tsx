@@ -20,24 +20,13 @@ export const Button: React.FC<IProps> = ({
   children,
   onClick,
   icon,
-  className,
+  className = '',
   type = 'primary',
   usesLoader = false,
   loadingText = 'Loading...',
   submit = false
 }) => {
   const [isLoading, setLoading] = useState(false);
-
-  const colors = {
-    primary: { background: 'bg-[#6D6EF0]', text: 'text-white', border: '' },
-    secondary: { background: 'bg-white', text: 'text-sky-500', border: 'border-sky-500' },
-    danger: { background: 'bg-[#f17573]', text: 'text-white', border: '' },
-    warn: { background: 'bg-[#f8d053]', text: 'text-white', border: '' },
-    info: { background: 'bg-[#48b0f7]', text: 'text-white', border: '' },
-    success: { background: 'bg-[#10cfbd]', text: 'text-white', border: '' }
-  };
-
-  const { background, border, text } = colors[type];
 
   const handleOnClick = async () => {
     if (usesLoader) setLoading(true);
@@ -48,7 +37,7 @@ export const Button: React.FC<IProps> = ({
   };
 
   return (
-    <button onClick={handleOnClick} className={`button ${background} ${text} ${border} ${className}`} type={submit ? 'submit' : 'button'}>
+    <button onClick={handleOnClick} className={`button button-${type} ${className}`} type={submit ? 'submit' : 'button'}>
       {icon && !isLoading && <div className="button-icon">{icon}</div>}
 
       {icon && isLoading && (
