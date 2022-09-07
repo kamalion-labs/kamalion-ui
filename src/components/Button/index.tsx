@@ -13,6 +13,7 @@ interface IProps {
   usesLoader?: boolean;
   loadingText?: string;
   className?: string;
+  submit?: boolean;
 }
 
 export const Button: React.FC<IProps> = ({
@@ -22,7 +23,8 @@ export const Button: React.FC<IProps> = ({
   className,
   type = 'primary',
   usesLoader = false,
-  loadingText = 'Loading...'
+  loadingText = 'Loading...',
+  submit = false
 }) => {
   const [isLoading, setLoading] = useState(false);
 
@@ -49,6 +51,7 @@ export const Button: React.FC<IProps> = ({
     <button
       onClick={handleOnClick}
       className={`flex h-[32px] flex-row rounded-md ${background} ${text} border-1 ${border} my-1 text-sm font-semibold transition hover:opacity-75 ${className}`}
+      type={submit ? 'submit' : 'button'}
     >
       {icon && !isLoading && <div className="button-icon">{icon}</div>}
 

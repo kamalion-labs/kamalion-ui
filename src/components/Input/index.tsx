@@ -5,15 +5,16 @@ export interface InputProps {
   value: any;
   onChange: (values: NumberFormatValues, sourceInfo?: SourceInfo) => void;
 
-  maskType?: 'text' | 'tel' | 'cel' | 'money' | 'percent' | 'date';
+  type?: 'text' | 'password' | 'tel' | 'cel' | 'money' | 'percent' | 'date';
   className?: string;
 
   name?: string;
   id?: string;
   max?: number;
+  placeholder?: string;
 }
 
-export const Input: React.FC<InputProps> = ({ id, name, value, onChange, max, maskType = 'text', className, ...rest }) => {
+export const Input: React.FC<InputProps> = ({ id, name, value, onChange, max, type = 'text', className, ...rest }) => {
   const maskProps = {
     money: {
       decimalScale: 2,
@@ -39,18 +40,19 @@ export const Input: React.FC<InputProps> = ({ id, name, value, onChange, max, ma
       format: '(##) #####-####',
       mask: '_'
     },
-    text: {}
+    text: {},
+    password: {
+      type: 'password' as 'text' | 'password' | 'tel'
+    }
   };
 
-  if (maskType !== 'text' && Object.keys(maskProps).includes(maskType)) {
-    return (
-      <NumberFormat className={`input ${className}`} value={value} onValueChange={onChange} maxLength={max} {...maskProps[maskType]} {...rest} />
-    );
+  if (type !== 'text' && type !== 'password' && Object.keys(maskProps).includes(type)) {
+    return <NumberFormat className={`input ${className}`} value={value} onValueChange={onChange} maxLength={max} {...maskProps[type]} {...rest} />;
   }
 
   return (
     <input
-      type={maskType}
+      type={type}
       className={`input ${className}`}
       onChange={(e) =>
         onChange({

@@ -55,6 +55,7 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+      - run: npm run build-styles
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
