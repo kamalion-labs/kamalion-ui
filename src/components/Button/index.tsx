@@ -20,7 +20,16 @@ export const Button = React.forwardRef<any, IProps>(
   ({ children, onClick, icon, className, type = 'primary', usesLoader = false, loadingText = 'Loading...', submit = false }, ref) => {
     const [isLoading, setLoading] = useState(false);
 
-    const buttonType = 'button-' + type;
+    const colors = {
+      primary: 'button-primary',
+      secondary: 'button-secondary',
+      danger: 'button-danger',
+      warn: 'button-warn',
+      info: 'button-info',
+      success: 'button-success'
+    };
+
+    const buttonType = colors[type];
 
     const handleOnClick = async (e: any) => {
       if (usesLoader) setLoading(true);
