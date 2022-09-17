@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { forwardRef, useState } from 'react';
 import { FaSpinner } from 'react-icons/fa';
 
 export type ButtonType = 'primary' | 'secondary' | 'danger' | 'warn' | 'info' | 'success' | 'white';
@@ -16,7 +16,7 @@ interface IProps {
   submit?: boolean;
 }
 
-export const Button = React.forwardRef<any, IProps>(
+export const Button = forwardRef<any, IProps>(
   ({ children, onClick, icon, className = '', type = 'primary', usesLoader = false, loadingText = 'Loading...', submit = false }, ref) => {
     const [isLoading, setLoading] = useState(false);
 

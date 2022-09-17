@@ -1,10 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@import '../components/Alert/styles.css';
-@import '../components/Badge/styles.css';
-@import '../components/Button/styles.css';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import './components.css';
+@import "tailwindcss/utilities";
 
 :root {
   --color-primary: #6D6EF0;
@@ -13,49 +10,49 @@
   --color-warn: #f8d053;
   --color-info: #48b0f7;
   --color-success: #10cfbd;
-
-  --color-nav: #293056;
-
 }
 
-.border-1 {
-  border-width: 1px;
-}
+@layer components {
 
-input[type='number'],
-input[type='number']::-webkit-outer-spin-button,
-input[type='number']::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-  -moz-appearance: textfield;
-}
-
-.input {
-  @apply mt-1 block text-black w-full px-3 py-2 bg-white border-2 rounded-md text-sm placeholder-slate-400
-  focus:outline-none focus:border-[color:var(--color-primary)] focus:ring-1 focus:ring-[color:var(--color-primary)]
-  disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-  invalid:border-pink-500 invalid:text-pink-600
-  focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
-}
-
-@-webkit-keyframes icon-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
+  .border-1 {
+    border-width: 1px;
   }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
-  }
-}
 
-@keyframes icon-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
+  input[type='number'],
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield;
   }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
+
+  .input {
+    @apply mt-1 block text-black w-full px-3 py-2 bg-white border-2 rounded-md text-sm placeholder-slate-400
+    focus:outline-none focus:border-[color:var(--color-primary)] focus:ring-1 focus:ring-[color:var(--color-primary)]
+    disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+    invalid:border-pink-500 invalid:text-pink-600
+    focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
+  }
+
+  @-webkit-keyframes icon-spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
+    }
+  }
+
+  @keyframes icon-spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
+    }
   }
 }
