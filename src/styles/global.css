@@ -3,17 +3,18 @@
 @import './components.css';
 @import "tailwindcss/utilities";
 
-:root {
-  --color-primary: #6D6EF0;
-  --color-secondary: #4FB0F6;
-  --color-danger: #f17573;
-  --color-warn: #f8d053;
-  --color-info: #48b0f7;
-  --color-success: #10cfbd;
+@layer base {
+  :root {
+    --color-primary: #6D6EF0;
+    --color-secondary: #4FB0F6;
+    --color-danger: #f17573;
+    --color-warn: #f8d053;
+    --color-info: #48b0f7;
+    --color-success: #10cfbd;
+  }
 }
 
 @layer components {
-
   .border-1 {
     border-width: 1px;
   }
