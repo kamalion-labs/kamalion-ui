@@ -2,7 +2,7 @@
 
 exports[`Badge should render danger Badge 1`] = `
 <div
-  className="my-2 rounded-full w-fit px-4 py-1 text-[10pt] font-semibold bg-[#f17573] text-white undefined"
+  className="badge badge-danger undefined"
 >
   Danger
 </div>
@@ -10,7 +10,7 @@ exports[`Badge should render danger Badge 1`] = `
 
 exports[`Badge should render info Badge 1`] = `
 <div
-  className="my-2 rounded-full w-fit px-4 py-1 text-[10pt] font-semibold bg-[#48b0f7] text-white undefined"
+  className="badge badge-info undefined"
 >
   Info
 </div>
@@ -18,7 +18,7 @@ exports[`Badge should render info Badge 1`] = `
 
 exports[`Badge should render success Badge 1`] = `
 <div
-  className="my-2 rounded-full w-fit px-4 py-1 text-[10pt] font-semibold bg-[#10cfbd] text-white undefined"
+  className="badge badge-success undefined"
 >
   Success
 </div>
@@ -26,7 +26,7 @@ exports[`Badge should render success Badge 1`] = `
 
 exports[`Badge should render warning Badge 1`] = `
 <div
-  className="my-2 rounded-full w-fit px-4 py-1 text-[10pt] font-semibold bg-[#f8d053] text-white undefined"
+  className="badge badge-warn undefined"
 >
   Warning
 </div>

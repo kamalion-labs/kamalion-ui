@@ -1,3 +1,4 @@
+import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { FaBeer } from 'react-icons/fa';
 import { Alert } from '.';
@@ -14,4 +15,14 @@ export const Text = Template.bind({});
 Text.args = {
   type: 'success',
   children: <>Alert</>
+};
+
+export const HtmlContent = Template.bind({});
+HtmlContent.args = {
+  type: 'success',
+  children: (
+    <>
+      <b>Alert</b> Content
+    </>
+  )
 };

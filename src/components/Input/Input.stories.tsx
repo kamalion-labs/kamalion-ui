@@ -18,7 +18,7 @@ Default.args = {
 
 export const Number = Template.bind({});
 Number.args = {
-  maskType: 'money',
+  type: 'money',
   onChange: (value) => {
     console.log({ value });
   }

@@ -1,0 +1,20 @@
+.alert {
+  @apply my-2 w-full rounded-md px-3 py-2 text-sm;
+}
+
+
+.alert-danger {
+  @apply bg-[color:var(--color-danger)] text-white;
+}
+
+.alert-warn {
+  @apply bg-[color:var(--color-warn)] text-white;
+}
+
+.alert-info {
+  @apply bg-[color:var(--color-info)] text-white;
+}
+
+.alert-success {
+  @apply bg-[color:var(--color-success)] text-white;
+}

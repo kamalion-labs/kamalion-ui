@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaSpinner } from 'react-icons/fa';
 
-export type ButtonType = 'primary' | 'secondary' | 'danger' | 'warn' | 'info' | 'success';
+export type ButtonType = 'primary' | 'secondary' | 'danger' | 'warn' | 'info' | 'success' | 'white';
 export type ButtonSize = 'small' | 'normal' | 'large';
 
 interface IProps {
@@ -17,7 +17,7 @@ interface IProps {
 }
 
 export const Button = React.forwardRef<any, IProps>(
-  ({ children, onClick, icon, className, type = 'primary', usesLoader = false, loadingText = 'Loading...', submit = false }, ref) => {
+  ({ children, onClick, icon, className = '', type = 'primary', usesLoader = false, loadingText = 'Loading...', submit = false }, ref) => {
     const [isLoading, setLoading] = useState(false);
 
     const colors = {
@@ -26,7 +26,8 @@ export const Button = React.forwardRef<any, IProps>(
       danger: 'button-danger',
       warn: 'button-warn',
       info: 'button-info',
-      success: 'button-success'
+      success: 'button-success',
+      white: 'button-white'
     };
 
     const buttonType = colors[type];
@@ -41,26 +42,28 @@ export const Button = React.forwardRef<any, IProps>(
 
     return (
       <button onClick={handleOnClick} className={`button ${buttonType} ${className}`} type={submit ? 'submit' : 'button'} ref={ref}>
-        {icon && !isLoading && <div className={`button-icon ${!children && 'rounded-r-md'}`}>{icon}</div>}
+        <div className="flex flex-row h-full">
+          {icon && !isLoading && <div className={`button-icon ${!children ? 'rounded-r-md' : 'bg-opacity-20 bg-black'}`}>{icon}</div>}
 
-        {icon && isLoading && (
-          <div className={`button-icon ${!children && 'rounded-r-md'}`}>
-            <FaSpinner className="icon-spin" />
-          </div>
-        )}
+          {icon && isLoading && (
+            <div className={`button-icon ${!children ? 'rounded-r-md' : 'bg-opacity-20 bg-black'}`}>
+              <FaSpinner className="icon-spin" />
+            </div>
+          )}
 
-        {children && (
-          <div className="px-5 py-1 items-center text-center w-full">
-            {!icon && isLoading && (
-              <>
-                <FaSpinner className="icon-spin mr-2" />
-                {loadingText}
-              </>
-            )}
-            {!isLoading && children}
-            {isLoading && icon && loadingText}
-          </div>
-        )}
+          {children && (
+            <div className="px-5 py-1 items-center text-center w-full">
+              {!icon && isLoading && (
+                <>
+                  <FaSpinner className="icon-spin mr-2" />
+                  {loadingText}
+                </>
+              )}
+              {!isLoading && children}
+              {isLoading && icon && loadingText}
+            </div>
+          )}
+        </div>
       </button>
     );
   }

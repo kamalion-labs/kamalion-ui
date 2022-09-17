@@ -1,10 +1,3 @@
-const types = {
-  danger: { bg: 'bg-[#f17573]', text: 'text-white' },
-  warning: { bg: 'bg-[#f8d053]', text: 'text-white' },
-  success: { bg: 'bg-[#10cfbd]', text: 'text-white' },
-  info: { bg: 'bg-[#48b0f7]', text: 'text-white' }
-};
-
 interface IProps {
   children: any;
   type: 'danger' | 'warning' | 'success' | 'info';
@@ -12,9 +5,16 @@ interface IProps {
 }
 
 export const Badge: React.FC<IProps> = ({ children, className, type }) => {
-  const { bg, text } = types[type];
+  const colors = {
+    danger: 'badge-danger',
+    warning: 'badge-warn',
+    info: 'badge-info',
+    success: 'badge-success'
+  };
+
+  const alertType = colors[type];
 
   if (!children) return null;
 
-  return <div className={`my-2 rounded-full w-fit px-4 py-1 text-[10pt] font-semibold ${bg} ${text} ${className}`}>{children}</div>;
+  return <div className={`badge ${alertType} ${className}`}>{children}</div>;
 };

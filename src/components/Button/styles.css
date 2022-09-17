@@ -1,0 +1,40 @@
+.button {
+  @apply h-[32px] rounded-md border-1 my-1 text-sm font-semibold transition hover:opacity-75;
+}
+
+.button-primary {
+  @apply bg-[color:var(--color-primary)] text-white;
+}
+
+.button-secondary {
+  @apply bg-[color:var(--color-secondary)] text-white;
+}
+
+.button-danger {
+  @apply bg-[color:var(--color-danger)] text-white;
+}
+
+.button-warn {
+  @apply bg-[color:var(--color-warn)] text-white;
+}
+
+.button-info {
+  @apply bg-[color:var(--color-info)] text-white;
+}
+
+.button-success {
+  @apply bg-[color:var(--color-success)] text-white;
+}
+
+.button-white {
+  @apply bg-white text-[color:var(--color-primary)] border-[color:var(--color-primary)];
+}
+
+.button-icon {
+  @apply flex rounded-l-md min-w-[32px] max-w-[32px]  items-center justify-center;
+}
+
+.icon-spin {
+  -webkit-animation: icon-spin 2s infinite linear;
+  animation: icon-spin 2s infinite linear;
+}
