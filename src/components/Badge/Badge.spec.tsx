@@ -1,7 +1,14 @@
+import React from 'react';
 import renderer from 'react-test-renderer';
 import { Badge } from '.';
 
 describe('Badge', () => {
+  it("should return null if there's no children", () => {
+    const alert = renderer.create(<Badge type="success">{null}</Badge>).toJSON();
+
+    expect(alert).toEqual(null);
+  });
+
   it('should render danger Badge', () => {
     const badge = renderer.create(<Badge type="danger">Danger</Badge>).toJSON();
 
@@ -9,7 +16,7 @@ describe('Badge', () => {
   });
 
   it('should render warning Badge', () => {
-    const badge = renderer.create(<Badge type="warning">Warning</Badge>).toJSON();
+    const badge = renderer.create(<Badge type="warn">Warning</Badge>).toJSON();
 
     expect(badge).toMatchSnapshot();
   });

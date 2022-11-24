@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should render danger Button 1`] = `
+<button
+  className="button button-danger "
+  onClick={[Function]}
+  type="button"
+>
+  <div
+    className="flex flex-row h-full"
+  >
+    <div
+      className="px-5 py-1 items-center text-center w-full"
+    >
+      Danger
+    </div>
+  </div>
+</button>
+`;
+
+exports[`Button should render info Button 1`] = `
+<button
+  className="button button-info "
+  onClick={[Function]}
+  type="button"
+>
+  <div
+    className="flex flex-row h-full"
+  >
+    <div
+      className="px-5 py-1 items-center text-center w-full"
+    >
+      Info
+    </div>
+  </div>
+</button>
+`;
+
+exports[`Button should render success Button 1`] = `
+<button
+  className="button button-success "
+  onClick={[Function]}
+  type="button"
+>
+  <div
+    className="flex flex-row h-full"
+  >
+    <div
+      className="px-5 py-1 items-center text-center w-full"
+    >
+      Success
+    </div>
+  </div>
+</button>
+`;
+
+exports[`Button should render warning Button 1`] = `
+<button
+  className="button button-warn "
+  onClick={[Function]}
+  type="button"
+>
+  <div
+    className="flex flex-row h-full"
+  >
+    <div
+      className="px-5 py-1 items-center text-center w-full"
+    >
+      Warning
+    </div>
+  </div>
+</button>
+`;

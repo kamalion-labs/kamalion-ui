@@ -5,7 +5,7 @@ export interface InputProps {
   value: any;
   onChange: (values: NumberFormatValues, sourceInfo?: SourceInfo) => void;
 
-  type?: 'text' | 'password' | 'tel' | 'cel' | 'money' | 'percent' | 'date';
+  type?: 'text' | 'number' | 'password' | 'tel' | 'cel' | 'money' | 'percent' | 'date';
   className?: string;
 
   name?: string;
@@ -41,6 +41,9 @@ export const Input: React.FC<InputProps> = ({ id, name, value, onChange, max, ty
       mask: '_'
     },
     text: {},
+    number: {
+      isNumericString: true
+    },
     password: {
       type: 'password' as 'text' | 'password' | 'tel'
     }

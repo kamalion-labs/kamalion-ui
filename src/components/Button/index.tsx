@@ -54,10 +54,10 @@ export const Button = forwardRef<any, IProps>(
           {children && (
             <div className="px-5 py-1 items-center text-center w-full">
               {!icon && isLoading && (
-                <>
+                <div className="flex flex-row items-center">
                   <FaSpinner className="icon-spin mr-2" />
                   {loadingText}
-                </>
+                </div>
               )}
               {!isLoading && children}
               {isLoading && icon && loadingText}

@@ -1,13 +1,13 @@
 interface IProps {
   children: any;
-  type: 'danger' | 'warning' | 'success' | 'info';
+  type: 'danger' | 'warn' | 'success' | 'info';
   className?: string;
 }
 
 export const Badge: React.FC<IProps> = ({ children, className, type }) => {
   const colors = {
     danger: 'badge-danger',
-    warning: 'badge-warn',
+    warn: 'badge-warn',
     info: 'badge-info',
     success: 'badge-success'
   };
