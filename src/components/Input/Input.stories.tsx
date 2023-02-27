@@ -23,3 +23,11 @@ Number.args = {
     console.log({ value });
   }
 };
+
+export const Button = Template.bind({});
+Button.args = {
+  button: 'Button',
+  onChange: (value) => {
+    console.log({ value });
+  }
+};

@@ -52,7 +52,7 @@ export const Button = forwardRef<any, IProps>(
           )}
 
           {children && (
-            <div className="px-5 py-1 items-center text-center w-full">
+            <div className="px-5 py-1 items-center flex text-center w-full">
               {!icon && isLoading && (
                 <div className="flex flex-row items-center">
                   <FaSpinner className="icon-spin mr-2" />

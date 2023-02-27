@@ -1,11 +1,13 @@
 @import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
-@import './preflight.css';
 
 @import '../components/Alert/styles.css';
 @import '../components/Badge/styles.css';
 @import '../components/Button/styles.css';
+@import '../components/Input/styles.css';
+
+@import "tailwindcss/utilities";
+
+@import "./preflight.css";
 
 :root {
   --color-primary: #6D6EF0;
@@ -16,44 +18,30 @@
   --color-success: #10cfbd;
 }
 
-.border-1 {
-  border-width: 1px;
-}
-
-input[type='number'],
-input[type='number']::-webkit-outer-spin-button,
-input[type='number']::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-  -moz-appearance: textfield;
-}
-
-.input {
-  @apply mt-1 block text-black w-full px-3 py-2 bg-white border-2 rounded-md text-sm placeholder-slate-400
-  focus:outline-none focus:border-[color:var(--color-primary)] focus:ring-1 focus:ring-[color:var(--color-primary)]
-  disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-  invalid:border-pink-500 invalid:text-pink-600
-  focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
-}
-
-@-webkit-keyframes icon-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
+@layer components {
+  .border-1 {
+    border-width: 1px;
   }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
-  }
-}
 
-@keyframes icon-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
+  @-webkit-keyframes icon-spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
+    }
   }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
+
+  @keyframes icon-spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
+    }
   }
 }
