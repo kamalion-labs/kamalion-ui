@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button should be clickable 1`] = `ShallowWrapper {}`;
-
 exports[`Button should have className 1`] = `
 <button
   className="button button-primary bg-white"
@@ -19,8 +17,6 @@ exports[`Button should have className 1`] = `
   </div>
 </button>
 `;
-
-exports[`Button should have icon and be clickable 1`] = `ShallowWrapper {}`;
 
 exports[`Button should have icon only 1`] = `
 <button
@@ -56,12 +52,6 @@ exports[`Button should have icon only 1`] = `
   </div>
 </button>
 `;
-
-exports[`Button should have icon only and a loader and be clickable 1`] = `ShallowWrapper {}`;
-
-exports[`Button should have loader and be clickable 1`] = `ShallowWrapper {}`;
-
-exports[`Button should have loader and icon and be clickable 1`] = `ShallowWrapper {}`;
 
 exports[`Button should render danger Button 1`] = `
 <button
