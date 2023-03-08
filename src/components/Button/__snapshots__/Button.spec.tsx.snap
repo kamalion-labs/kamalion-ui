@@ -12,7 +12,7 @@ exports[`Button should have className 1`] = `
     className="flex flex-row h-full"
   >
     <div
-      className="px-5 py-1 items-center text-center w-full"
+      className="px-5 py-1 items-center flex text-center w-full"
     >
       Classname
     </div>
@@ -73,7 +73,7 @@ exports[`Button should render danger Button 1`] = `
     className="flex flex-row h-full"
   >
     <div
-      className="px-5 py-1 items-center text-center w-full"
+      className="px-5 py-1 items-center flex text-center w-full"
     >
       Danger
     </div>
@@ -91,7 +91,7 @@ exports[`Button should render info Button 1`] = `
     className="flex flex-row h-full"
   >
     <div
-      className="px-5 py-1 items-center text-center w-full"
+      className="px-5 py-1 items-center flex text-center w-full"
     >
       Info
     </div>
@@ -109,7 +109,7 @@ exports[`Button should render primary Button 1`] = `
     className="flex flex-row h-full"
   >
     <div
-      className="px-5 py-1 items-center text-center w-full"
+      className="px-5 py-1 items-center flex text-center w-full"
     >
       Primary
     </div>
@@ -127,7 +127,7 @@ exports[`Button should render secondary Button 1`] = `
     className="flex flex-row h-full"
   >
     <div
-      className="px-5 py-1 items-center text-center w-full"
+      className="px-5 py-1 items-center flex text-center w-full"
     >
       Secondary
     </div>
@@ -145,7 +145,7 @@ exports[`Button should render submit Button 1`] = `
     className="flex flex-row h-full"
   >
     <div
-      className="px-5 py-1 items-center text-center w-full"
+      className="px-5 py-1 items-center flex text-center w-full"
     >
       Submit
     </div>
@@ -163,7 +163,7 @@ exports[`Button should render success Button 1`] = `
     className="flex flex-row h-full"
   >
     <div
-      className="px-5 py-1 items-center text-center w-full"
+      className="px-5 py-1 items-center flex text-center w-full"
     >
       Success
     </div>
@@ -181,7 +181,7 @@ exports[`Button should render warning Button 1`] = `
     className="flex flex-row h-full"
   >
     <div
-      className="px-5 py-1 items-center text-center w-full"
+      className="px-5 py-1 items-center flex text-center w-full"
     >
       Warning
     </div>
@@ -199,7 +199,7 @@ exports[`Button should render white Button 1`] = `
     className="flex flex-row h-full"
   >
     <div
-      className="px-5 py-1 items-center text-center w-full"
+      className="px-5 py-1 items-center flex text-center w-full"
     >
       White
     </div>
