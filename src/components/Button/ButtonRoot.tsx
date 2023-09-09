@@ -20,7 +20,6 @@ const ButtonRoot = ({
     <button
       className={cn(ButtonVariants({ variant, size, className }))}
       type={type}
-      ref={ref}
       {...props}
     >
       {children}
