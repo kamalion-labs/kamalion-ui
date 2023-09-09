@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { Page, Sidebar } from "../../../src/components";
 import { routes } from "../../router/routes";
+import logo from "../../assets/logo.svg";
 
 export function Layout({ children }: { children: ReactNode }) {
   return (
@@ -8,7 +9,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <Page.Sidebar>
         <Sidebar.Root>
           <Sidebar.Header>
-            <img src="/examples/assets/logo.svg" alt="logo" className="w-8" />
+            <img src={logo} alt="logo" className="w-8" />
             <span className="font-normal text-2xl font-montserrat">
               Kamalion UI
             </span>
