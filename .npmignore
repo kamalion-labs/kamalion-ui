@@ -1,9 +1,5 @@
+examples
 node_modules
-src
-tsconfig.json
-coverage
-.storybook
+public
 .git
-yarn-error.log
-.eslinrc.json
-jest.config.js
+.github

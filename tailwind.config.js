@@ -1,20 +1,26 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+export default {
+  content: ["./index.html", "./examples/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        'color-primary': 'var(--color-primary)',
-        'color-secondary': 'var(--color-secondary)',
-        'color-warn': 'var(--color-warn)',
-        'color-danger': 'var(--color-danger)',
-        'color-info': 'var(--color-info)',
-        'color-success': 'var(--color-success)'
-      }
-    }
+        accent: "rgba(var(--accent), <alpha-value>)",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: 0 },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: 0 },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+    },
   },
-  plugins: [require('postcss-import')],
-  corePlugins: {
-    preflight: true
-  }
+  plugins: [require("tailwind-scrollbar"), require("tailwindcss-radix")()],
 };
