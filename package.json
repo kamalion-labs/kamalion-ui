@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "prod": "tsc -P tsconfig.prod.json",
+    "build": "tsc -P tsconfig.prod.json",
+    "build-web": "vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
