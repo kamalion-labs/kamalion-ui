@@ -21,7 +21,7 @@ const InputSelect = React.forwardRef<
 
   if (!name) return null;
 
-  const value = formContext.getValues(name);
+  const value = formContext.watch(name);
 
   return (
     <>
