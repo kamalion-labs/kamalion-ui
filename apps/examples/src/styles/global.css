@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+  }
+
+  * {
+    font-family: Montserrat, Helvetica, Arial, sans-serif;
+  }
+  
+  body, #root {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+
+    @apply flex h-screen w-full;
+  }
+}
+
+@layer components {
+  .font-sen {
+    font-family: Sen;
+  }
+
+  .font-montserrat {
+    font-family: Montserrat;
+  }
+}

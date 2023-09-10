@@ -56,26 +56,10 @@
     --input-background: #FFF;
     --ring: 240 4.9% 83.9%;
   }
-}
-
-@layer components {
-  * {
-    font-family: Montserrat, Helvetica, Arial, sans-serif;
-  }
   
   body, #root {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-
-    @apply flex h-screen w-full;
-  }
-
-  .font-sen {
-    font-family: Sen;
-  }
-
-  .font-montserrat {
-    font-family: Montserrat;
   }
 }
