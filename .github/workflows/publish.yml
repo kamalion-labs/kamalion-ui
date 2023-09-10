@@ -26,6 +26,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@kamalion'
 
       - uses: pnpm/action-setup@v2
         name: Install pnpm
@@ -49,6 +51,7 @@ jobs:
 
       - run: pnpm i
       - run: pnpm run build
-      - run: pnpm publish
+      - run: cd packages/kamalion-ui
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
