@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "pnpm run --filter @kamalion/ui build",
+    "publish": "pnpm run --filter @kamalion/ui publish",
     "dev": "pnpm run --filter examples dev"
   },
   "keywords": [],
