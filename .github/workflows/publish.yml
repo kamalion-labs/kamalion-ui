@@ -30,7 +30,8 @@ jobs:
           cache: 'npm'
           scope: '@kamalion'
 
-      - run: npm ci
+      - run: cd packages/kamalion-ui/
+      - run: npm i
       - run: npm run build
       - run: npm publish
         env:
