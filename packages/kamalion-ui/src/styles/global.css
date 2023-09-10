@@ -39,6 +39,8 @@
 
     --box-background: #FFF;
 
+    --input-background: #FFF;
+
     --popover-background: var(--input-background);
     --popover-foreground: var(--input-foreground);
 
