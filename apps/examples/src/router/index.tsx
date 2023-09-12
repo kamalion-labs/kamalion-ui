@@ -1,6 +1,6 @@
 import { RouteObject, createBrowserRouter } from "react-router-dom";
 
-import { NavRoute } from "../../src/stores";
+import { NavRoute } from "@kamalion/ui";
 import { routes } from "./routes";
 
 function getRouterDomRoutes(routes: NavRoute[]) {

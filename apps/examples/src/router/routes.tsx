@@ -1,9 +1,10 @@
 import { FaBars, FaBeerMugEmpty, FaWpforms } from "react-icons/fa6";
 
-import { NavRoute } from "../../src/stores";
+import { NavRoute } from "@kamalion/ui";
 
 import { HomePage } from "../pages/home";
 import { AccordionPage } from "../pages/accordion";
+import { ButtonsPage } from "../pages/buttons";
 
 export const routes: NavRoute[] = [
   {
@@ -21,6 +22,14 @@ export const routes: NavRoute[] = [
     showInMenu: true,
     icon: <FaBars />,
     element: <AccordionPage />,
+  },
+  {
+    id: "Buttons",
+    title: "Buttons",
+    path: "/Buttons",
+    showInMenu: true,
+    icon: <FaBars />,
+    element: <ButtonsPage />,
   },
   {
     id: "submenu",

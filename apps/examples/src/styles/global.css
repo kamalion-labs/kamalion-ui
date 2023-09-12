@@ -4,7 +4,6 @@
 
 @layer base {
   :root {
-    --accent: 255, 0, 0;
   }
 
   * {
