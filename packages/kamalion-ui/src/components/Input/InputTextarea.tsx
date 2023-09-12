@@ -13,7 +13,7 @@ const InputTextarea = React.forwardRef<HTMLTextAreaElement, InputTextareaProps>(
         <textarea
           ref={ref}
           className={cn(
-            "flex w-full border bg-transparent p-3 transition-colors",
+            "flex w-full border bg-[--input-background] text-[--input-foreground] p-3 transition-colors",
             "placeholder:text-muted-foreground focus-visible:ring-ring",
             "file:border-0 file:bg-transparent file:text-sm file:font-medium",
             "focus-visible:ring-0 focus-visible:border-[--input-ring] focus-visible:outline-none",

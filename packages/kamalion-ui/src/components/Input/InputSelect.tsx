@@ -34,7 +34,7 @@ const InputSelect = React.forwardRef<
           ref={ref}
           asChild
           className={cn(
-            "flex w-fit min-w-[250px] bg-[--input-background] h-9 transition-colors",
+            "flex w-fit min-w-[250px] h-9 transition-colors",
             "border rounded-sm border-[--input-border]",
             "hover:bg-zinc-100 active:bg-zinc-200",
             "placeholder:text-muted-foreground",
@@ -48,7 +48,7 @@ const InputSelect = React.forwardRef<
           <Button.Root
             size="lg"
             className={cn(
-              "border rounded-sm border-[--input-border]",
+              "border bg-[--input-background] text-[--input-foreground] rounded-sm border-[--input-border]",
               triggerClassName
             )}
           >

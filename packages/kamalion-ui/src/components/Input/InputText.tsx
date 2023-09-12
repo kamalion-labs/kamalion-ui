@@ -14,7 +14,7 @@ const InputText = React.forwardRef<HTMLInputElement, InputProps>(
       <>
         <input
           className={cn(
-            "flex h-9 w-full bg-transparent px-3 py-1 transition-colors",
+            "flex h-9 w-full bg-[--input-background] text-[--input-foreground] px-3 py-1 transition-colors",
             "border rounded-sm border-[--input-border]",
             "placeholder:text-muted-foreground",
             "file:border-0 file:bg-transparent file:text-sm file:font-medium",
