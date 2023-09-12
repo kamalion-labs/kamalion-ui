@@ -89,6 +89,28 @@ export function ButtonsPage() {
                 <Button.Content>Button</Button.Content>
               </Button.Root>
             </div>
+            
+            <div className="space-x-3">
+              <Button.Root size="icon">
+                <Button.Icon><FaBeerMugEmpty /></Button.Icon>
+              </Button.Root>
+
+              <Button.Root size="icon" variant="accent">
+                <Button.Icon><FaBeerMugEmpty /></Button.Icon>
+              </Button.Root>
+
+              <Button.Root size="icon" variant="danger">
+                <Button.Icon><FaBeerMugEmpty /></Button.Icon>
+              </Button.Root>
+
+              <Button.Root size="icon" variant="success">
+                <Button.Icon><FaBeerMugEmpty /></Button.Icon>
+              </Button.Root>
+
+              <Button.Root size="icon" variant="ghost">
+                <Button.Icon><FaBeerMugEmpty /></Button.Icon>
+              </Button.Root>
+            </div>
           </Box.Content>
         </Box.Root>
 
