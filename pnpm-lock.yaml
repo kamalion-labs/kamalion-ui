@@ -4,13 +4,18 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  object-path@<0.11.5: '>=0.11.5'
+  object-path@<0.11.8: '>=0.11.8'
+  object-path@<0.11.6: '>=0.11.6'
+
 importers:
 
   .:
     dependencies:
       '@kamalion/ui':
         specifier: workspace:^
-        version: link:packages/kamalion-ui
+        version: 'link:'
 
   apps/examples:
     dependencies:
@@ -19,7 +24,7 @@ importers:
         version: 3.3.1(react-hook-form@7.46.1)
       '@kamalion/ui':
         specifier: workspace:^
-        version: link:../../packages/kamalion-ui
+        version: link:../..
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -148,11 +153,11 @@ importers:
         specifier: ^4.10.1
         version: 4.11.0(react@18.2.0)
       react-router-dom:
-        specifier: ^6.11.2
+        specifier: ^6.15.0
         version: 6.15.0(react-dom@18.2.0)(react@18.2.0)
       sort-by:
-        specifier: ^0.0.2
-        version: 0.0.2
+        specifier: ^1.2.0
+        version: 1.2.0
       tailwind-merge:
         specifier: ^1.14.0
         version: 1.14.0
@@ -3181,9 +3186,9 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /object-path@0.6.0:
-    resolution: {integrity: sha512-fxrwsCFi3/p+LeLOAwo/wyRMODZxdGBtUlWRzsEpsUVrisZbEfZ21arxLGfaWfcnqb8oHPNihIb4XPE8CQPN5A==}
-    engines: {node: '>=0.8.0'}
+  /object-path@0.11.8:
+    resolution: {integrity: sha512-YJjNZrlXJFM42wTBn6zgOJVar9KFJvzx6sTWDte8sWZF//cnjl0BxHNpfZx+ZffXX63A9q0b1zsFiBX4g4X5KA==}
+    engines: {node: '>= 10.12.0'}
     dev: false
 
   /object.assign@4.1.4:
@@ -3706,14 +3711,10 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /sort-by@0.0.2:
-    resolution: {integrity: sha512-iOX5oHA4a0eqTMFiWrHYqv924UeRKFBLhym7iwSVG37Egg2wApgZKAjyzM9WZjMwKv6+8Zi+nIaJ7FYsO9EkoA==}
-    dev: false
-
   /sort-by@1.2.0:
     resolution: {integrity: sha512-aRyW65r3xMnf4nxJRluCg0H/woJpksU1dQxRtXYzau30sNBOmf5HACpDd9MZDhKh7ALQ5FgSOfMPwZEtUmMqcg==}
     dependencies:
-      object-path: 0.6.0
+      object-path: 0.11.8
     dev: false
 
   /source-map-js@1.0.2:
