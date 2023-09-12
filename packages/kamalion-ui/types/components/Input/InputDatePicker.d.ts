@@ -1,12 +1,11 @@
-import * as React from "react";
-import { DayPicker } from "react-day-picker";
-type InputDatePickerTriggerProps = {
+import { DayPickerSingleProps } from "react-day-picker";
+export interface InputDatePickerProps extends Omit<DayPickerSingleProps, "mode"> {
     triggerClassName?: string;
-};
-export type CalendarProps = React.ComponentProps<typeof DayPicker>;
-export type InputDatePickerProps = React.InputHTMLAttributes<HTMLInputElement> & InputDatePickerTriggerProps;
+    name?: string;
+    mode?: "single";
+}
 declare const InputDatePicker: {
-    ({ className, triggerClassName, name, }: InputDatePickerProps): import("react/jsx-runtime").JSX.Element | null;
+    ({ className, triggerClassName, name, ...props }: InputDatePickerProps): import("react/jsx-runtime").JSX.Element | null;
     displayName: string;
 };
 export { InputDatePicker };

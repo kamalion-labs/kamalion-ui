@@ -7,7 +7,7 @@ export declare const Input: {
     Text: import("react").ForwardRefExoticComponent<import("react").InputHTMLAttributes<HTMLInputElement> & import("react").RefAttributes<HTMLInputElement>>;
     Textarea: import("react").ForwardRefExoticComponent<import("react").TextareaHTMLAttributes<HTMLTextAreaElement> & import("react").RefAttributes<HTMLTextAreaElement>>;
     DatePicker: {
-        ({ className, triggerClassName, name, }: import("./InputDatePicker").InputDatePickerProps): import("react/jsx-runtime").JSX.Element | null;
+        ({ className, triggerClassName, name, ...props }: import("./InputDatePicker").InputDatePickerProps): import("react/jsx-runtime").JSX.Element | null;
         displayName: string;
     };
     Select: import("react").ForwardRefExoticComponent<import("@radix-ui/react-select").SelectProps & {

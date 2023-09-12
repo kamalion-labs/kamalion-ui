@@ -1,6 +1,5 @@
-import * as React from "react";
 import { useFormContext } from "react-hook-form";
-import { DayPicker } from "react-day-picker";
+import { DayPickerSingleProps } from "react-day-picker";
 import { FaCalendar } from "react-icons/fa6";
 import { format } from "date-fns";
 
@@ -9,19 +8,18 @@ import { Popover } from "../Popover";
 import { Button } from "../Button";
 import { Calendar } from "../Calendar";
 
-type InputDatePickerTriggerProps = {
+export interface InputDatePickerProps
+  extends Omit<DayPickerSingleProps, "mode"> {
   triggerClassName?: string;
-};
-
-export type CalendarProps = React.ComponentProps<typeof DayPicker>;
-
-export type InputDatePickerProps = React.InputHTMLAttributes<HTMLInputElement> &
-  InputDatePickerTriggerProps;
+  name?: string;
+  mode?: "single";
+}
 
 const InputDatePicker = ({
   className,
   triggerClassName,
   name,
+  ...props
 }: InputDatePickerProps) => {
   const formContext = useFormContext();
 
@@ -52,6 +50,7 @@ const InputDatePicker = ({
 
         <Popover.Content className={cn("bg-[--popover-background]", className)}>
           <Calendar
+            {...props}
             mode="single"
             selected={value}
             onSelect={(val) => formContext.setValue(name, val)}
