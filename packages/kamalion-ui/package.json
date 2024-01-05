@@ -47,6 +47,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^1.2.1",
     "date-fns": "^2.30.0",
+    "framer-motion": "^10.17.6",
     "react-day-picker": "^8.8.1",
     "react-hook-form": "^7.44.3",
     "react-icons": "^4.10.1",
