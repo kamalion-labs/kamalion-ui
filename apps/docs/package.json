@@ -1,5 +1,5 @@
 {
-  "name": "examples",
+  "name": "docs",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,16 +11,13 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.0",
-    "@kamalion/ui": "workspace:^",
+    "@kamalion/ui": "*",
     "class-variance-authority": "^0.7.0",
-    "localforage": "^1.10.0",
-    "match-sorter": "^6.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.44.3",
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.15.0",
-    "sort-by": "^1.2.0",
     "zod": "^3.21.4"
   },
   "devDependencies": {

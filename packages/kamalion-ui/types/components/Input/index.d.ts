@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { InputLabel } from "./InputLabel";
 import { InputRoot } from "./InputRoot";
 export declare const Input: {
@@ -11,8 +10,8 @@ export declare const Input: {
         displayName: string;
     };
     Select: import("react").ForwardRefExoticComponent<import("@radix-ui/react-select").SelectProps & {
-        className?: string | undefined;
-        triggerClassName?: string | undefined;
+        className?: string;
+        triggerClassName?: string;
     } & import("react").RefAttributes<never>>;
     SelectItem: import("react").ForwardRefExoticComponent<Omit<import("@radix-ui/react-select").SelectItemProps & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
 };

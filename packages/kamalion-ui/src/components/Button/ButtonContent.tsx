@@ -4,11 +4,7 @@ import { cn } from "../../util/cn";
 
 type ButtonContentProps = React.HTMLAttributes<HTMLDivElement>;
 
-export function ButtonContent({
-  className,
-  children,
-  ...props
-}: ButtonContentProps) {
+export function ButtonContent({ className, children, ...props }: ButtonContentProps) {
   return (
     <div className={cn("drop-shadow-md", className)} {...props}>
       {children}

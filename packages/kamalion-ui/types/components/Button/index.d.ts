@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { ButtonContent } from "./ButtonContent";
 import { ButtonIcon } from "./ButtonIcon";
 export declare const Button: {

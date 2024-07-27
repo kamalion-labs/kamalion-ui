@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 export declare const Accordion: {
     Root: import("react").ForwardRefExoticComponent<(AccordionPrimitive.AccordionSingleProps | AccordionPrimitive.AccordionMultipleProps) & import("react").RefAttributes<HTMLDivElement>>;

@@ -1,24 +1,22 @@
 {
-  "name": "@kamalion/ui",
-  "version": "1.0.0",
+  "name": "ui",
+  "version": "0.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "build": "pnpm run --filter @kamalion/ui build",
-    "publish": "pnpm run --filter @kamalion/ui publish",
-    "dev": "pnpm run --filter examples dev"
+    "build": "npm run build -w @kamalion/ui",
+    "build-docs": "npm run build -w docs",
+    "publish": "npm run publish --access=public -w @kamalion/ui",
+    "dev": "concurrently --kill-others \"npm run dev -w=docs\" \"npm run dev -w=@kamalion/ui\" \"npm run dev-styles -w=@kamalion/ui\""
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@kamalion/ui": "workspace:^"
-  },
-  "pnpm": {
-    "overrides": {
-      "object-path@<0.11.5": ">=0.11.5",
-      "object-path@<0.11.8": ">=0.11.8",
-      "object-path@<0.11.6": ">=0.11.6"
-    }
+  "author": "Rony Moura<ronymmoura@gmail.com>",
+  "license": "MIT",
+  "workspaces": [
+    "apps/docs",
+    "packages/kamalion-ui"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "@kamalion/eslint-config": "1.0.2"
   }
 }

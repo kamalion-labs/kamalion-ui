@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 export declare const Popover: {
     Root: import("react").FC<PopoverPrimitive.PopoverProps>;

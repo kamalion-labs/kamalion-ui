@@ -3,8 +3,8 @@ import { type VariantProps } from "class-variance-authority";
 
 import { buttonVariants } from "./ButtonVariants";
 import { cn } from "../../util/cn";
-import { Button } from ".";
 import { FaSpinner } from "react-icons/fa6";
+import { ButtonIcon } from "./ButtonIcon";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -13,19 +13,7 @@ export interface ButtonProps
 }
 
 const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      variant,
-      className,
-      isLoading,
-      type = "button",
-      children,
-      size,
-      onClick,
-      ...props
-    },
-    ref
-  ) => {
+  ({ variant, className, isLoading, type = "button", children, size, onClick, ...props }, ref) => {
     return (
       <button
         className={cn(buttonVariants({ variant, size, className }))}
@@ -38,15 +26,15 @@ const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {isLoading && (
           <>
-            <Button.Icon>
+            <ButtonIcon>
               <FaSpinner className="animate-spin" />
-            </Button.Icon>
+            </ButtonIcon>
           </>
         )}
         {!isLoading && children}
       </button>
     );
-  }
+  },
 );
 
 ButtonRoot.displayName = "ButtonRoot";
