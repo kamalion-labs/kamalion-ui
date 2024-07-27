@@ -1,5 +1,7 @@
 import { InputDatePicker } from "./InputDatePicker";
 import { InputLabel } from "./InputLabel";
+import { InputMask } from "./InputMask";
+import { InputNumber } from "./InputNumber";
 import { InputRoot } from "./InputRoot";
 import { InputSelect } from "./InputSelect";
 import { InputSelectItem } from "./InputSelectItem";
@@ -14,4 +16,6 @@ export const Input = {
   DatePicker: InputDatePicker,
   Select: InputSelect,
   SelectItem: InputSelectItem,
+  Number: InputNumber,
+  Mask: InputMask,
 };
