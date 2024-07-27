@@ -24,10 +24,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: 'https://registry.npmjs.org'
-          scope: '@kamalion'
 
       - run: npm ci
       - run: npm run build
       - run: npm publish
+        working-directory: packages/kamalion-ui
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
