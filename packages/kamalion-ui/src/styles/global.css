@@ -47,6 +47,9 @@
 
     --calendar-background: var(--input-background);
     --calendar-today-bg: var(--background-alt);
+
+    --dialog-background: var(--background);
+    --dialog-foreground: var(--foreground);
   }
  
   .dark {
