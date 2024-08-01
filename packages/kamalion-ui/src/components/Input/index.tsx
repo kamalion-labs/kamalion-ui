@@ -1,3 +1,4 @@
+import { InputCheckbox } from "./InputCheckbox";
 import { InputDatePicker } from "./InputDatePicker";
 import { InputLabel } from "./InputLabel";
 import { InputMask } from "./InputMask";
@@ -18,4 +19,5 @@ export const Input = {
   SelectItem: InputSelectItem,
   Number: InputNumber,
   Mask: InputMask,
+  Checkbox: InputCheckbox,
 };
