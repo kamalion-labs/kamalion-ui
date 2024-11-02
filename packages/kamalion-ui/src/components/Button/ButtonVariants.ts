@@ -8,7 +8,7 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-white hover:bg-zinc-100 active:bg-zinc-200",
+        default: "bg-white hover:bg-zinc-100 active:bg-zinc-200 border",
         accent: `text-white bg-accent border-[--input-ring]
           hover:bg-accent/70 
           active:bg-accent/90 
