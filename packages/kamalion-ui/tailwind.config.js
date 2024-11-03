@@ -5,6 +5,10 @@ export default {
     extend: {
       colors: {
         accent: "rgba(var(--accent), <alpha-value>)",
+        "accent-foreground": "rgba(var(--accent-foreground), <alpha-value>)",
+        muted: "hsl(var(--muted))",
+        "muted-foreground": "hsl(var(--muted-foreground))",
+        border: "var(--border)",
       },
       keyframes: {
         "accordion-down": {

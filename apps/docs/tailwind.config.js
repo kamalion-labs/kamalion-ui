@@ -4,7 +4,6 @@ export default {
   theme: {
     extend: {
       colors: {
-        accent: "rgba(var(--accent), <alpha-value>)",
       },
       keyframes: {
         "accordion-down": {

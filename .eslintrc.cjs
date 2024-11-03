@@ -4,5 +4,7 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   parserOptions: { ecmaVersion: "latest", sourceType: "module" },
   plugins: ["react-refresh"],
-  rules: {},
+  rules: {
+    "react/no-unknown-property": "off",
+  },
 };

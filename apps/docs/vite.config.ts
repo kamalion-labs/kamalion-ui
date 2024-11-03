@@ -8,7 +8,18 @@ export default defineConfig({
     react(),
     Unfonts({
       google: {
-        families: ["Sen", "Montserrat"],
+        families: [
+          {
+            name: "Sen",
+            styles: "wght@100;200;300;400;500;600;700;800;900",
+            defer: true,
+          }, 
+          {
+            name: "Montserrat",
+            styles: "wght@100;200;300;400;500;600;700;800;900",
+            defer: true,
+          }
+        ],
       },
     }),
   ],

@@ -5,6 +5,7 @@ import { NavRoute } from "@kamalion/ui";
 import { HomePage } from "../pages/home";
 import { AccordionPage } from "../pages/accordion";
 import { ButtonsPage } from "../pages/buttons";
+import { CommandPage } from "../pages/command";
 
 export const routes: NavRoute[] = [
   {
@@ -30,6 +31,14 @@ export const routes: NavRoute[] = [
     showInMenu: true,
     icon: <FaBars />,
     element: <ButtonsPage />,
+  },
+  {
+    id: "Command",
+    title: "Command",
+    path: "/Command",
+    showInMenu: true,
+    icon: <FaBars />,
+    element: <CommandPage />,
   },
   {
     id: "submenu",

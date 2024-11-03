@@ -6,10 +6,15 @@
   :root {
     --background: #F4F4F4;
     --foreground: #2B303B;
+    
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
 
     --background-alt: #2B303B;
     --background-alt-darker: #272B34;
     --foreground-alt: #FFF;
+
+    --background-hover: var(--background-alt);
 
     --border: rgba(33,33,33,.14);
 
