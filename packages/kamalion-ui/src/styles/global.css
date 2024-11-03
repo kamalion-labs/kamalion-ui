@@ -10,6 +10,14 @@
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
 
+    --success: #3DC5A3;
+    --success-hover: #44d6b1;
+    --success-active: #46a88f;
+
+    --danger: #FF7A90;
+    --danger-hover: #ff9eac;
+    --danger-active: #e27384;
+
     --background-alt: #2B303B;
     --background-alt-darker: #272B34;
     --foreground-alt: #FFF;

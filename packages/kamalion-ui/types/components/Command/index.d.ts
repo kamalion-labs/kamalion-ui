@@ -5,7 +5,7 @@ export declare const Command: {
         ref?: import("react").Ref<HTMLDivElement>;
     } & {
         asChild?: boolean;
-    }, "key" | keyof import("react").HTMLAttributes<HTMLDivElement> | "asChild"> & {
+    }, "key" | "asChild" | keyof import("react").HTMLAttributes<HTMLDivElement>> & {
         label?: string;
         shouldFilter?: boolean;
         filter?: (value: string, search: string, keywords?: string[]) => number;
@@ -20,7 +20,7 @@ export declare const Command: {
         ref?: import("react").Ref<HTMLInputElement>;
     } & {
         asChild?: boolean;
-    }, "key" | "asChild" | keyof import("react").InputHTMLAttributes<HTMLInputElement>>, "onChange" | "value" | "type"> & {
+    }, "key" | "asChild" | keyof import("react").InputHTMLAttributes<HTMLInputElement>>, "value" | "onChange" | "type"> & {
         value?: string;
         onValueChange?: (search: string) => void;
     } & import("react").RefAttributes<HTMLInputElement>, "ref"> & import("react").RefAttributes<HTMLInputElement>>;
@@ -30,7 +30,7 @@ export declare const Command: {
         ref?: import("react").Ref<HTMLDivElement>;
     } & {
         asChild?: boolean;
-    }, "key" | keyof import("react").HTMLAttributes<HTMLDivElement> | "asChild"> & {
+    }, "key" | "asChild" | keyof import("react").HTMLAttributes<HTMLDivElement>> & {
         label?: string;
     } & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
     Empty: import("react").ForwardRefExoticComponent<Omit<{
@@ -39,14 +39,14 @@ export declare const Command: {
         ref?: import("react").Ref<HTMLDivElement>;
     } & {
         asChild?: boolean;
-    }, "key" | keyof import("react").HTMLAttributes<HTMLDivElement> | "asChild"> & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
+    }, "key" | "asChild" | keyof import("react").HTMLAttributes<HTMLDivElement>> & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
     Group: import("react").ForwardRefExoticComponent<Omit<{
         children?: import("react").ReactNode;
     } & Omit<Pick<Pick<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof import("react").HTMLAttributes<HTMLDivElement>> & {
         ref?: import("react").Ref<HTMLDivElement>;
     } & {
         asChild?: boolean;
-    }, "key" | keyof import("react").HTMLAttributes<HTMLDivElement> | "asChild">, "heading" | "value"> & {
+    }, "key" | "asChild" | keyof import("react").HTMLAttributes<HTMLDivElement>>, "value" | "heading"> & {
         heading?: import("react").ReactNode;
         value?: string;
         forceMount?: boolean;
@@ -57,7 +57,7 @@ export declare const Command: {
         ref?: import("react").Ref<HTMLDivElement>;
     } & {
         asChild?: boolean;
-    }, "key" | keyof import("react").HTMLAttributes<HTMLDivElement> | "asChild">, "onSelect" | "value" | "disabled"> & {
+    }, "key" | "asChild" | keyof import("react").HTMLAttributes<HTMLDivElement>>, "value" | "onSelect" | "disabled"> & {
         disabled?: boolean;
         onSelect?: (value: string) => void;
         value?: string;
@@ -72,7 +72,7 @@ export declare const Command: {
         ref?: import("react").Ref<HTMLDivElement>;
     } & {
         asChild?: boolean;
-    }, "key" | keyof import("react").HTMLAttributes<HTMLDivElement> | "asChild"> & {
+    }, "key" | "asChild" | keyof import("react").HTMLAttributes<HTMLDivElement>> & {
         alwaysRender?: boolean;
     } & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
 };

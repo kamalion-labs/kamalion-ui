@@ -13,8 +13,8 @@ export const buttonVariants = cva(
           hover:bg-accent/70 
           active:bg-accent/90 
           focus-visible:border-white`,
-        success: "text-white bg-emerald-500 hover:bg-emerald-600",
-        danger: "text-white bg-red-500 hover:bg-red-600",
+        success: "text-white bg-[--success] hover:bg-[--success-hover] active:bg-[--success-active]",
+        danger: "text-white bg-[--danger] hover:bg-[--danger-hover] active:bg-[--danger-active]",
         ghost: "border-none hover:font-bold",
       },
       size: {
