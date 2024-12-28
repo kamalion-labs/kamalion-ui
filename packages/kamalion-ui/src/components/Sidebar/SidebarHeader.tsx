@@ -18,7 +18,8 @@ export function SidebarHeader({ children, className }: SidebarHeaderProps) {
         className,
       )}
     >
-      <div>{children}</div>
+      {children}
+
       <div className="hover:cursor-pointer md:hidden" onClick={toggleNav}>
         <IoClose size={24} />
       </div>
