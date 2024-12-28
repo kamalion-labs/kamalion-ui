@@ -1,10 +1,4 @@
-import {
-  ReactNode,
-  createContext,
-  useCallback,
-  useContext,
-  useState,
-} from "react";
+import { ReactNode, createContext, useCallback, useContext, useState } from "react";
 import { Toast, ToastType } from "../components";
 
 interface ToastProviderProps {
@@ -19,17 +13,14 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   const [IsClosed, setIsClosed] = useState(true);
   const [Type, setType] = useState<ToastType>("success");
 
-  const showToast = useCallback(
-    ({ message, type = "success" }: { message: string; type?: ToastType }) => {
-      setMessage(message);
-      setType(type);
-      setIsVisible(true);
-      setIsClosed(false);
+  const showToast = useCallback(({ message, type = "success" }: { message: string; type?: ToastType }) => {
+    setMessage(message);
+    setType(type);
+    setIsVisible(true);
+    setIsClosed(false);
 
-      setTimeout(() => setIsVisible(false), 5000);
-    },
-    []
-  );
+    setTimeout(() => setIsVisible(false), 5000);
+  }, []);
 
   return (
     <ToastContext.Provider value={{ showToast }}>

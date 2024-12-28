@@ -12,6 +12,8 @@ interface NavState {
     currentId: string;
     parentId?: string;
     routes: NavRoute[];
+    navOpen: boolean;
+    toggleNav: () => void;
     setCurrentId: (id: string) => void;
     setParentId: (parentId: string) => void;
     setRoutes: (routes: NavRoute[]) => void;

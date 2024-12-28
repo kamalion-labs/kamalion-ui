@@ -9,10 +9,12 @@ export function Layout({ children }: { children: ReactNode }) {
       <Page.Sidebar>
         <Sidebar.Root>
           <Sidebar.Header>
-            <img src={logo} alt="logo" className="w-8" />
-            <span className="font-normal text-2xl font-montserrat">
-              Kamalion UI
-            </span>
+            <div className="flex gap-x-3">
+              <img src={logo} alt="logo" className="w-8" />
+              <span className="font-normal text-2xl font-montserrat">
+                Kamalion UI
+              </span>
+            </div>
           </Sidebar.Header>
 
           <Sidebar.Content>
