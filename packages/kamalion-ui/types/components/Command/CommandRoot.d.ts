@@ -5,7 +5,7 @@ declare const CommandRoot: React.ForwardRefExoticComponent<Omit<{
     ref?: React.Ref<HTMLDivElement>;
 } & {
     asChild?: boolean;
-}, "key" | "asChild" | keyof React.HTMLAttributes<HTMLDivElement>> & {
+}, "key" | keyof React.HTMLAttributes<HTMLDivElement> | "asChild"> & {
     label?: string;
     shouldFilter?: boolean;
     filter?: (value: string, search: string, keywords?: string[]) => number;

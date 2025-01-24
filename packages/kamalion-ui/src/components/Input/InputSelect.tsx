@@ -20,18 +20,8 @@ const InputSelect = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root> & InputSelectProps
 >(
   (
-    {
-      className,
-      triggerClassName,
-      position = "popper",
-      children,
-      name,
-      onValueChange,
-      noControl,
-      value,
-      ...props
-    },
-    ref
+    { className, triggerClassName, position = "popper", children, name, onValueChange, noControl, value, ...props },
+    ref,
   ) => {
     const formContext = useFormContext();
 
@@ -47,23 +37,21 @@ const InputSelect = React.forwardRef<
           value={value || undefined}
           name={name}
           onValueChange={(val) => {
-            uncontrolled
-              ? onValueChange!(val)
-              : formContext.setValue(name, val);
+            uncontrolled ? onValueChange!(val) : formContext.setValue(name, val);
           }}
         >
           <SelectPrimitive.Trigger
             ref={ref}
             asChild
             className={cn(
-              "flex w-fit min-w-[250px] h-9 transition-colors",
+              "flex w-fit min-w-[250px] h-8 transition-colors",
               "border rounded-sm border-[--input-border]",
               "hover:bg-zinc-100 active:bg-zinc-200",
               "placeholder:text-muted-foreground",
               "file:border-0 file:bg-transparent file:text-sm file:font-medium",
               "focus-visible:ring-0 focus-visible:border-[--input-ring] focus-visible:outline-none",
               "disabled:cursor-not-allowed disabled:opacity-50",
-              triggerClassName
+              triggerClassName,
             )}
             {...props}
           >
@@ -71,14 +59,11 @@ const InputSelect = React.forwardRef<
               size="lg"
               className={cn(
                 "border bg-[--input-background] text-[--input-foreground] rounded-sm border-[--input-border]",
-                triggerClassName
+                triggerClassName,
               )}
             >
               <Button.Content className="flex flex-1 justify-start">
-                <SelectPrimitive.Value
-                  className="flex-1"
-                  placeholder="Selecione um item..."
-                />
+                <SelectPrimitive.Value className="flex-1" placeholder="Selecione um item..." />
               </Button.Content>
 
               <Button.Icon>
@@ -99,7 +84,7 @@ const InputSelect = React.forwardRef<
                 "data-[side=left]:slide-in-from-right-2",
                 "data-[side=right]:slide-in-from-left-2",
                 "data-[side=top]:slide-in-from-bottom-2",
-                className
+                className,
               )}
             >
               <SelectPrimitive.ScrollUpButton className="flex items-center justify-center h-[25px] text-slate-900">
@@ -116,13 +101,13 @@ const InputSelect = React.forwardRef<
         </SelectPrimitive.Root>
 
         {!uncontrolled && name && (
-          <div className="text-red-400">
-            {formContext.formState?.errors?.[name]?.message?.toString()}
-          </div>
+          <div className="text-red-400">{formContext.formState?.errors?.[name]?.message?.toString()}</div>
         )}
       </>
     );
-  }
+  },
 );
+
+InputSelect.displayName = "InputSelect";
 
 export { InputSelect };

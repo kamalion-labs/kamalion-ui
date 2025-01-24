@@ -34,31 +34,20 @@ export type InputNumberProps = Omit<NumericFormatProps, "type"> & {
 };
 
 const InputNumber = React.forwardRef<HTMLInputElement, InputNumberProps>(
-  (
-    {
-      className,
-      name,
-      type = "number",
-      displayType = "input",
-      noControl,
-      ...rest
-    }: InputNumberProps,
-    ref
-  ) => {
+  ({ className, name, type = "number", displayType = "input", noControl, ...rest }: InputNumberProps, ref) => {
     const formContext = useFormContext();
 
     if (!name) return null;
 
     const classes = cn(
-      "flex h-9 w-full bg-[--input-background] text-[--input-foreground] px-3 py-1 transition-colors",
+      "flex h-8 w-full bg-[--input-background] text-[--input-foreground] px-3 py-1 transition-colors",
       "border rounded-sm border-[--input-border]",
       "placeholder:text-muted-foreground",
       "file:border-0 file:bg-transparent file:text-sm file:font-medium",
       "focus-visible:ring-0 focus-visible:border-[--input-ring] focus-visible:outline-none",
       "disabled:cursor-not-allowed disabled:opacity-50",
-      displayType === "text" &&
-        "border-0 p-0 disabled:cursor-text disabled:opacity-100 h-fit bg-transparent",
-      className
+      displayType === "text" && "border-0 p-0 disabled:cursor-text disabled:opacity-100 h-fit bg-transparent",
+      className,
     );
 
     if (!formContext || !formContext.control || noControl) {
@@ -96,14 +85,12 @@ const InputNumber = React.forwardRef<HTMLInputElement, InputNumberProps>(
               }
             />
 
-            <div className="text-red-400">
-              {props.fieldState.error?.message}
-            </div>
+            <div className="text-red-400">{props.fieldState.error?.message}</div>
           </>
         )}
       />
     );
-  }
+  },
 );
 
 InputNumber.displayName = "InputNumber";

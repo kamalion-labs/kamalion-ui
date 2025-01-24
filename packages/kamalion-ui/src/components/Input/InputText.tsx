@@ -11,33 +11,22 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 };
 
 const InputText = React.forwardRef<HTMLInputElement, InputProps>(
-  (
-    {
-      className,
-      name,
-      displayType = "input",
-      type = "text",
-      noControl,
-      ...props
-    },
-    ref
-  ) => {
+  ({ className, name, displayType = "input", type = "text", noControl, ...props }, ref) => {
     const formContext = useFormContext();
     const [ShowPassword, setShowPassword] = useState(false);
 
     if (!name) return null;
 
     const classes = cn(
-      "flex h-9 w-full bg-[--input-background] text-[--input-foreground] px-3 py-1 transition-colors",
+      "flex h-8 w-full bg-[--input-background] text-[--input-foreground] px-3 py-1 transition-colors",
       "border rounded-sm border-[--input-border]",
       "placeholder:text-muted-foreground",
       "file:border-0 file:bg-transparent file:text-sm file:font-medium",
       "focus-visible:ring-0 focus-visible:border-[--input-ring] focus-visible:outline-none",
       "disabled:cursor-not-allowed disabled:opacity-50",
-      displayType === "text" &&
-        "border-0 p-0 disabled:cursor-text disabled:opacity-100 h-fit bg-transparent",
+      displayType === "text" && "border-0 p-0 disabled:cursor-text disabled:opacity-100 h-fit bg-transparent",
       type === "password" && "rounded-r-none border-r-0",
-      className
+      className,
     );
 
     if (!formContext || !formContext.control || noControl) {
@@ -50,11 +39,7 @@ const InputText = React.forwardRef<HTMLInputElement, InputProps>(
               disabled={displayType === "text"}
               {...props}
               ref={ref}
-              type={
-                type === "text" || (type === "password" && ShowPassword)
-                  ? "text"
-                  : "password"
-              }
+              type={type === "text" || (type === "password" && ShowPassword) ? "text" : "password"}
             />
             {type === "password" && (
               <Button.Root
@@ -62,9 +47,7 @@ const InputText = React.forwardRef<HTMLInputElement, InputProps>(
                 className={cn("h-auto w-fit rounded-l-none")}
                 onClick={() => setShowPassword((old) => !old)}
               >
-                <Button.Icon>
-                  {ShowPassword ? <FaEyeSlash /> : <FaEye />}
-                </Button.Icon>
+                <Button.Icon>{ShowPassword ? <FaEyeSlash /> : <FaEye />}</Button.Icon>
               </Button.Root>
             )}
           </div>
@@ -82,11 +65,7 @@ const InputText = React.forwardRef<HTMLInputElement, InputProps>(
             {...props}
             {...formContext.register(name)}
             ref={ref}
-            type={
-              type === "text" || (type === "password" && ShowPassword)
-                ? "text"
-                : "password"
-            }
+            type={type === "text" || (type === "password" && ShowPassword) ? "text" : "password"}
           />
           {type === "password" && (
             <Button.Root
@@ -94,19 +73,15 @@ const InputText = React.forwardRef<HTMLInputElement, InputProps>(
               className={cn("h-auto w-fit rounded-l-none")}
               onClick={() => setShowPassword((old) => !old)}
             >
-              <Button.Icon>
-                {ShowPassword ? <FaEyeSlash /> : <FaEye />}
-              </Button.Icon>
+              <Button.Icon>{ShowPassword ? <FaEyeSlash /> : <FaEye />}</Button.Icon>
             </Button.Root>
           )}
         </div>
 
-        <div className="text-red-400">
-          {formContext.formState?.errors?.[name]?.message?.toString()}
-        </div>
+        <div className="text-red-400">{formContext.formState?.errors?.[name]?.message?.toString()}</div>
       </>
     );
-  }
+  },
 );
 
 InputText.displayName = "Input";

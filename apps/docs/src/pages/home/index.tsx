@@ -10,6 +10,7 @@ const selectItems = ["Apple", "Banana", "Blueberry", "Grapes", "Pineapple"];
 
 const formSchema = z.object({
   text: z.string().nonempty("Campo obrigatório"),
+  button: z.string().nonempty("Campo obrigatório"),
   password: z.string().nonempty("Campo obrigatório"),
   textarea: z.string().nonempty("Campo obrigatório"),
   date: z.coerce.date({
@@ -57,6 +58,16 @@ export function HomePage() {
                 <Input.Root>
                   <Input.Label htmlFor="date">DatePicker:</Input.Label>
                   <Input.DatePicker {...form.register("date")} />
+                </Input.Root>
+
+                <Input.Root>
+                  <Input.Label htmlFor="date">Button:</Input.Label>
+                  <div className="flex">
+                    <Input.Text {...form.register("button")} />
+                    <Button.Root>
+                      <Button.Content>Button</Button.Content>
+                    </Button.Root>
+                  </div>
                 </Input.Root>
 
                 <Input.Root>

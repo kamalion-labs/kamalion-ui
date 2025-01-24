@@ -49,17 +49,7 @@ export type InputMaskProps = Omit<PatternFormatProps, "type" | "format"> & {
 };
 
 const InputMask = React.forwardRef<HTMLInputElement, InputMaskProps>(
-  (
-    {
-      className,
-      name,
-      type,
-      displayType = "input",
-      noControl,
-      ...rest
-    }: InputMaskProps,
-    ref
-  ) => {
+  ({ className, name, type, displayType = "input", noControl, ...rest }: InputMaskProps, ref) => {
     const formContext = useFormContext();
 
     if (!name) return null;
@@ -67,15 +57,14 @@ const InputMask = React.forwardRef<HTMLInputElement, InputMaskProps>(
     const { returnFormattedValue, ...maskRest } = maskProps[type];
 
     const classes = cn(
-      "flex h-9 w-full bg-[--input-background] text-[--input-foreground] px-3 py-1 transition-colors",
+      "flex h-8 w-full bg-[--input-background] text-[--input-foreground] px-3 py-1 transition-colors",
       "border rounded-sm border-[--input-border]",
       "placeholder:text-muted-foreground",
       "file:border-0 file:bg-transparent file:text-sm file:font-medium",
       "focus-visible:ring-0 focus-visible:border-[--input-ring] focus-visible:outline-none",
       "disabled:cursor-not-allowed disabled:opacity-50",
-      displayType === "text" &&
-        "border-0 p-0 disabled:cursor-text disabled:opacity-100 h-fit bg-transparent",
-      className
+      displayType === "text" && "border-0 p-0 disabled:cursor-text disabled:opacity-100 h-fit bg-transparent",
+      className,
     );
 
     if (!formContext || !formContext.control || noControl) {
@@ -113,14 +102,12 @@ const InputMask = React.forwardRef<HTMLInputElement, InputMaskProps>(
               }
             />
 
-            <div className="text-red-400">
-              {props.fieldState.error?.message}
-            </div>
+            <div className="text-red-400">{props.fieldState.error?.message}</div>
           </>
         )}
       />
     );
-  }
+  },
 );
 
 InputMask.displayName = "InputMask";

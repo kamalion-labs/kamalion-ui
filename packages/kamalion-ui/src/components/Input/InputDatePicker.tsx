@@ -31,7 +31,7 @@ const InputDatePicker = React.forwardRef<
         <Popover.Trigger asChild ref={ref}>
           <Button.Root
             size="lg"
-            className={cn("border rounded-sm min-w-[250px] h-9 w-fit border-[--input-border]", triggerClassName)}
+            className={cn("border rounded-sm min-w-[250px] h-8 w-fit border-[--input-border]", triggerClassName)}
           >
             <Button.Content className="flex flex-1 justify-start">
               {value ? format(value, "dd/MM/yyyy") : "Selecione uma data..."}

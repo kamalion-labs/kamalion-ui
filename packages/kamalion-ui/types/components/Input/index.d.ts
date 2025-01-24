@@ -21,7 +21,7 @@ export declare const Input: {
         noControl?: boolean;
     } & import("react").RefAttributes<HTMLInputElement>>;
     Mask: import("react").ForwardRefExoticComponent<Omit<import("react-number-format").PatternFormatProps, "type" | "format"> & {
-        type: "tel" | "date" | "cel" | "hiddenCel" | "cpf" | "cnpj" | "cep";
+        type: "date" | "tel" | "cel" | "hiddenCel" | "cpf" | "cnpj" | "cep";
         noControl?: boolean;
     } & import("react").RefAttributes<HTMLInputElement>>;
     Checkbox: import("react").ForwardRefExoticComponent<Omit<import("@radix-ui/react-checkbox").CheckboxProps & import("react").RefAttributes<HTMLButtonElement>, "ref"> & {

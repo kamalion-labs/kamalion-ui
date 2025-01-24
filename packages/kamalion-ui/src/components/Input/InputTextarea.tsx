@@ -18,21 +18,17 @@ const InputTextarea = React.forwardRef<HTMLTextAreaElement, InputTextareaProps>(
             "file:border-0 file:bg-transparent file:text-sm file:font-medium",
             "focus-visible:ring-0 focus-visible:border-[--input-ring] focus-visible:outline-none",
             "disabled:cursor-not-allowed disabled:opacity-50",
-            className
+            className,
           )}
           id={name}
           {...props}
           {...(name && formContext.register(name))}
-        ></textarea>
+        />
 
-        {name && (
-          <div className="text-red-400">
-            {formContext.formState?.errors?.[name]?.message?.toString()}
-          </div>
-        )}
+        {name && <div className="text-red-400">{formContext.formState?.errors?.[name]?.message?.toString()}</div>}
       </>
     );
-  }
+  },
 );
 
 InputTextarea.displayName = "Input";

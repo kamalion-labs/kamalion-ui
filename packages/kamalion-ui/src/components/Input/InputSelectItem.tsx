@@ -16,7 +16,7 @@ const InputSelectItem = React.forwardRef<
       "cursor-pointer",
       "text-sm outline-none focus:bg-accent focus:text-accent-foreground",
       "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-      className
+      className,
     )}
     {...props}
   >
