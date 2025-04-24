@@ -1,7 +1,10 @@
+"use client";
+
 import * as React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { NumericFormat, NumericFormatProps } from "react-number-format";
 import { cn } from "../../util/cn";
+import { InputBaseClassNames, InputTextBaseClassNames } from "./InputBaseClassNames";
 
 type MaskType = "money" | "percent" | "number";
 
@@ -40,14 +43,9 @@ const InputNumber = React.forwardRef<HTMLInputElement, InputNumberProps>(
     if (!name) return null;
 
     const classes = cn(
-      "flex h-8 w-full bg-[--input-background] text-[--input-foreground] px-3 py-1 transition-colors",
-      "border rounded-sm border-[--input-border]",
-      "placeholder:text-muted-foreground",
-      "file:border-0 file:bg-transparent file:text-sm file:font-medium",
-      "focus-visible:ring-0 focus-visible:border-[--input-ring] focus-visible:outline-none",
-      "disabled:cursor-not-allowed disabled:opacity-50",
-      displayType === "text" && "border-0 p-0 disabled:cursor-text disabled:opacity-100 h-fit bg-transparent",
-      className,
+      InputBaseClassNames,
+      displayType === "text" && InputTextBaseClassNames,
+      className
     );
 
     if (!formContext || !formContext.control || noControl) {
@@ -58,6 +56,7 @@ const InputNumber = React.forwardRef<HTMLInputElement, InputNumberProps>(
           getInputRef={ref}
           onChange={(e) => e.preventDefault()}
           disabled={displayType === "text"}
+          displayType={displayType}
           {...rest}
         />
       );
@@ -75,22 +74,26 @@ const InputNumber = React.forwardRef<HTMLInputElement, InputNumberProps>(
               {...props.field}
               getInputRef={ref}
               disabled={displayType === "text"}
-              onChange={(e) => e.preventDefault()}
-              onValueChange={(e) =>
-                props.field.onChange({
-                  target: {
-                    value: e.value,
-                  },
-                })
-              }
+              onChange={(e) => {
+                e.preventDefault();
+              }}
+              onValueChange={(e) => {
+                props.field.onChange(e.floatValue);
+              }}
+              displayType={displayType}
+              id={name}
             />
 
-            <div className="text-red-400">{props.fieldState.error?.message}</div>
+            {props.fieldState.error && (
+              <div className="text-red-400" data-testid={`error-${name}`}>
+                {props.fieldState.error?.message}
+              </div>
+            )}
           </>
         )}
       />
     );
-  },
+  }
 );
 
 InputNumber.displayName = "InputNumber";

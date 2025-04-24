@@ -1,0 +1,13 @@
+examples
+node_modules
+public
+.git
+.github
+vite.config.ts
+tsconfig.*
+tailwind.config.js
+index.html
+src
+
+!dist
+!types

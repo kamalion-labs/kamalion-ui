@@ -1,4 +1,6 @@
-export declare const buttonVariants: (props?: ({
-    variant?: "default" | "accent" | "success" | "danger" | "ghost" | null | undefined;
-    size?: "default" | "sm" | "lg" | "icon" | null | undefined;
-} & import("class-variance-authority/types").ClassProp) | undefined) => string;
+import { VariantProps } from "class-variance-authority";
+export declare const buttonVariants: (props?: {
+    variant?: "default" | "success" | "danger" | "accent" | "ghost";
+    size?: "default" | "icon" | "sm" | "lg";
+} & import("class-variance-authority/types").ClassProp) => string;
+export type ButtonVariantsList = VariantProps<typeof buttonVariants>["variant"];

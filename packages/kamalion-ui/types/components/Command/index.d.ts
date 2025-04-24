@@ -1,8 +1,8 @@
 export declare const Command: {
     Root: import("react").ForwardRefExoticComponent<Omit<{
-        children?: import("react").ReactNode;
+        children?: React.ReactNode;
     } & Pick<Pick<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof import("react").HTMLAttributes<HTMLDivElement>> & {
-        ref?: import("react").Ref<HTMLDivElement>;
+        ref?: React.Ref<HTMLDivElement>;
     } & {
         asChild?: boolean;
     }, "key" | keyof import("react").HTMLAttributes<HTMLDivElement> | "asChild"> & {
@@ -16,48 +16,48 @@ export declare const Command: {
         disablePointerSelection?: boolean;
         vimBindings?: boolean;
     } & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
-    Input: import("react").ForwardRefExoticComponent<Omit<Omit<Pick<Pick<import("react").DetailedHTMLProps<import("react").InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, keyof import("react").InputHTMLAttributes<HTMLInputElement> | "key"> & {
-        ref?: import("react").Ref<HTMLInputElement>;
+    Input: import("react").ForwardRefExoticComponent<Omit<Omit<Pick<Pick<import("react").DetailedHTMLProps<import("react").InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, "key" | keyof import("react").InputHTMLAttributes<HTMLInputElement>> & {
+        ref?: React.Ref<HTMLInputElement>;
     } & {
         asChild?: boolean;
-    }, keyof import("react").InputHTMLAttributes<HTMLInputElement> | "key" | "asChild">, "type" | "value" | "onChange"> & {
+    }, "key" | "asChild" | keyof import("react").InputHTMLAttributes<HTMLInputElement>>, "onChange" | "value" | "type"> & {
         value?: string;
         onValueChange?: (search: string) => void;
     } & import("react").RefAttributes<HTMLInputElement>, "ref"> & import("react").RefAttributes<HTMLInputElement>>;
     List: import("react").ForwardRefExoticComponent<Omit<{
-        children?: import("react").ReactNode;
+        children?: React.ReactNode;
     } & Pick<Pick<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof import("react").HTMLAttributes<HTMLDivElement>> & {
-        ref?: import("react").Ref<HTMLDivElement>;
+        ref?: React.Ref<HTMLDivElement>;
     } & {
         asChild?: boolean;
     }, "key" | keyof import("react").HTMLAttributes<HTMLDivElement> | "asChild"> & {
         label?: string;
     } & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
     Empty: import("react").ForwardRefExoticComponent<Omit<{
-        children?: import("react").ReactNode;
+        children?: React.ReactNode;
     } & Pick<Pick<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof import("react").HTMLAttributes<HTMLDivElement>> & {
-        ref?: import("react").Ref<HTMLDivElement>;
+        ref?: React.Ref<HTMLDivElement>;
     } & {
         asChild?: boolean;
     }, "key" | keyof import("react").HTMLAttributes<HTMLDivElement> | "asChild"> & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
     Group: import("react").ForwardRefExoticComponent<Omit<{
-        children?: import("react").ReactNode;
+        children?: React.ReactNode;
     } & Omit<Pick<Pick<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof import("react").HTMLAttributes<HTMLDivElement>> & {
-        ref?: import("react").Ref<HTMLDivElement>;
+        ref?: React.Ref<HTMLDivElement>;
     } & {
         asChild?: boolean;
-    }, "key" | keyof import("react").HTMLAttributes<HTMLDivElement> | "asChild">, "value" | "heading"> & {
-        heading?: import("react").ReactNode;
+    }, "key" | keyof import("react").HTMLAttributes<HTMLDivElement> | "asChild">, "heading" | "value"> & {
+        heading?: React.ReactNode;
         value?: string;
         forceMount?: boolean;
     } & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
     Item: import("react").ForwardRefExoticComponent<Omit<{
-        children?: import("react").ReactNode;
+        children?: React.ReactNode;
     } & Omit<Pick<Pick<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof import("react").HTMLAttributes<HTMLDivElement>> & {
-        ref?: import("react").Ref<HTMLDivElement>;
+        ref?: React.Ref<HTMLDivElement>;
     } & {
         asChild?: boolean;
-    }, "key" | keyof import("react").HTMLAttributes<HTMLDivElement> | "asChild">, "disabled" | "value" | "onSelect"> & {
+    }, "key" | keyof import("react").HTMLAttributes<HTMLDivElement> | "asChild">, "onSelect" | "disabled" | "value"> & {
         disabled?: boolean;
         onSelect?: (value: string) => void;
         value?: string;
@@ -65,11 +65,11 @@ export declare const Command: {
         forceMount?: boolean;
     } & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
     Shortcut: {
-        ({ className, ...props }: import("react").HTMLAttributes<HTMLSpanElement>): import("react/jsx-runtime").JSX.Element;
+        ({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>): import("react/jsx-runtime").JSX.Element;
         displayName: string;
     };
     Separator: import("react").ForwardRefExoticComponent<Omit<Pick<Pick<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof import("react").HTMLAttributes<HTMLDivElement>> & {
-        ref?: import("react").Ref<HTMLDivElement>;
+        ref?: React.Ref<HTMLDivElement>;
     } & {
         asChild?: boolean;
     }, "key" | keyof import("react").HTMLAttributes<HTMLDivElement> | "asChild"> & {

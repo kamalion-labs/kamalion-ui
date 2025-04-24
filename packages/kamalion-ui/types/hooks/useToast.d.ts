@@ -6,7 +6,7 @@ interface ToastProviderProps {
         type?: ToastType;
     }) => void;
 }
-export declare const ToastContext: import("react").Context<ToastProviderProps | null>;
+export declare const ToastContext: import("react").Context<ToastProviderProps>;
 export declare function ToastProvider({ children }: {
     children: ReactNode;
 }): import("react/jsx-runtime").JSX.Element;

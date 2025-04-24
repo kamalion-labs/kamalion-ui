@@ -1,7 +1,7 @@
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { ReactNode } from "react";
 import { FaChevronRight } from "react-icons/fa6";
-import { useNav } from "../../stores";
+//import { useNav } from "../../stores";
 import { cn } from "../../util/cn";
 
 interface SidebarMenuGroupProps {
@@ -17,15 +17,15 @@ export function SidebarMenuGroup({
   text,
   icon,
 }: SidebarMenuGroupProps) {
-  const { parentId } = useNav();
+  //const { parentId } = useNav();
 
   return (
     <NavigationMenu.Item className="group" value={id}>
       <NavigationMenu.Trigger
         className={cn(
-          "group flex w-full select-none text-[--nav-item-foreground] items-center space-x-4 h-10 pr-4 transition-colors",
+          "itc-menu-group group flex w-full select-none text-[--nav-item-foreground] items-center space-x-4 h-10 pr-4 transition-colors",
           "hover:text-[--nav-item-foreground-hover]",
-          id === parentId && "text-primary"
+          //id === parentId && "text-primary"
         )}
         onPointerMove={(event) => event.preventDefault()}
         onPointerLeave={(event) => event.preventDefault()}
@@ -45,7 +45,7 @@ export function SidebarMenuGroup({
 
       <NavigationMenu.Content
         className={cn(
-          "bg-[--nav-group-background]",
+          "itc-menu-content bg-[--nav-group-background]",
           "w-radix-navigation-menu-viewport",
           "h-radix-navigation-menu-viewport",
           "radix-state-open:animate-scale-in-content",

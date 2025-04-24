@@ -1,10 +1,10 @@
 import { SidebarHeader } from "./SidebarHeader";
 import { SidebarContent } from "./SidebarContent";
 import { SidebarRoot } from "./SidebarRoot";
+import { SidebarFooter } from "./SidebarFooter";
 import { SidebarMenu } from "./SidebarMenu";
 import { SidebarMenuItem } from "./SidebarMenuItem";
 import { SidebarMenuGroup } from "./SidebarMenuGroup";
-import { SidebarFooter } from "./SidebarFooter";
 
 export const Sidebar = {
   Root: SidebarRoot,

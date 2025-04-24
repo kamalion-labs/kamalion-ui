@@ -14,9 +14,9 @@ const InputSelectItem = React.forwardRef<
     className={cn(
       "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8",
       "cursor-pointer",
-      "text-sm outline-none focus:bg-accent focus:text-accent-foreground",
+      "text-sm outline-none focus:bg-accent focus:text-white",
       "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-      className,
+      className
     )}
     {...props}
   >

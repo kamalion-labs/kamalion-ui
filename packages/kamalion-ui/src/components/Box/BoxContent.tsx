@@ -1,4 +1,3 @@
-import React from "react";
 import { cn } from "../../util/cn";
 
 type BoxContentProps = React.HTMLAttributes<HTMLDivElement>;

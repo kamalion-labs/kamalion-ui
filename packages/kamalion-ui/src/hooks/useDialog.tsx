@@ -1,3 +1,5 @@
+"use client";
+
 import { Dialog } from "..";
 import { ReactNode, createContext, useCallback, useContext, useState } from "react";
 
@@ -21,7 +23,7 @@ export function DialogProvider({ children }: { children: ReactNode }) {
   const [OnCloseEvent, setOnCloseEvent] = useState<() => void>();
   const [IsVisible, setIsVisible] = useState(false);
   const [IsClosed, setIsClosed] = useState(true);
-  const [ContentClassName, setContentClassName] = useState<string | undefined>("");
+  const [ContentClassName, setContentClassName] = useState("");
 
   const showDialog = useCallback(({ content, title, onClose, contentClassName }: ShowDialogProps) => {
     setContent(content);

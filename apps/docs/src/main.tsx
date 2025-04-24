@@ -1,14 +1,23 @@
-import { StrictMode } from "react";
-import ReactDOM from "react-dom/client";
-import { RouterProvider } from "react-router-dom";
+import { createRoot } from "react-dom/client";
+import { createHashRouter, Outlet, RouterProvider } from "react-router";
 
-import "@kamalion/ui/dist/styles.css";
 import "./styles/global.css";
+import { createRoutesList, DialogProvider, PageProvider, ToastProvider } from "@kamalion/ui";
+import routes from "./routes";
 
-import { router } from "./router";
+const router = createHashRouter([
+  {
+    element: (
+      <PageProvider>
+        <ToastProvider>
+          <DialogProvider>
+            <Outlet />
+          </DialogProvider>
+        </ToastProvider>
+      </PageProvider>
+    ),
+    children: createRoutesList(routes, <div>404</div>),
+  },
+]);
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
-);
+createRoot(document.getElementById("root")!).render(<RouterProvider router={router} />);

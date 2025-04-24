@@ -10,5 +10,5 @@ type InputErrorProps = React.HTMLAttributes<HTMLDivElement> & InputErrorsProps;
 export function InputError({ className, children }: InputErrorProps) {
   if (!children) return null;
 
-  return <div className={cn("", className)}>{children}</div>;
+  return <div className={cn("itc-input-error", className)}>{children}</div>;
 }

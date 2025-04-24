@@ -1,4 +1,4 @@
-import { InputCheckbox } from "./InputCheckbox";
+import { InputCheckbox, InputCheckboxState } from "./InputCheckbox";
 import { InputDatePicker } from "./InputDatePicker";
 import { InputLabel } from "./InputLabel";
 import { InputMask } from "./InputMask";
@@ -21,3 +21,5 @@ export const Input = {
   Mask: InputMask,
   Checkbox: InputCheckbox,
 };
+
+export { type InputCheckboxState };

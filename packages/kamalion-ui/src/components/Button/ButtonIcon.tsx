@@ -6,7 +6,7 @@ type ButtonIconProps = React.HTMLAttributes<HTMLDivElement>;
 
 export function ButtonIcon({ className, children, ...props }: ButtonIconProps) {
   return (
-    <div className={cn("drop-shadow-md", className)} {...props}>
+    <div className={cn("itc-button-icon drop-shadow-md", className)} {...props}>
       {children}
     </div>
   );

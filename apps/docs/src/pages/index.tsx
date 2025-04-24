@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
 import { Page, Sidebar } from "@kamalion/ui";
-import { routes } from "../../router/routes";
-import logo from "../../assets/logo.svg";
+import routes from "../routes";
+import logo from "../assets/logo.svg";
+import { Outlet } from "react-router";
 
-export function Layout({ children }: { children: ReactNode }) {
+export function Layout() {
   return (
     <Page.Root>
       <Page.Sidebar>
@@ -28,7 +28,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <Page.Wrapper>
         <Page.Header>Título</Page.Header>
 
-        {children}
+        <Outlet />
       </Page.Wrapper>
     </Page.Root>
   );

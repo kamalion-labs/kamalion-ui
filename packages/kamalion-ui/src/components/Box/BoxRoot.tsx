@@ -1,4 +1,3 @@
-import React from "react";
 import { cn } from "../../util/cn";
 
 type BoxRootProps = React.HTMLAttributes<HTMLDivElement>;
@@ -7,7 +6,7 @@ export function BoxRoot({ className, children, ...rest }: BoxRootProps) {
   return (
     <div
       className={cn(
-        "bg-[--box-background] drop-shadow-md",
+        "itc-box bg-(--box-background) border border-(--box-border)",
         "rounded-md",
         className
       )}
