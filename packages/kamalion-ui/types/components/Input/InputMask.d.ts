@@ -11,9 +11,11 @@ type InputMaskType = keyof typeof maskProps;
 export type InputMaskProps = Omit<PatternFormatProps, "type" | "format"> & {
     type: InputMaskType;
     noControl?: boolean;
+    noError?: boolean;
 };
 declare const InputMask: React.ForwardRefExoticComponent<Omit<PatternFormatProps, "type" | "format"> & {
     type: InputMaskType;
     noControl?: boolean;
+    noError?: boolean;
 } & React.RefAttributes<HTMLInputElement>>;
 export { InputMask };

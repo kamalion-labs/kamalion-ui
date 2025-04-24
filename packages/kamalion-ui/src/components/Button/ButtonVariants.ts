@@ -1,21 +1,22 @@
-import { cva } from "class-variance-authority";
+import { cva, VariantProps } from "class-variance-authority";
 
 export const buttonVariants = cva(
-  `inline-flex min-w-[130px] items-center justify-center text-sm font-medium space-x-3 rounded px-3 py-1
-  transition-all bg-[--button-background] text-[--button-foreground]
-  focus-visible:ring-0 focus-visible:border-[--input-ring] focus-visible:outline-none
+  `itc-button inline-flex w-fit items-center justify-center text-sm font-medium space-x-3 rounded px-3 py-1
+  transition-all
+  hover:cursor-pointer
   disabled:pointer-events-none disabled:opacity-50`,
   {
     variants: {
       variant: {
-        default: "bg-white hover:bg-zinc-100 active:bg-zinc-200 border",
-        accent: `text-white bg-accent border-[--input-ring]
-          hover:bg-accent/70 
-          active:bg-accent/90 
-          focus-visible:border-white`,
-        success: "text-white bg-[--success] hover:bg-[--success-hover] active:bg-[--success-active]",
-        danger: "text-white bg-[--danger] hover:bg-[--danger-hover] active:bg-[--danger-active]",
-        ghost: "border-none hover:font-bold",
+        default: `border border-(--border) bg-(--color-background) text-(--color-foreground)
+          hover:bg-white active:bg-zinc-200
+          dark:bg-(--color-background) dark:hover:bg-zinc-700`,
+        accent: `text-accent-foreground bg-accent
+          hover:bg-accent/70 active:bg-accent/90
+          dark:text-foreground`,
+        success: "text-white bg-emerald-400 hover:bg-emerald-500",
+        danger: "text-white bg-red-400 hover:bg-red-500",
+        ghost: "border-0 bg-transparent hover:font-bold",
       },
       size: {
         default: "h-8",
@@ -30,3 +31,5 @@ export const buttonVariants = cva(
     },
   },
 );
+
+export type ButtonVariantsList = VariantProps<typeof buttonVariants>["variant"];

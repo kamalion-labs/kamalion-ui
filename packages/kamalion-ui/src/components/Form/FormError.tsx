@@ -1,20 +1,20 @@
+"use client";
+
+
 import { useFormContext } from "react-hook-form";
+import { Alert } from "..";
 
-import { cn } from "../../util/cn";
-
-type FormErrorProps = React.HTMLAttributes<HTMLDivElement>;
-
-export function FormError({ className, ...props }: FormErrorProps) {
+export function FormError() {
   const formContext = useFormContext();
 
   if (!formContext.formState.errors.root) return null;
 
   return (
-    <div
-      className={cn("rounded bg-red-500 px-2 py-1 text-white", className)}
-      {...props}
-    >
-      <b>Erro:</b> {formContext.formState.errors.root?.message}
-    </div>
+    <Alert.Root variant="danger" className="itc-form-error">
+      <Alert.Title className="itc-form-error-title">Erro:</Alert.Title>
+      <Alert.Description className="itc-form-error-description">
+        {formContext.formState.errors.root?.message}
+      </Alert.Description>
+    </Alert.Root>
   );
 }

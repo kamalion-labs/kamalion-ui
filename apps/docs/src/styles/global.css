@@ -1,22 +1,21 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "@kamalion/ui/dist/styles.css";
 
-@layer base {
-  :root {
-  }
+:root {
+  --color-accent: var(--color-indigo-500);
+  font-family: Montserrat, Helvetica, Arial, sans-serif;
+}
 
-  * {
-    font-family: Montserrat, Helvetica, Arial, sans-serif;
-  }
-  
-  body, #root {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+@theme {
+  --color-accent: var(--color-accent);
+}
 
-    @apply flex h-screen w-full;
-  }
+body, #root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
+  @apply flex h-screen w-full;
 }
 
 @layer components {

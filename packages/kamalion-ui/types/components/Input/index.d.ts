@@ -1,3 +1,4 @@
+import { InputCheckboxState } from "./InputCheckbox";
 import { InputLabel } from "./InputLabel";
 import { InputRoot } from "./InputRoot";
 export declare const Input: {
@@ -7,7 +8,9 @@ export declare const Input: {
         displayType?: "input" | "text";
         noControl?: boolean;
     } & import("react").RefAttributes<HTMLInputElement>>;
-    Textarea: import("react").ForwardRefExoticComponent<import("react").TextareaHTMLAttributes<HTMLTextAreaElement> & import("react").RefAttributes<HTMLTextAreaElement>>;
+    Textarea: import("react").ForwardRefExoticComponent<import("react").TextareaHTMLAttributes<HTMLTextAreaElement> & {
+        noControl?: boolean;
+    } & import("react").RefAttributes<HTMLTextAreaElement>>;
     DatePicker: import("react").ForwardRefExoticComponent<import("@radix-ui/react-popover").PopoverProps & import("./InputDatePicker").InputDatePickerProps & import("react").RefAttributes<never>>;
     Select: import("react").ForwardRefExoticComponent<import("@radix-ui/react-select").SelectProps & {
         className?: string;
@@ -21,10 +24,12 @@ export declare const Input: {
         noControl?: boolean;
     } & import("react").RefAttributes<HTMLInputElement>>;
     Mask: import("react").ForwardRefExoticComponent<Omit<import("react-number-format").PatternFormatProps, "type" | "format"> & {
-        type: "date" | "tel" | "cel" | "hiddenCel" | "cpf" | "cnpj" | "cep";
+        type: "tel" | "date" | "cel" | "hiddenCel" | "cpf" | "cnpj" | "cep";
         noControl?: boolean;
+        noError?: boolean;
     } & import("react").RefAttributes<HTMLInputElement>>;
     Checkbox: import("react").ForwardRefExoticComponent<Omit<import("@radix-ui/react-checkbox").CheckboxProps & import("react").RefAttributes<HTMLButtonElement>, "ref"> & {
         noControl?: boolean;
     } & import("react").RefAttributes<HTMLButtonElement>>;
 };
+export { type InputCheckboxState };

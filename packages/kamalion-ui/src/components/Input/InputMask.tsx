@@ -1,7 +1,11 @@
+"use client";
+
 import * as React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { PatternFormat, PatternFormatProps } from "react-number-format";
 import { cn } from "../../util/cn";
+import { InputBaseClassNames, InputTextBaseClassNames } from "./InputBaseClassNames";
+import { format, formatISO, isValid, parse, parseISO } from "date-fns";
 
 type MaskType = "date" | "tel" | "cel" | "hiddenCel" | "cpf" | "cnpj" | "cep";
 
@@ -46,25 +50,25 @@ type InputMaskType = keyof typeof maskProps;
 export type InputMaskProps = Omit<PatternFormatProps, "type" | "format"> & {
   type: InputMaskType;
   noControl?: boolean;
+  noError?: boolean;
 };
 
 const InputMask = React.forwardRef<HTMLInputElement, InputMaskProps>(
-  ({ className, name, type, displayType = "input", noControl, ...rest }: InputMaskProps, ref) => {
+  ({ className, name, type, value, noError, displayType = "input", noControl, ...rest }: InputMaskProps, ref) => {
     const formContext = useFormContext();
 
     if (!name) return null;
 
     const { returnFormattedValue, ...maskRest } = maskProps[type];
+    
+    const val = formContext?.watch(name) ?? undefined;
+    // console.log({val});
+    const val2 = type === "date" && val ? format(parseISO(val), "dd/MM/yyyy") : val;
 
     const classes = cn(
-      "flex h-8 w-full bg-[--input-background] text-[--input-foreground] px-3 py-1 transition-colors",
-      "border rounded-sm border-[--input-border]",
-      "placeholder:text-muted-foreground",
-      "file:border-0 file:bg-transparent file:text-sm file:font-medium",
-      "focus-visible:ring-0 focus-visible:border-[--input-ring] focus-visible:outline-none",
-      "disabled:cursor-not-allowed disabled:opacity-50",
-      displayType === "text" && "border-0 p-0 disabled:cursor-text disabled:opacity-100 h-fit bg-transparent",
-      className,
+      InputBaseClassNames,
+      displayType === "text" && InputTextBaseClassNames,
+      className
     );
 
     if (!formContext || !formContext.control || noControl) {
@@ -75,6 +79,8 @@ const InputMask = React.forwardRef<HTMLInputElement, InputMaskProps>(
           getInputRef={ref}
           disabled={displayType === "text"}
           onChange={(e) => e.preventDefault()}
+          displayType={displayType}
+          id={name}
           {...rest}
         />
       );
@@ -92,22 +98,30 @@ const InputMask = React.forwardRef<HTMLInputElement, InputMaskProps>(
               {...props.field}
               getInputRef={ref}
               disabled={displayType === "text"}
+              displayType={displayType}
+              id={name}
+              {...rest}
               onChange={(e) => e.preventDefault()}
-              onValueChange={(e) =>
-                props.field.onChange({
-                  target: {
-                    value: returnFormattedValue ? e.formattedValue : e.value,
-                  },
-                })
-              }
+              value={val2}
+              onValueChange={(e) => {
+                if (isValid(parse(e.formattedValue, "dd/MM/yyyy", new Date()))) {
+                  formContext.setValue(name, formatISO(parse(e.formattedValue, "dd/MM/yyyy", new Date())));
+                } else {
+                  formContext.resetField(name);
+                }
+              }}
             />
-
-            <div className="text-red-400">{props.fieldState.error?.message}</div>
+            
+            {formContext.formState?.errors?.[name] && (
+              <div className="text-red-400" data-testid={`error-${name}`}>
+                {!noError && props.fieldState.error?.message}
+              </div>
+            )}
           </>
         )}
       />
     );
-  },
+  }
 );
 
 InputMask.displayName = "InputMask";

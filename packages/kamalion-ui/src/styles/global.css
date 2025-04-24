@@ -1,84 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  :root {
-    --background: #F4F4F4;
-    --foreground: #2B303B;
-    
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
+@import "./variables.css";
 
-    --success: #3DC5A3;
-    --success-hover: #44d6b1;
-    --success-active: #46a88f;
+html, body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 
-    --danger: #FF7A90;
-    --danger-hover: #ff9eac;
-    --danger-active: #e27384;
-
-    --background-alt: #2B303B;
-    --background-alt-darker: #272B34;
-    --foreground-alt: #FFF;
-
-    --background-hover: var(--background-alt);
-
-    --border: rgba(33,33,33,.14);
-
-    --accent: 21, 229, 119;
-    --accent-foreground: 255, 255, 255;
-
-    --input-border: var(--border);
-    --input-background: #FFF;
-    --input-ring: rgb(var(--accent));
-
-    --button-background: #FFF;
-    --button-foreground: var(--foreground);
-    
-    --radius: rem;
-
-    --sidebar-background: var(--background-alt);
-    --sidebar-foreground: var(--foreground-alt);
-    --sidebar-header-background: var(--background-alt-darker);
-    --sidebar-footer-background: var(--background-alt-darker);
-
-    --page-header-background: #FFF;
-    --page-header-foreground: var(--foreground);
-
-    --nav-item-foreground: #929aac;
-    --nav-item-foreground-hover: #FFF;
-    --nav-group-background: var(--sidebar-header-background);
-
-    --box-background: #FFF;
-
-    --input-background: #FFF;
-    --input-foreground: var(--foreground);
-
-    --popover-background: var(--input-background);
-    --popover-foreground: var(--input-foreground);
-
-    --calendar-background: var(--input-background);
-    --calendar-today-bg: var(--background-alt);
-
-    --dialog-background: var(--background);
-    --dialog-foreground: var(--foreground);
-  }
- 
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    
-    --border: 240 3.7% 15.9%;
-    
-    --input-border: var(--border);
-    --input-background: #FFF;
-    --ring: 240 4.9% 83.9%;
-  }
-  
-  body, #root {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-  }
+  @apply bg-(--color-background);
 }

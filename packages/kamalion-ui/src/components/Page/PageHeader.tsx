@@ -1,8 +1,7 @@
 import { ReactNode } from "react";
-import { HiMenuAlt2 } from "react-icons/hi";
 import { cn } from "../../util/cn";
-import { Button } from "../Button";
-import { useNav } from "../../stores";
+import { FaBars } from "react-icons/fa6";
+import { useSidebar } from "../..";
 
 interface PageHeaderProps {
   children: ReactNode;
@@ -10,20 +9,18 @@ interface PageHeaderProps {
 }
 
 export function PageHeader({ children, className }: PageHeaderProps) {
-  const { toggleNav } = useNav();
+  const { toggleSidebar } = useSidebar();
 
   return (
     <header
       className={cn(
-        "min-h-[64px] gap-x-3 flex font-montserrat items-center px-5 border-b bg-[--page-header-background] text-[--page-header-foreground] font-medium uppercase text-xl",
-        className,
+        "itc-page-header min-h-[64px] flex font-montserrat items-center px-5 bg-(--page-header-background) text-(--page-header-foreground) font-medium uppercase text-xl",
+        className
       )}
     >
-      <Button.Root size="icon" variant="default" onClick={toggleNav} className="md:hidden">
-        <Button.Icon>
-          <HiMenuAlt2 />
-        </Button.Icon>
-      </Button.Root>
+      <div className="pr-4 md:hidden" onClick={toggleSidebar}>
+        <FaBars />
+      </div>
 
       {children}
     </header>

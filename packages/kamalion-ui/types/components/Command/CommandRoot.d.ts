@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 declare const CommandRoot: React.ForwardRefExoticComponent<Omit<{
     children?: React.ReactNode;
 } & Pick<Pick<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof React.HTMLAttributes<HTMLDivElement>> & {

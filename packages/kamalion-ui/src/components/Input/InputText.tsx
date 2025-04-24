@@ -1,9 +1,11 @@
+"use client";
+
 import * as React from "react";
 import { useFormContext } from "react-hook-form";
 import { cn } from "../../util/cn";
-import { Button } from "..";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useState } from "react";
+import { InputBaseClassNames, InputTextBaseClassNames } from "./InputBaseClassNames";
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   displayType?: "input" | "text";
@@ -18,37 +20,38 @@ const InputText = React.forwardRef<HTMLInputElement, InputProps>(
     if (!name) return null;
 
     const classes = cn(
-      "flex h-8 w-full bg-[--input-background] text-[--input-foreground] px-3 py-1 transition-colors",
-      "border rounded-sm border-[--input-border]",
-      "placeholder:text-muted-foreground",
-      "file:border-0 file:bg-transparent file:text-sm file:font-medium",
-      "focus-visible:ring-0 focus-visible:border-[--input-ring] focus-visible:outline-none",
-      "disabled:cursor-not-allowed disabled:opacity-50",
-      displayType === "text" && "border-0 p-0 disabled:cursor-text disabled:opacity-100 h-fit bg-transparent",
-      type === "password" && "rounded-r-none border-r-0",
-      className,
+      InputBaseClassNames,
+      displayType === "text" && InputTextBaseClassNames,
+      className
     );
+
+    let newType = type;
+
+    if (type === "password" && ShowPassword) {
+      newType = "text";
+    }
 
     if (!formContext || !formContext.control || noControl) {
       return (
         <>
-          <div className="flex">
-            <input
-              className={classes}
-              id={name}
-              disabled={displayType === "text"}
-              {...props}
-              ref={ref}
-              type={type === "text" || (type === "password" && ShowPassword) ? "text" : "password"}
-            />
+          <div className="flex relative">
+            {displayType === "input" && <input className={classes} id={name} {...props} ref={ref} type={newType} />}
+
+            {displayType === "text" && (
+              <span className={classes} id={name} {...props} ref={ref}>
+                {props.value}
+              </span>
+            )}
+
             {type === "password" && (
-              <Button.Root
-                size="icon"
-                className={cn("h-auto w-fit rounded-l-none")}
+              <div
+                className={cn(
+                  "absolute flex h-full right-0 items-center justify-center w-10 hover:cursor-pointer hover:opacity-50 transition-all text-[--input-foreground]"
+                )}
                 onClick={() => setShowPassword((old) => !old)}
               >
-                <Button.Icon>{ShowPassword ? <FaEyeSlash /> : <FaEye />}</Button.Icon>
-              </Button.Root>
+                {ShowPassword ? <FaEyeSlash /> : <FaEye />}
+              </div>
             )}
           </div>
         </>
@@ -57,31 +60,38 @@ const InputText = React.forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <>
-        <div className="flex">
-          <input
-            className={classes}
-            id={name}
-            disabled={displayType === "text"}
-            {...props}
-            {...formContext.register(name)}
-            ref={ref}
-            type={type === "text" || (type === "password" && ShowPassword) ? "text" : "password"}
-          />
+        <div className="flex relative">
+          {displayType === "input" && (
+            <input className={classes} id={name} {...formContext.register(name)} ref={ref} type={newType} {...props} />
+          )}
+
+          {displayType === "text" && (
+            <span className={classes} id={name} {...props} ref={ref}>
+              {props.value}
+            </span>
+          )}
+
           {type === "password" && (
-            <Button.Root
-              size="icon"
-              className={cn("h-auto w-fit rounded-l-none")}
+            <div
+              className={cn(
+                "absolute flex h-full right-0 items-center justify-center w-10 hover:cursor-pointer hover:opacity-50 transition-all text-[--input-foreground]"
+              )}
               onClick={() => setShowPassword((old) => !old)}
+              tabIndex={-1}
             >
-              <Button.Icon>{ShowPassword ? <FaEyeSlash /> : <FaEye />}</Button.Icon>
-            </Button.Root>
+              {ShowPassword ? <FaEyeSlash /> : <FaEye />}
+            </div>
           )}
         </div>
 
-        <div className="text-red-400">{formContext.formState?.errors?.[name]?.message?.toString()}</div>
+        {formContext.formState?.errors?.[name] && (
+          <div className="text-red-400" data-testid={`error-${name}`}>
+            {formContext.formState?.errors?.[name]?.message?.toString()}
+          </div>
+        )}
       </>
     );
-  },
+  }
 );
 
 InputText.displayName = "Input";

@@ -1,4 +1,6 @@
 import { ReactNode } from "react";
-export declare function PageRoot({ children }: {
+export type PageRootProps = {
+    isLoading?: boolean;
     children: ReactNode;
-}): import("react/jsx-runtime").JSX.Element;
+};
+export declare function PageRoot({ children, isLoading }: PageRootProps): import("react/jsx-runtime").JSX.Element;

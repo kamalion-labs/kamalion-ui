@@ -68,7 +68,7 @@ export function Toast({
 }: Props) {
   return (
     <motion.div
-      className={`absolute bottom-[40px] right-4 z-50 flex max-w-[350px] text-lg shadow-md ${typeStyles[type].color}`}
+      className={`itc-toast fixed bottom-[40px] right-4 z-50 flex max-w-[350px] text-lg shadow-md ${typeStyles[type].color}`}
       initial={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
       animate={isVisible ? "open" : "closed"}
@@ -76,17 +76,17 @@ export function Toast({
       variants={motionVariants}
     >
       <div
-        className={`flex w-[60px] items-center justify-center rounded-l-md text-white ${typeStyles[type].iconBg}`}
+        className={`itc-toast-icon flex w-[60px] items-center justify-center rounded-l-md text-background ${typeStyles[type].iconBg}`}
       >
         {typeStyles[type].icon}
       </div>
       <div
-        className={`flex flex-1 space-x-5 rounded-r-md border bg-white p-4 leading-tight ${typeStyles[type].border}`}
+        className={`itc-toast-content flex flex-1 space-x-5 rounded-r-md border bg-background p-4 leading-tight ${typeStyles[type].border}`}
       >
         <div>{message}</div>
 
         <div
-          className="cursor-pointer transition-opacity hover:opacity-70"
+          className="itc-toast-close cursor-pointer transition-opacity hover:opacity-70"
           onClick={onClose}
         >
           <FaTimes />

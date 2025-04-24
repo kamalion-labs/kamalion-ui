@@ -16,7 +16,6 @@
     "packages/kamalion-ui"
   ],
   "devDependencies": {
-    "concurrently": "^8.2.2",
-    "@kamalion/eslint-config": "1.0.2"
+    "concurrently": "^8.2.2"
   }
 }

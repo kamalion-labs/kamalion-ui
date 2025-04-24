@@ -1,63 +1,79 @@
+"use client";
+
 import * as React from "react";
 import { useFormContext } from "react-hook-form";
-import { DayPickerSingleProps } from "react-day-picker";
+import { PropsSingle } from "react-day-picker";
 import { FaCalendar } from "react-icons/fa6";
-import { format, formatISO, parseISO } from "date-fns";
 
 import { cn } from "../../util/cn";
 import { Popover } from "../Popover";
 import { Button } from "../Button";
 import { Calendar } from "../Calendar";
+import { Input } from "../..";
+import { formatISO, parseISO } from "date-fns";
 
-export interface InputDatePickerProps extends Omit<DayPickerSingleProps, "mode"> {
+export interface InputDatePickerProps extends Omit<PropsSingle, "mode" | "required"> {
   triggerClassName?: string;
   name?: string;
   mode?: "single";
+  className?: string;
+  required?: boolean;
 }
 
 const InputDatePicker = React.forwardRef<
-  React.ElementRef<typeof Popover.Root>,
+  React.ComponentRef<typeof Popover.Root>,
   React.ComponentPropsWithoutRef<typeof Popover.Root> & InputDatePickerProps
->(({ className, triggerClassName, name, ...props }: InputDatePickerProps, ref) => {
+>(({ className, triggerClassName, name, required, ...props }: InputDatePickerProps, ref) => {
   const formContext = useFormContext();
 
   if (!name) return null;
 
   const value = formContext.watch(name);
+  // console.log({value});
+  const dateVal = value && value !== "" ? parseISO(value) : undefined;
 
   return (
     <>
-      <Popover.Root>
-        <Popover.Trigger asChild ref={ref}>
-          <Button.Root
-            size="lg"
-            className={cn("border rounded-sm min-w-[250px] h-8 w-fit border-[--input-border]", triggerClassName)}
-          >
-            <Button.Content className="flex flex-1 justify-start">
-              {value ? format(value, "dd/MM/yyyy") : "Selecione uma data..."}
-            </Button.Content>
+      <div className="flex w-full relative items-center">
+        <Input.Mask type="date" className="" name={name} noError />
+        
+        <Popover.Root>
+          <Popover.Trigger asChild ref={ref}>
+            <Button.Root
+              size="icon"
+              className={cn(
+                "absolute right-px h-7 bg-transparent border-0 border-l rounded-l-none",
+                "focus:ring-0 focus:border-(--input-ring) focus:border focus:rounded-l outline-none",
+                triggerClassName
+              )}
+            >
+              <Button.Icon>
+                <FaCalendar />
+              </Button.Icon>
+            </Button.Root>
+          </Popover.Trigger>
 
-            <Button.Icon>
-              <FaCalendar />
-            </Button.Icon>
-          </Button.Root>
-        </Popover.Trigger>
+          <Popover.Content className={className}>
+            <Calendar
+              {...props}
+              mode="single"
+              required={required}
+              selected={dateVal}
+              onSelect={(val) => {
+                if (val) {
+                  // console.log({val});
+                  return formContext.setValue(
+                    name,
+                    formatISO(val)
+                  );
+                }
+              }}
+            />
+          </Popover.Content>
+        </Popover.Root>
+      </div>
 
-        <Popover.Content className={cn("bg-[--popover-background] p-4", className)}>
-          <Calendar
-            {...props}
-            mode="single"
-            selected={value ?? undefined}
-            onSelect={(val) => {
-              if (val) {
-                return formContext.setValue(name, parseISO(formatISO(val)));
-              }
-            }}
-          />
-        </Popover.Content>
-      </Popover.Root>
-
-      {name && <div className="text-red-400">{formContext.formState?.errors?.[name]?.message?.toString()}</div>}
+      {name && formContext.formState?.errors?.[name] && <div className="text-red-400">{formContext.formState?.errors?.[name]?.message?.toString()}</div>}
     </>
   );
 });

@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { NavRoute } from "../..";
+import { NavRoute } from "../../stores";
 interface SidebarMenuProps {
     children?: ReactNode;
     routes?: NavRoute[];

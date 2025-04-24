@@ -5,5 +5,9 @@ interface PageWrapperProps {
 }
 
 export function PageWrapper({ children }: PageWrapperProps) {
-  return <div className="z-10 flex-1 h-full flex flex-col">{children}</div>;
+  return (
+    <div className="itc-page-wrapper z-10 flex-1 overflow-x-auto h-full flex flex-col">
+      {children}
+    </div>
+  );
 }

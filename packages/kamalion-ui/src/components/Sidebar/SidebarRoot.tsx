@@ -10,7 +10,7 @@ export function SidebarRoot({ children, className }: SidebarRootProps) {
   return (
     <div
       className={cn(
-        "bg-[--sidebar-background] flex flex-col h-full text-[--sidebar-foreground]",
+        "itc-sidebar bg-(--sidebar-background) text-(--sidebar-foreground) flex flex-col h-full",
         className
       )}
     >

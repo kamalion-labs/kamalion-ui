@@ -1,0 +1,101 @@
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: var(--color-gray-100);
+  --color-foreground: var(--color-gray-700);
+
+  --color-muted: var(--color-zinc-200);
+  --color-muted-foreground: var(--color-zinc-500);
+
+  --border: var(--color-zinc-400);
+
+  --color-accent: var(--color-emerald-500);
+  --color-accent-foreground: var(--color-white);
+
+  --box-background: var(--color-background);
+  --box-border: var(--border);
+
+  --calendar-background: var(--color-background);
+  --calendar-foreground: var(--color-foreground);
+  --calendar-today-background: var(--color-muted);
+  --calendar-today-foreground: var(--color-muted-foreground);
+  --calendar-selected-background: var(--color-accent);
+  --calendar-selected-foreground: var(--color-foreground);
+
+  --dialog-background: var(--color-background);
+  --dialog-foreground: var(--color-foreground);
+
+  --popover-background: var(--color-background);
+  --popover-foreground: var(--color-foreground);
+
+  --input-background: var(--color-background);
+  --input-foreground: var(--color-foreground);
+  --input-ring: var(--color-accent);
+  --input-border: var(--border);
+
+  --page-header-background: var(--color-accent);
+  --page-header-foreground: var(--color-white);
+
+  --sidebar-background: var(--color-background);
+  --sidebar-foreground: var(--color-foreground);
+
+  --sidebar-header-background: var(--color-accent);
+  --sidebar-header-foreground: var(--color-white);
+
+  --nav-item-foreground: var(--color-foreground);
+  --nav-item-foreground-hover: var(--color-accent);
+  
+  /* animations */
+
+  --animate-scale-in: scale-in 1s ease-in-out infinite;
+  @keyframes scale-in {
+    0% { opacity: 0; transform: scale(0); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+}
+
+@variant dark {
+  --color-background: var(--color-zinc-800);
+  --color-foreground: #FFFFFF;
+
+  --color-muted: var(--color-zinc-700);
+  --color-muted-foreground: var(--color-zinc-400);
+  
+  --border: var(--color-zinc-500);
+  --box-border: var(--border);
+
+  --color-accent: var(--color-emerald-500);
+  --color-accent-foreground: var(--color-white);
+
+  --box-background: var(--color-background);
+
+  --calendar-background: var(--color-background);
+  --calendar-foreground: var(--color-foreground);
+  --calendar-today-background: var(--color-muted);
+  --calendar-today-foreground: var(--color-muted-foreground);
+  --calendar-selected-background: var(--color-accent);
+  --calendar-selected-foreground: var(--color-foreground);
+
+  --dialog-background: var(--color-background);
+  --dialog-foreground: var(--color-foreground);
+
+  --popover-background: var(--color-background);
+  --popover-foreground: var(--color-foreground);
+
+  --input-background: var(--color-background);
+  --input-foreground: var(--color-foreground);
+  --input-ring: var(--color-accent);
+  --input-border: var(--border);
+
+  --page-header-background: var(--color-background);
+  --page-header-foreground: var(--color-foreground);
+
+  --sidebar-background: var(--color-background);
+  --sidebar-foreground: var(--color-foreground);
+
+  --sidebar-header-background: var(--color-accent);
+  --sidebar-header-foreground: var(--color-white);
+
+  --nav-item-foreground: var(--color-foreground);
+  --nav-item-foreground-hover: var(--color-accent);
+}

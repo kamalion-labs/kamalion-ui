@@ -1,10 +1,10 @@
-import React from "react";
+import * as React from "react";
 import { Command as CommandPrimitive } from "cmdk";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { cn } from "../..";
 
 const CommandInput = React.forwardRef<
-  React.ElementRef<typeof CommandPrimitive.Input>,
+  React.ComponentRef<typeof CommandPrimitive.Input>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
 >(({ className, ...props }, ref) => (
   <div className="flex items-center border-b px-3" cmdk-input-wrapper="">

@@ -1,9 +1,9 @@
 import { Command as CommandPrimitive } from "cmdk";
-import React from "react";
+import * as React from "react";
 import { cn } from "../..";
 
 const CommandRoot = React.forwardRef<
-  React.ElementRef<typeof CommandPrimitive>,
+  React.ComponentRef<typeof CommandPrimitive>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive>
 >(({ className, ...props }, ref) => (
   <CommandPrimitive

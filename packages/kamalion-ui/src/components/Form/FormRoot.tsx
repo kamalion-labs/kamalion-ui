@@ -1,12 +1,28 @@
+"use client";
+
 import * as React from "react";
 import { cn } from "../../util/cn";
+import { FormProvider } from "react-hook-form";
 
-type FormRootProps = React.FormHTMLAttributes<HTMLFormElement>;
+type FormRootProps = React.FormHTMLAttributes<HTMLFormElement> & {
+  form: any;
+  inline?: boolean;
+};
 
-export function FormRoot({ children, className, ...props }: FormRootProps) {
+export function FormRoot({ children, className, form, inline, ...props }: FormRootProps) {
   return (
-    <form className={cn("flex flex-col space-y-5", className)} {...props}>
-      {children}
-    </form>
+    <FormProvider {...form}>
+      <form
+        className={cn(
+          "itc-form flex", 
+          inline ? "flex-row items-end gap-x-5" : "flex-col gap-y-5", 
+          className
+        )}
+        {...props}
+        autoComplete="off"
+      >
+        {children}
+      </form>
+    </FormProvider>
   );
 }

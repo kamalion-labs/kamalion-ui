@@ -1,4 +1,5 @@
 import * as React from "react";
-type InputTextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
-declare const InputTextarea: React.ForwardRefExoticComponent<InputTextareaProps & React.RefAttributes<HTMLTextAreaElement>>;
+declare const InputTextarea: React.ForwardRefExoticComponent<React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+    noControl?: boolean;
+} & React.RefAttributes<HTMLTextAreaElement>>;
 export { InputTextarea };
