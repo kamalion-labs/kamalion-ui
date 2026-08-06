@@ -1,0 +1,8 @@
+url: http://localhost:5173
+---
+- launchApp
+- openLink:
+    link: http://localhost:5173/toast
+- assertVisible: "Toast"
+- tapOn: "Success toast"
+- assertVisible: "Changes saved"

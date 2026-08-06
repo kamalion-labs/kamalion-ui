@@ -1,0 +1,8 @@
+url: http://localhost:5173
+---
+- launchApp
+- openLink:
+    link: http://localhost:5173/forms
+- assertVisible: "Create account"
+- tapOn: "Create account"
+- assertVisible: "Name is required"

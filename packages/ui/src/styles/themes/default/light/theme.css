@@ -1,0 +1,77 @@
+/* Default theme — Light mode semantic tokens. */
+.theme-light {
+  /* ─── Root Window & Translucent Glass Layer ─── */
+  --color-window-glass: color-mix(in srgb, var(--color-white) 45%, transparent);
+  --color-window-glass-border: color-mix(
+    in srgb,
+    var(--color-white) 60%,
+    transparent
+  );
+  --backdrop-blur-amount: var(--blur-2xl);
+
+  /* ─── Sidebar Layer (directly on window shell) ─── */
+  --color-sidebar-bg: transparent;
+  --color-sidebar-fg: var(--color-stone-700);
+  --color-sidebar-fg-muted: var(--color-stone-500);
+  --color-sidebar-active-bg: var(--color-white);
+  --color-sidebar-active-fg: var(--color-stone-900);
+  --color-sidebar-active-shadow: var(--shadow-sm);
+
+  /* ─── Elevated Floating Content Panels ─── */
+  --color-surface-panel: var(--color-white);
+  --color-surface-panel-muted: var(--color-slate-50);
+  --color-surface-panel-border: color-mix(
+    in srgb,
+    var(--color-black) 6%,
+    transparent
+  );
+  --color-surface-panel-shadow: var(--shadow-md);
+
+  /* ─── Sticky Panel Headers (translucent on scroll) ─── */
+  --color-panel-header-glass: color-mix(
+    in srgb,
+    var(--color-white) 82%,
+    transparent
+  );
+  --color-panel-header-border: color-mix(
+    in srgb,
+    var(--color-black) 6%,
+    transparent
+  );
+  --backdrop-blur-header: var(--blur-md);
+
+  /* ─── Typography & Content ─── */
+  --color-foreground: var(--color-stone-900);
+  --color-foreground-muted: var(--color-stone-500);
+  --color-foreground-subtle: var(--color-stone-400);
+
+  /* ─── Primary & Brand Accents ─── */
+  --color-accent: var(--color-violet-600);
+  --color-accent-hover: var(--color-violet-700);
+  --color-accent-active: var(--color-violet-800);
+  --color-accent-foreground: var(--color-white);
+  --color-accent-soft: color-mix(in srgb, var(--color-violet-600) 12%, transparent);
+
+  /* ─── Feedback & Status Colors ─── */
+  --color-danger: var(--color-red-600);
+  --color-danger-soft: color-mix(in srgb, var(--color-red-600) 10%, transparent);
+  --color-success: var(--color-green-600);
+  --color-success-soft: color-mix(in srgb, var(--color-green-600) 10%, transparent);
+  --color-warning: var(--color-amber-600);
+  --color-warning-soft: color-mix(in srgb, var(--color-amber-600) 10%, transparent);
+  --color-info: var(--color-blue-600);
+  --color-info-soft: color-mix(in srgb, var(--color-blue-600) 10%, transparent);
+
+  /* ─── Borders & Dividers ─── */
+  --color-border: color-mix(in srgb, var(--color-stone-900) 8%, transparent);
+  --color-border-hover: color-mix(in srgb, var(--color-stone-900) 16%, transparent);
+
+  /* ─── Radii ─── */
+  --radius-window: var(--radius-3xl);
+  --radius-panel: var(--radius-2xl);
+  --radius-card: var(--radius-xl);
+  --radius-pill: calc(infinity * 1px);
+
+  /* ─── Elevations ─── */
+  --shadow-panel: var(--shadow-xl);
+}

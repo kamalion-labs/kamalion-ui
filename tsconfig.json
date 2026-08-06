@@ -1,0 +1,8 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./packages/ui" },
+    { "path": "./apps/kitchensink" }
+  ],
+  "$comment": "Solution file for editor navigation only. Typechecking runs per-workspace via `npm run typecheck`."
+}

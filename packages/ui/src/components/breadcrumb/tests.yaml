@@ -1,0 +1,7 @@
+url: http://localhost:5173
+---
+- launchApp
+- openLink:
+    link: http://localhost:5173/breadcrumb
+- assertVisible: "Breadcrumb"
+- assertVisible: "Components"

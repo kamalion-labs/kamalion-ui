@@ -1,0 +1,36 @@
+/**
+ * Kamalion UI — aggregated stylesheet entry (`@kamalion/web-ui/styles`).
+ *
+ * Consumers import this once (e.g. in their app entry). It pulls in the
+ * Tailwind v4 engine, tells Tailwind to scan the library source for classes,
+ * registers the global + per-component token registries, and applies the
+ * default light/dark theme mappings.
+ *
+ * NOTE: Tailwind v4 / Lightning CSS does not support glob `@import`. Each new
+ * component adds an explicit `@import` for its `tokens.css` and its default
+ * light/dark mapping below — keep the sections in the marked order.
+ */
+
+/* 1. Tailwind v4 engine (preflight + utilities + built-in theme). */
+@import "tailwindcss";
+
+/* 2. Global semantic token registry (all `initial`). */
+@import "./tokens.css";
+
+/* 3. Per-component token registries (all `initial`). ---------------------- */
+/* @kamalion:component-tokens */
+@import "../components/button/tokens.css";
+
+/* 4. Default theme — semantic values under .theme-light / .theme-dark. */
+@import "./themes/default/light/theme.css";
+@import "./themes/default/dark/theme.css";
+
+/* 5. Default theme — per-component token mappings. ----------------------- */
+/* @kamalion:component-theme */
+@import "./themes/default/light/button.css";
+@import "./themes/default/dark/button.css";
+
+/* 6. Tell Tailwind to scan the library source (paths are relative to THIS
+ *    file, so they resolve wherever the package physically lives). */
+@source "../components";
+@source "../index.ts";

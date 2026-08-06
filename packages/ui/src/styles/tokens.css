@@ -1,0 +1,74 @@
+/**
+ * Global semantic token registry.
+ *
+ * Every token is declared as `initial` so it is a known, reset theme variable.
+ * Real values are assigned per theme under `.theme-light` / `.theme-dark`
+ * (see `styles/themes/**`). Components read these at runtime via Tailwind v4
+ * arbitrary-variable syntax, e.g. `bg-(--color-surface-panel)`.
+ *
+ * Tailwind v4 built-in theme variables (`--color-slate-*`, `--color-violet-*`,
+ * `--radius-*`, `--shadow-*`, `--blur-*`, `--color-white`, `--color-black`) are
+ * provided by `@import "tailwindcss"` and are referenced by the theme files —
+ * they are NOT redeclared here.
+ */
+
+@theme {
+  /* ─── Root Window & Translucent Glass Layer ─── */
+  --color-window-glass: initial;
+  --color-window-glass-border: initial;
+  --backdrop-blur-amount: initial;
+
+  /* ─── Sidebar Layer (rests directly on the window shell) ─── */
+  --color-sidebar-bg: initial;
+  --color-sidebar-fg: initial;
+  --color-sidebar-fg-muted: initial;
+  --color-sidebar-active-bg: initial;
+  --color-sidebar-active-fg: initial;
+  --color-sidebar-active-shadow: initial;
+
+  /* ─── Elevated Floating Content Panels ─── */
+  --color-surface-panel: initial;
+  --color-surface-panel-muted: initial;
+  --color-surface-panel-border: initial;
+  --color-surface-panel-shadow: initial;
+
+  /* ─── Sticky Panel Headers (translucent on scroll) ─── */
+  --color-panel-header-glass: initial;
+  --color-panel-header-border: initial;
+  --backdrop-blur-header: initial;
+
+  /* ─── Typography & Content ─── */
+  --color-foreground: initial;
+  --color-foreground-muted: initial;
+  --color-foreground-subtle: initial;
+
+  /* ─── Primary & Brand Accents ─── */
+  --color-accent: initial;
+  --color-accent-hover: initial;
+  --color-accent-active: initial;
+  --color-accent-foreground: initial;
+  --color-accent-soft: initial;
+
+  /* ─── Feedback & Status Colors ─── */
+  --color-danger: initial;
+  --color-danger-soft: initial;
+  --color-success: initial;
+  --color-success-soft: initial;
+  --color-warning: initial;
+  --color-warning-soft: initial;
+  --color-info: initial;
+  --color-info-soft: initial;
+
+  /* ─── Borders & Dividers ─── */
+  --color-border: initial;
+  --color-border-hover: initial;
+
+  /* ─── Radii ─── */
+  --radius-window: initial;
+  --radius-panel: initial;
+  --radius-card: initial;
+  --radius-pill: initial;
+
+  /* ─── Elevations ─── */
+  --shadow-panel: initial;
+}

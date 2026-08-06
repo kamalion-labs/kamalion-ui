@@ -10,24 +10,25 @@ jobs:
 
     permissions:
       contents: read
+      id-token: write # required for npm provenance
       packages: write
 
-    strategy:
-      matrix:
-        node-version: [18.x]
-
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-          registry-url: 'https://registry.npmjs.org'
+          node-version: 20.x
+          registry-url: "https://registry.npmjs.org"
 
       - run: npm ci
-      - run: npm run build
-      - run: npm publish
-        working-directory: packages/kamalion-ui
+
+      # The library ships as source — there is no build step. Validate types
+      # and confirm the published tarball contains only src/** (incl. CSS).
+      - run: npm run typecheck
+      - run: npm pack --dry-run --workspace @kamalion/web-ui
+
+      - run: npm publish --workspace @kamalion/web-ui --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

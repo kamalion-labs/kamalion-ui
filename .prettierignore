@@ -1,0 +1,6 @@
+**/dist/**
+**/build/**
+**/.docusaurus/**
+**/storybook-static/**
+**/node_modules/**
+package-lock.json

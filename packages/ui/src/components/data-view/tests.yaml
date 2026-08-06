@@ -1,0 +1,8 @@
+url: http://localhost:5173
+---
+- launchApp
+- openLink:
+    link: http://localhost:5173/data-view
+- assertVisible: "DataView"
+- tapOn: "Search people…"
+- inputText: "Person 1"

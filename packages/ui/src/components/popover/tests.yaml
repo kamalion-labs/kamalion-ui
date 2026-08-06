@@ -1,0 +1,8 @@
+url: http://localhost:5173
+---
+- launchApp
+- openLink:
+    link: http://localhost:5173/popover
+- assertVisible: "Popover"
+- tapOn: "Open popover"
+- assertVisible: "Popover panel"

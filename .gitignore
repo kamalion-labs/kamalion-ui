@@ -1,0 +1,9 @@
+node_modules/
+dist/
+build/
+.docusaurus/
+storybook-static/
+*.local
+.DS_Store
+*.log
+.vite/

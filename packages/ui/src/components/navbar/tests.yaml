@@ -1,0 +1,8 @@
+url: http://localhost:5173
+---
+- launchApp
+- openLink:
+    link: http://localhost:5173/app-shell
+- assertVisible: "Acme Inc."
+- tapOn: "Reports"
+- assertVisible: "Monthly"

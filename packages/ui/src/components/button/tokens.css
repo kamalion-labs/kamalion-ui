@@ -1,0 +1,28 @@
+@theme {
+  --button-radius: initial;
+
+  /* solid */
+  --button-solid-bg: initial;
+  --button-solid-bg-hover: initial;
+  --button-solid-bg-active: initial;
+  --button-solid-fg: initial;
+
+  /* soft */
+  --button-soft-bg: initial;
+  --button-soft-bg-hover: initial;
+  --button-soft-fg: initial;
+
+  /* outline */
+  --button-outline-border: initial;
+  --button-outline-fg: initial;
+  --button-outline-bg-hover: initial;
+
+  /* ghost */
+  --button-ghost-fg: initial;
+  --button-ghost-bg-hover: initial;
+
+  /* danger */
+  --button-danger-bg: initial;
+  --button-danger-bg-hover: initial;
+  --button-danger-fg: initial;
+}

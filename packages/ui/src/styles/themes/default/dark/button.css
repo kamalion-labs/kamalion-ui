@@ -1,0 +1,28 @@
+.theme-dark {
+  --button-radius: var(--radius-pill);
+
+  /* solid */
+  --button-solid-bg: var(--color-accent);
+  --button-solid-bg-hover: var(--color-accent-hover);
+  --button-solid-bg-active: var(--color-accent-active);
+  --button-solid-fg: var(--color-accent-foreground);
+
+  /* soft */
+  --button-soft-bg: var(--color-accent-soft);
+  --button-soft-bg-hover: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  --button-soft-fg: var(--color-foreground);
+
+  /* outline */
+  --button-outline-border: var(--color-border);
+  --button-outline-fg: var(--color-foreground);
+  --button-outline-bg-hover: var(--color-surface-panel-muted);
+
+  /* ghost */
+  --button-ghost-fg: var(--color-foreground);
+  --button-ghost-bg-hover: var(--color-surface-panel-muted);
+
+  /* danger */
+  --button-danger-bg: var(--color-danger);
+  --button-danger-bg-hover: color-mix(in srgb, var(--color-danger) 82%, white);
+  --button-danger-fg: var(--color-accent-foreground);
+}

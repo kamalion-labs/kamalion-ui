@@ -1,0 +1,6 @@
+url: http://localhost:5173
+---
+- launchApp
+- openLink:
+    link: http://localhost:5173/text
+- assertVisible: "Muted secondary text."
