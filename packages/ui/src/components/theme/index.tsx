@@ -72,6 +72,17 @@ export function ThemeProvider({
     return () => mq.removeEventListener("change", apply);
   }, [theme]);
 
+  // Keep tabs in sync. `storage` only fires in *other* tabs, so this never
+  // echoes the local `setTheme` write.
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key !== storageKey) return;
+      setThemeState((e.newValue as Theme | null) ?? defaultTheme);
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, [storageKey, defaultTheme]);
+
   const setTheme = (next: Theme) => {
     setThemeState(next);
     try {

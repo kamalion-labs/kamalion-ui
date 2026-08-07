@@ -101,10 +101,40 @@ function PageHeaderSubtitle({ className, children, ...props }: SlotProps) {
   );
 }
 
-function PageHeader({ className, children, ...props }: SlotProps) {
+export interface PageHeaderProps extends SlotProps {
+  /**
+   * Right-aligned action cluster — search, filters, a primary button.
+   *
+   * Deliberately a prop rather than children: children *replace* the
+   * `usePage()` metadata band, so an app shell that needed a search box in the
+   * header would otherwise have to re-implement the title and subtitle itself
+   * just to sit next to it. `actions` composes with the band instead.
+   */
+  actions?: ReactNode;
+  classNameActions?: string;
+}
+
+function PageHeader({
+  actions,
+  classNameActions,
+  className,
+  children,
+  ...props
+}: PageHeaderProps) {
   const ctx = usePageContext();
   const meta = ctx?.meta;
   const showMeta = !children && (meta?.title || meta?.subtitle);
+
+  const band = showMeta ? (
+    <>
+      {meta?.title ? <PageHeaderTitle>{meta.title}</PageHeaderTitle> : null}
+      {meta?.subtitle ? (
+        <PageHeaderSubtitle>{meta.subtitle}</PageHeaderSubtitle>
+      ) : null}
+    </>
+  ) : (
+    children
+  );
 
   return (
     <header
@@ -114,15 +144,22 @@ function PageHeader({ className, children, ...props }: SlotProps) {
       )}
       {...props}
     >
-      {showMeta ? (
-        <>
-          {meta?.title ? <PageHeaderTitle>{meta.title}</PageHeaderTitle> : null}
-          {meta?.subtitle ? (
-            <PageHeaderSubtitle>{meta.subtitle}</PageHeaderSubtitle>
-          ) : null}
-        </>
+      {actions ? (
+        <div className="flex items-center gap-4">
+          {/* min-w-0 so a long title truncates instead of shoving the
+              actions off the right edge. */}
+          <div className="flex min-w-0 flex-1 flex-col gap-1">{band}</div>
+          <div
+            className={cn(
+              "page-header-actions flex shrink-0 items-center gap-2",
+              classNameActions,
+            )}
+          >
+            {actions}
+          </div>
+        </div>
       ) : (
-        children
+        band
       )}
     </header>
   );
@@ -274,4 +311,7 @@ export const Page = Object.assign(PageRoot, {
 });
 
 export { usePage };
-export type { PageMeta } from "./context";
+// `usePage` is a setter; `usePageContext` is the matching reader, needed by
+// consumers composing their own header chrome around the metadata.
+export { usePageContext } from "./context";
+export type { PageMeta, PageContextValue } from "./context";

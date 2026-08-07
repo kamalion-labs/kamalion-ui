@@ -7,3 +7,6 @@ storybook-static/
 .DS_Store
 *.log
 .vite/
+
+# npm pack artifacts
+packages/*/*.tgz
