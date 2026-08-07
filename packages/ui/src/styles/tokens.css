@@ -24,13 +24,27 @@
   --color-sidebar-fg-muted: initial;
   --color-sidebar-active-bg: initial;
   --color-sidebar-active-fg: initial;
+  /** @deprecated Use `--shadow-floating`. Removed in 4.0.0. */
   --color-sidebar-active-shadow: initial;
 
   /* ─── Elevated Floating Content Panels ─── */
   --color-surface-panel: initial;
   --color-surface-panel-muted: initial;
   --color-surface-panel-border: initial;
+  /* Translucent, so they composite correctly over BOTH `--color-surface-panel`
+   * and `--color-surface-panel-muted` without needing a second pair. */
+  --color-surface-panel-hover: initial;
+  --color-surface-panel-active: initial;
+  /**
+   * @deprecated A box-shadow living under a `--color-*` name, which also makes
+   * Tailwind emit nonsense utilities (`bg-surface-panel-shadow`). Use
+   * `--shadow-raised`. Removed in 4.0.0.
+   */
   --color-surface-panel-shadow: initial;
+
+  /* ─── Scrim behind modals & drawers ─── */
+  --color-overlay: initial;
+  --backdrop-blur-overlay: initial;
 
   /* ─── Sticky Panel Headers (translucent on scroll) ─── */
   --color-panel-header-glass: initial;
@@ -42,33 +56,69 @@
   --color-foreground-muted: initial;
   --color-foreground-subtle: initial;
 
+  /* ─── Inverted Surface (tooltips) ─── */
+  --color-tooltip-bg: initial;
+  --color-tooltip-fg: initial;
+
   /* ─── Primary & Brand Accents ─── */
   --color-accent: initial;
   --color-accent-hover: initial;
   --color-accent-active: initial;
   --color-accent-foreground: initial;
+  /* Soft = a FILL (badge, soft button, highlighted select item). It is not a
+   * focus ring — at 12% it is invisible as one, which is why the focus ring
+   * has its own token below. */
   --color-accent-soft: initial;
+  --color-accent-subtle: initial;
 
-  /* ─── Feedback & Status Colors ─── */
+  /* ─── Focus ─── */
+  --color-focus-ring: initial;
+  --color-focus-ring-danger: initial;
+  --focus-ring-width: initial;
+  --focus-ring-offset: initial;
+
+  /* ─── Feedback & Status Colors ───
+   * `-soft` is the tinted fill, `-border` the readable hairline over it, and
+   * `-fg` a tone-tinted text colour with enough contrast on the soft fill. */
   --color-danger: initial;
   --color-danger-soft: initial;
+  --color-danger-border: initial;
+  --color-danger-fg: initial;
   --color-success: initial;
   --color-success-soft: initial;
+  --color-success-border: initial;
+  --color-success-fg: initial;
   --color-warning: initial;
   --color-warning-soft: initial;
+  --color-warning-border: initial;
+  --color-warning-fg: initial;
   --color-info: initial;
   --color-info-soft: initial;
+  --color-info-border: initial;
+  --color-info-fg: initial;
 
   /* ─── Borders & Dividers ─── */
   --color-border: initial;
   --color-border-hover: initial;
 
-  /* ─── Radii ─── */
+  /* ─── Radii ───
+   * Strictly descending, so a nested surface always reads tighter than its
+   * container: window 24 → panel 16 → card 12 → control 8 → inline 6. */
   --radius-window: initial;
   --radius-panel: initial;
   --radius-card: initial;
+  --radius-control: initial;
+  --radius-inline: initial;
   --radius-pill: initial;
 
-  /* ─── Elevations ─── */
+  /* ─── Elevations ───
+   * Border-First Elevation Rule: surfaces separate with a 1px border at rest,
+   * and shadow means genuine Z-elevation above the content surface. */
+  --shadow-raised: initial;
+  --shadow-raised-hover: initial;
+  --shadow-floating: initial;
+  --shadow-overlay: initial;
+  --shadow-modal: initial;
+  /** @deprecated Use `--shadow-overlay`. Removed in 4.0.0. */
   --shadow-panel: initial;
 }

@@ -1,7 +1,8 @@
 import { useState, type HTMLAttributes, type ReactNode } from "react";
-import { RotateCw } from "lucide-react";
+import { RotateCw, TriangleAlert } from "lucide-react";
 import { cn } from "../../util";
 import { Breadcrumb } from "../breadcrumb";
+import { Button } from "../button";
 import { PageContext, usePageContext, type PageMeta } from "./context";
 import { usePage } from "./hooks";
 
@@ -38,10 +39,33 @@ function PageWrapper({ className, children, ...props }: SlotProps) {
   );
 }
 
-function PageContent({ className, children, ...props }: SlotProps) {
+export interface PageContentProps extends SlotProps {
+  /**
+   * `plain` (default) is a bare scroll region — the pre-existing behaviour.
+   * `panel` renders the elevated floating content surface the theme guide
+   * describes, so consumers stop hand-rolling it in every app shell.
+   */
+  variant?: "plain" | "panel";
+  /** Applies the standard content inset. */
+  padded?: boolean;
+}
+
+function PageContent({
+  variant = "plain",
+  padded,
+  className,
+  children,
+  ...props
+}: PageContentProps) {
   return (
     <main
-      className={cn("page-content flex-1 overflow-auto", className)}
+      className={cn(
+        "page-content flex-1 overflow-auto",
+        variant === "panel" &&
+          "m-3 ml-0 rounded-(--radius-panel) border border-(--color-surface-panel-border) bg-(--color-surface-panel) shadow-(--shadow-overlay)",
+        padded && "p-6",
+        className,
+      )}
       {...props}
     >
       {children}
@@ -208,24 +232,28 @@ function PageError({
       )}
       {...props}
     >
-      <h2 className="text-lg font-semibold text-(--color-foreground)">
+      <span
+        aria-hidden="true"
+        className="mb-1 flex size-12 items-center justify-center rounded-(--radius-pill) bg-(--color-danger-soft) text-(--color-danger)"
+      >
+        <TriangleAlert className="size-6" />
+      </span>
+      <h2 className="text-lg font-semibold tracking-tight text-(--color-foreground)">
         {title}
       </h2>
       {description ? (
-        <p className="max-w-md text-sm text-(--color-foreground-muted)">
+        <p className="max-w-md text-sm text-pretty text-(--color-foreground-muted)">
           {description}
         </p>
       ) : null}
       {children}
       {onRetry ? (
-        <button
-          type="button"
-          onClick={onRetry}
-          className="mt-2 inline-flex items-center gap-2 rounded-(--radius-pill) bg-(--color-accent) px-4 py-2 text-sm font-medium text-(--color-accent-foreground) transition-colors hover:bg-(--color-accent-hover)"
-        >
+        // The real Button, not a local class string — so the retry action
+        // inherits the system's geometry, focus ring and motion.
+        <Button className="mt-2" onClick={onRetry}>
           <RotateCw className="size-4" />
           {retryLabel}
-        </button>
+        </Button>
       ) : null}
     </div>
   );

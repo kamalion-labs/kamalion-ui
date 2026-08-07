@@ -2,8 +2,12 @@ import type React from "react";
 
 export type SortDirection = "asc" | "desc" | false;
 
+/** Row height. `compact` trims ~8px per row for genuinely dense views. */
+export type TableDensity = "default" | "compact";
+
 export interface TableProps
   extends React.TableHTMLAttributes<HTMLTableElement> {
+  density?: TableDensity;
   className?: string;
   ref?: React.Ref<HTMLTableElement>;
 }

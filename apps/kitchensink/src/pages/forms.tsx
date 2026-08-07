@@ -16,7 +16,7 @@ type FormValues = z.infer<typeof schema>;
 function FormBoundDemo() {
   const { toast } = useToast();
   const form = useForm<FormValues>(schema, {
-    defaultValues: { name: "", email: "", password: "", role: "", agree: false },
+    defaultValues: { name: "", email: "", password: "", role: "editor", agree: true },
   });
 
   return (

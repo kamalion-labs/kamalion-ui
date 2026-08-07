@@ -1,5 +1,10 @@
 import type { Preview } from "@storybook/react";
 import { useEffect } from "react";
+// Keep in sync with `apps/kitchensink/src/main.tsx` — without these Storybook
+// renders in the platform UI font while the kitchensink renders in Inter, and
+// the discrepancy looks like a bug in the library.
+import "@fontsource-variable/inter";
+import "@fontsource-variable/jetbrains-mono";
 import "../src/styles/index.css";
 import { Tooltip } from "../src/components/tooltip";
 import { ToastProvider } from "../src/components/toast";

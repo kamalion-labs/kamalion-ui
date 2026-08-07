@@ -15,7 +15,7 @@ export function InputLabel({ className, children, ...props }: InputLabelProps) {
     <label
       htmlFor={id}
       className={cn(
-        "input-label text-sm font-medium text-(--color-foreground)",
+        "input-label w-fit cursor-pointer text-sm font-medium text-(--color-foreground)",
         className,
       )}
       {...props}

@@ -1,0 +1,49 @@
+/**
+ * Shared utilities.
+ *
+ * `focus-ring` is the library's single focus recipe. Every interactive element
+ * uses one of these three variants — never a hand-rolled `ring-*` stack.
+ *
+ * WHY `outline` AND NOT `ring`:
+ * `ring-offset-<color>` paints the offset gap as an OPAQUE fill. That is fine
+ * on a solid panel, but this theme's shell is translucent glass — a focused
+ * button in the sidebar would paint a solid white halo over the wallpaper
+ * showing through. `outline-offset` renders a genuinely transparent gap and
+ * follows `border-radius`, so one recipe works over panel, glass and coloured
+ * fills alike, with no offset-colour token to keep in sync.
+ */
+
+/** Default: focus ring sits just outside the element's own border. */
+@utility focus-ring {
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus-ring);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  &[aria-invalid="true"]:focus-visible,
+  &[data-invalid]:focus-visible {
+    outline-color: var(--color-focus-ring-danger);
+  }
+}
+
+/**
+ * Composite controls where focus lands on a descendant but the ring belongs on
+ * the wrapper — `Input.Group`, `Input.Number`, the file dropzone.
+ */
+@utility focus-ring-within {
+  &:has(:focus-visible) {
+    outline: var(--focus-ring-width) solid var(--color-focus-ring);
+    outline-offset: var(--focus-ring-offset);
+  }
+}
+
+/**
+ * Elements clipped by an `overflow-hidden` ancestor — select items, table rows,
+ * sidebar pills — where a positive offset would be cut off by the clip.
+ */
+@utility focus-ring-inset {
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus-ring);
+    outline-offset: calc(-1 * var(--focus-ring-width));
+  }
+}

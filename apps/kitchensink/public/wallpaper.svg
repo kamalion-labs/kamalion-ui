@@ -1,0 +1,132 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1600 1000"
+  preserveAspectRatio="xMidYMid slice"
+  role="presentation"
+>
+  <!--
+    Ambient desktop wallpaper for the kitchensink shell.
+
+    The default theme's window layer is translucent glass over whatever the OS
+    is showing (see styles/themes/default/AGENTS.md). This stands in for that
+    wallpaper so the frosted panels have something warm to sit on: a golden
+    field with a blue band sweeping through the lower left.
+
+    Built from soft-edged ellipses rather than an feGaussianBlur — a blur
+    filter over shapes this large is expensive to rasterise, and each ellipse
+    carrying its own radial fade to transparent is both cheaper and smoother.
+  -->
+  <defs>
+    <linearGradient id="field" x1="0.1" y1="0" x2="0.72" y2="1">
+      <stop offset="0" stop-color="#f7b75c" />
+      <stop offset="0.38" stop-color="#f19a4b" />
+      <stop offset="0.72" stop-color="#e8763b" />
+      <stop offset="1" stop-color="#dd5c30" />
+    </linearGradient>
+
+    <!-- Each fill is centred on its own ellipse (objectBoundingBox units), so
+         it reaches full opacity at the middle and vanishes at the edge. -->
+    <radialGradient id="gold">
+      <stop offset="0" stop-color="#ffd486" stop-opacity="0.95" />
+      <stop offset="0.55" stop-color="#ffc46c" stop-opacity="0.5" />
+      <stop offset="1" stop-color="#ffc46c" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="blush">
+      <stop offset="0" stop-color="#eda2ac" stop-opacity="0.8" />
+      <stop offset="0.55" stop-color="#e9a3b2" stop-opacity="0.32" />
+      <stop offset="1" stop-color="#e9a3b2" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="cream">
+      <stop offset="0" stop-color="#fce0ad" stop-opacity="0.62" />
+      <stop offset="0.6" stop-color="#fbd9a2" stop-opacity="0.22" />
+      <stop offset="1" stop-color="#fbd9a2" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="azure">
+      <stop offset="0" stop-color="#3d7ac9" stop-opacity="1" />
+      <stop offset="0.5" stop-color="#4d87cf" stop-opacity="0.72" />
+      <stop offset="1" stop-color="#5c91d3" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="sky">
+      <stop offset="0" stop-color="#7fb0e3" stop-opacity="0.7" />
+      <stop offset="0.6" stop-color="#8dbae8" stop-opacity="0.24" />
+      <stop offset="1" stop-color="#8dbae8" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="ember">
+      <stop offset="0" stop-color="#d9512a" stop-opacity="0.85" />
+      <stop offset="0.55" stop-color="#e05e2f" stop-opacity="0.4" />
+      <stop offset="1" stop-color="#e05e2f" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Chromatic bridge. Blue and orange are near-complements, so blending
+         them straight through sRGB passes through neutral and the seam turns
+         grey (measured at 6% saturation before this existed). Laying a
+         saturated violet-rose along the seam routes the blend
+         blue -> violet -> rose -> orange instead, which is the path the
+         reference wallpaper takes. -->
+    <radialGradient id="violet">
+      <stop offset="0" stop-color="#a75ea1" stop-opacity="0.72" />
+      <stop offset="0.5" stop-color="#b76391" stop-opacity="0.38" />
+      <stop offset="1" stop-color="#c26b80" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#field)" />
+
+  <!-- Warm highlight across the top third. -->
+  <ellipse cx="640" cy="60" rx="900" ry="420" fill="url(#gold)" />
+
+  <!-- Soft blush pulling the top-right corner off pure orange. -->
+  <ellipse cx="1560" cy="90" rx="520" ry="380" fill="url(#blush)" />
+
+  <!-- Pale diagonal sweep through the middle, keeping the field from reading
+       as a flat two-stop gradient. -->
+  <ellipse
+    cx="880"
+    cy="540"
+    rx="900"
+    ry="210"
+    transform="rotate(-13 880 540)"
+    fill="url(#cream)"
+  />
+
+  <!-- Violet bridge, laid ALONG the blue/orange seam (which runs roughly from
+       the left edge down to bottom-centre at ~34°) and drawn before the blue
+       so the band's core stays a clean blue. -->
+  <ellipse
+    cx="300"
+    cy="830"
+    rx="660"
+    ry="175"
+    transform="rotate(34 300 830)"
+    fill="url(#violet)"
+  />
+
+  <!-- The blue band: a wide ellipse running off the left edge. -->
+  <ellipse
+    cx="90"
+    cy="900"
+    rx="880"
+    ry="330"
+    transform="rotate(-17 90 900)"
+    fill="url(#azure)"
+  />
+
+  <!-- Lighter sky sliver riding just above the band, so the blue has depth
+       instead of being one flat wash. -->
+  <ellipse
+    cx="200"
+    cy="740"
+    rx="620"
+    ry="170"
+    transform="rotate(-20 200 740)"
+    fill="url(#sky)"
+  />
+
+  <!-- Deep ember anchoring the bottom-right. -->
+  <ellipse cx="1420" cy="1000" rx="760" ry="400" fill="url(#ember)" />
+</svg>

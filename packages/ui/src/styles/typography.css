@@ -1,0 +1,77 @@
+/**
+ * Typography foundation — font stacks + the semantic type ramp.
+ *
+ * Unlike `tokens.css`, these are declared with REAL values in a global
+ * `@theme` rather than `initial` + per-theme assignment. That is deliberate:
+ * the two-tier rule in `themes/default/AGENTS.md` exists for tokens that vary
+ * per theme, and a font stack is infrastructure — it is identical in light and
+ * dark. There is also a correctness reason: `.theme-light` may be applied to a
+ * wrapper `<div>` rather than `<html>`, and Tailwind's preflight resolves
+ * `html { font-family: var(--default-font-family) }` at the root — a
+ * theme-scoped value would never reach it.
+ *
+ * A theme may still override `--font-sans` under `.theme-light` if it ever
+ * needs to; the cascade allows it.
+ *
+ * The library ships NO font binaries and makes NO network request. Consumers
+ * supply the webfont however they prefer (self-hosted `@font-face`, Fontsource,
+ * their own CDN); the stack below upgrades automatically the moment "Inter" or
+ * "Inter Variable" becomes available, and degrades to the platform UI font
+ * otherwise. See `apps/kitchensink/src/main.tsx` for the Fontsource wiring.
+ */
+
+@theme {
+  /* Tailwind derives `--default-font-family` from `--font-sans` (and
+   * `--default-mono-font-family` from `--font-mono`), so declaring these two
+   * is enough to retheme `<html>` and `<code>` via preflight. */
+  --font-sans:
+    "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
+
+  --font-mono:
+    "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, SFMono-Regular,
+    "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* Inter character variants. `cv05` gives `l` a tail, which disambiguates
+   * l / I / 1 — the single most valuable fix for dense data tables. `ss03`
+   * rounds quotes and commas. Both are inert on the fallback fonts. */
+  --font-sans--font-feature-settings: "cv05" 1, "ss03" 1;
+  /* Disable the ligatures that make code hard to scan character-by-character. */
+  --font-mono--font-feature-settings: "liga" 0, "calt" 0;
+
+  /* ─── Semantic type ramp ───
+   * Generates `text-display`, `text-title`, … utilities carrying size,
+   * line-height, tracking and weight together.
+   *
+   * The negative tracking on the large sizes is the biggest single legibility
+   * win here: Inter does not apply optical sizing automatically, so display
+   * text set at its default tracking reads loose and unresolved. */
+  --text-display: 2.25rem;
+  --text-display--line-height: 1.2;
+  --text-display--letter-spacing: -0.021em;
+  --text-display--font-weight: 700;
+
+  --text-title: 1.875rem;
+  --text-title--line-height: 1.25;
+  --text-title--letter-spacing: -0.018em;
+  --text-title--font-weight: 700;
+
+  --text-subtitle: 1.5rem;
+  --text-subtitle--line-height: 1.3;
+  --text-subtitle--letter-spacing: -0.015em;
+  --text-subtitle--font-weight: 600;
+
+  --text-section: 1.25rem;
+  --text-section--line-height: 1.35;
+  --text-section--letter-spacing: -0.01em;
+  --text-section--font-weight: 600;
+
+  /* UI body — labels, table cells, buttons, form text. Distinct from prose
+   * body (`Text.Paragraph`), which stays at 1rem/1.75 for long-form reading. */
+  --text-body: 0.875rem;
+  --text-body--line-height: 1.5715;
+
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.4;
+}

@@ -1,7 +1,9 @@
 import { IMaskInput } from "react-imask";
 import { cn } from "../../../util";
+import { useControlGeometry } from "../context";
 import { useInputField } from "../hooks";
-import { controlBase, FieldError } from "../shared";
+import { FieldError } from "../shared";
+import { controlVariants, type ControlShape, type ControlSize } from "../variants";
 
 export interface InputMaskProps {
   /** IMask pattern, e.g. "(00) 00000-0000", "000.000.000-00" (CPF). */
@@ -9,6 +11,10 @@ export interface InputMaskProps {
   value?: string;
   onValueChange?: (value: string) => void;
   placeholder?: string;
+  /** Overrides the size inherited from the surrounding `<Input>`. */
+  size?: ControlSize;
+  /** Overrides the shape inherited from the surrounding `<Input>`. */
+  shape?: ControlShape;
   className?: string;
 }
 
@@ -18,9 +24,12 @@ export function InputMask({
   value,
   onValueChange,
   placeholder,
+  size,
+  shape,
   className,
 }: InputMaskProps) {
   const field = useInputField<string>({ value, onValueChange });
+  const geometry = useControlGeometry({ size, shape });
 
   return (
     <>
@@ -33,7 +42,7 @@ export function InputMask({
         aria-invalid={field.invalid || undefined}
         value={field.value ?? ""}
         onAccept={(accepted) => field.setValue(String(accepted))}
-        className={cn(controlBase, className)}
+        className={cn(controlVariants(geometry), className)}
       />
       <FieldError error={field.error} />
     </>

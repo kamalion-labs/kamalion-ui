@@ -1,21 +1,28 @@
+import { XCircle } from "lucide-react";
 import { cn } from "../../util";
+import { controlVariants } from "./variants";
 
-/** Base classes shared by text-like control elements (input/textarea/select). */
-export const controlBase = cn(
-  "input-control w-full rounded-(--radius-card) border border-(--color-border) bg-(--color-surface-panel) text-(--color-foreground)",
-  "px-3 py-2 text-sm",
-  "placeholder:text-(--color-foreground-subtle)",
-  "transition-colors outline-none",
-  "focus:border-(--color-accent) focus:ring-2 focus:ring-(--color-accent-soft)",
-  "disabled:cursor-not-allowed disabled:opacity-60",
-  "aria-[invalid=true]:border-(--color-danger) aria-[invalid=true]:focus:ring-(--color-danger-soft)",
-);
+/**
+ * Base classes shared by text-like control elements (input/textarea/select).
+ *
+ * @deprecated Prefer `controlVariants({ size, shape })` from `./variants` so
+ * the control participates in the shared size ramp. Kept as the default-sized
+ * shorthand for call sites that don't need geometry control.
+ */
+export const controlBase = controlVariants();
 
 export function FieldError({ error }: { error?: string }) {
   if (!error) return null;
   return (
-    <p className="input-error text-xs text-(--color-danger)" role="alert">
-      {error}
+    <p
+      className={cn(
+        "input-error flex items-start gap-1.5 text-xs font-medium text-(--color-danger)",
+        "animate-in fade-in-0 slide-in-from-top-1 duration-(--duration-fast) ease-standard",
+      )}
+      role="alert"
+    >
+      <XCircle className="mt-px size-3.5 shrink-0" aria-hidden="true" />
+      <span>{error}</span>
     </p>
   );
 }

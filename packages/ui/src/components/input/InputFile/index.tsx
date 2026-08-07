@@ -63,9 +63,14 @@ function InputFileRoot({
         }}
         aria-invalid={field.invalid || undefined}
         className={cn(
-          "input-file flex cursor-pointer flex-col items-center justify-center gap-2 rounded-(--radius-panel) border-2 border-dashed border-(--color-border) bg-(--color-surface-panel-muted) p-6 text-center transition-colors outline-none",
-          "hover:border-(--color-accent) focus-visible:ring-2 focus-visible:ring-(--color-accent-soft)",
-          dragging && "border-(--color-accent) bg-(--color-accent-soft)",
+          // `border` not `border-2`: a 2px dashed outline is the classic
+          // unfinished-upload-widget tell. A single dash at a stronger colour
+          // reads as intentional.
+          "input-file flex cursor-pointer flex-col items-center justify-center gap-2 rounded-(--radius-card) border border-dashed border-(--color-border-hover) bg-(--color-surface-panel-muted) p-6 text-center",
+          "transition-[border-color,background-color,transform] ease-standard outline-none",
+          "hover:border-(--color-accent) hover:bg-(--color-accent-subtle)",
+          "focus-ring",
+          dragging && "scale-[0.995] border-(--color-accent) bg-(--color-accent-soft)",
           field.invalid && "border-(--color-danger)",
           className,
         )}
@@ -130,7 +135,8 @@ function InputFileItem({
   return (
     <li
       className={cn(
-        "flex items-center gap-2 rounded-(--radius-card) border border-(--color-border) bg-(--color-surface-panel) px-3 py-2 text-sm",
+        "flex items-center gap-2 rounded-(--radius-control) border border-(--color-border) bg-(--color-surface-panel) px-3 py-2 text-sm",
+        "animate-in fade-in-0 slide-in-from-top-1 duration-(--duration-fast) ease-standard",
         className,
       )}
     >
@@ -197,7 +203,9 @@ function InputFileItemDelete({
       aria-label="Remove file"
       onClick={onClick}
       className={cn(
-        "shrink-0 rounded-(--radius-card) p-1 text-(--color-foreground-subtle) transition-colors hover:bg-(--color-danger-soft) hover:text-(--color-danger)",
+        "flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-(--radius-inline) text-(--color-foreground-subtle) transition-colors",
+        "hover:bg-(--color-danger-soft) hover:text-(--color-danger)",
+        "outline-none focus-ring",
         className,
       )}
     >

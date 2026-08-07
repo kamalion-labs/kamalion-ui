@@ -46,14 +46,23 @@ function ResizableHandle({
   return (
     <PanelResizeHandle
       className={cn(
-        "resizable-handle relative flex items-center justify-center bg-(--color-border) transition-colors data-[resize-handle-state=hover]:bg-(--color-accent) data-[resize-handle-state=drag]:bg-(--color-accent)",
+        "resizable-handle group relative flex shrink-0 items-center justify-center bg-(--color-border)",
+        "transition-colors ease-standard",
+        "data-[resize-handle-state=hover]:bg-(--color-accent) data-[resize-handle-state=drag]:bg-(--color-accent)",
         "data-[panel-group-direction=horizontal]:w-px data-[panel-group-direction=vertical]:h-px",
+        // The visual rail stays 1px, but the DRAG TARGET was also 1px — which
+        // is effectively unhittable. This `after:` overlay widens the target to
+        // ~10px without changing the layout.
+        "after:absolute after:z-10",
+        "data-[panel-group-direction=horizontal]:after:inset-y-0 data-[panel-group-direction=horizontal]:after:left-1/2 data-[panel-group-direction=horizontal]:after:w-2.5 data-[panel-group-direction=horizontal]:after:-translate-x-1/2",
+        "data-[panel-group-direction=vertical]:after:inset-x-0 data-[panel-group-direction=vertical]:after:top-1/2 data-[panel-group-direction=vertical]:after:h-2.5 data-[panel-group-direction=vertical]:after:-translate-y-1/2",
+        "outline-none focus-ring",
         className,
       )}
       {...props}
     >
       {withGrip ? (
-        <span className="z-10 h-8 w-1 rounded-(--radius-pill) bg-(--color-border-hover)" />
+        <span className="z-20 h-8 w-1 rounded-(--radius-pill) bg-(--color-border-hover) opacity-0 transition-opacity ease-standard group-hover:opacity-100 group-data-[resize-handle-state=drag]:opacity-100" />
       ) : null}
     </PanelResizeHandle>
   );

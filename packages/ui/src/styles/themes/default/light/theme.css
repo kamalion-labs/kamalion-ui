@@ -15,7 +15,6 @@
   --color-sidebar-fg-muted: var(--color-stone-500);
   --color-sidebar-active-bg: var(--color-white);
   --color-sidebar-active-fg: var(--color-stone-900);
-  --color-sidebar-active-shadow: var(--shadow-sm);
 
   /* ─── Elevated Floating Content Panels ─── */
   --color-surface-panel: var(--color-white);
@@ -25,7 +24,20 @@
     var(--color-black) 6%,
     transparent
   );
-  --color-surface-panel-shadow: var(--shadow-md);
+  --color-surface-panel-hover: color-mix(
+    in srgb,
+    var(--color-stone-900) 4%,
+    transparent
+  );
+  --color-surface-panel-active: color-mix(
+    in srgb,
+    var(--color-stone-900) 7%,
+    transparent
+  );
+
+  /* ─── Scrim behind modals & drawers ─── */
+  --color-overlay: color-mix(in srgb, var(--color-slate-900) 40%, transparent);
+  --backdrop-blur-overlay: var(--blur-xs);
 
   /* ─── Sticky Panel Headers (translucent on scroll) ─── */
   --color-panel-header-glass: color-mix(
@@ -45,33 +57,69 @@
   --color-foreground-muted: var(--color-stone-500);
   --color-foreground-subtle: var(--color-stone-400);
 
+  /* ─── Inverted Surface (tooltips) ─── */
+  --color-tooltip-bg: var(--color-stone-900);
+  --color-tooltip-fg: var(--color-stone-50);
+
   /* ─── Primary & Brand Accents ─── */
   --color-accent: var(--color-violet-600);
   --color-accent-hover: var(--color-violet-700);
   --color-accent-active: var(--color-violet-800);
   --color-accent-foreground: var(--color-white);
   --color-accent-soft: color-mix(in srgb, var(--color-violet-600) 12%, transparent);
+  --color-accent-subtle: color-mix(in srgb, var(--color-violet-600) 6%, transparent);
 
-  /* ─── Feedback & Status Colors ─── */
+  /* ─── Focus ─── */
+  --color-focus-ring: var(--color-violet-600);
+  --color-focus-ring-danger: var(--color-red-600);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+
+  /* ─── Feedback & Status Colors ───
+   * `-border` sits at ~25% rather than the fill's 10%: a border painted with
+   * the fill's own token composites the same tint twice over the same surface
+   * and lands ~2.5x too weak to read as a border at all. */
   --color-danger: var(--color-red-600);
   --color-danger-soft: color-mix(in srgb, var(--color-red-600) 10%, transparent);
+  --color-danger-border: color-mix(in srgb, var(--color-red-600) 25%, transparent);
+  --color-danger-fg: var(--color-red-700);
   --color-success: var(--color-green-600);
   --color-success-soft: color-mix(in srgb, var(--color-green-600) 10%, transparent);
+  --color-success-border: color-mix(in srgb, var(--color-green-600) 25%, transparent);
+  --color-success-fg: var(--color-green-700);
   --color-warning: var(--color-amber-600);
   --color-warning-soft: color-mix(in srgb, var(--color-amber-600) 10%, transparent);
+  --color-warning-border: color-mix(in srgb, var(--color-amber-600) 30%, transparent);
+  --color-warning-fg: var(--color-amber-700);
   --color-info: var(--color-blue-600);
   --color-info-soft: color-mix(in srgb, var(--color-blue-600) 10%, transparent);
+  --color-info-border: color-mix(in srgb, var(--color-blue-600) 25%, transparent);
+  --color-info-fg: var(--color-blue-700);
 
   /* ─── Borders & Dividers ─── */
   --color-border: color-mix(in srgb, var(--color-stone-900) 8%, transparent);
   --color-border-hover: color-mix(in srgb, var(--color-stone-900) 16%, transparent);
 
   /* ─── Radii ─── */
-  --radius-window: var(--radius-3xl);
-  --radius-panel: var(--radius-2xl);
-  --radius-card: var(--radius-xl);
+  --radius-window: var(--radius-3xl); /* 24px */
+  --radius-panel: var(--radius-2xl); /*  16px */
+  --radius-card: var(--radius-xl); /*    12px */
+  --radius-control: var(--radius-lg); /*  8px */
+  --radius-inline: var(--radius-md); /*   6px */
+  /* NOT `var(--radius-full)` — Tailwind v4 ships no such theme variable
+   * (`rounded-full` is a static utility), so referencing it yields an invalid
+   * value and every pill in the library renders square. */
   --radius-pill: calc(infinity * 1px);
 
   /* ─── Elevations ─── */
-  --shadow-panel: var(--shadow-xl);
+  --shadow-raised: var(--shadow-xs);
+  --shadow-raised-hover: var(--shadow-md);
+  --shadow-floating: var(--shadow-sm);
+  --shadow-overlay: var(--shadow-lg);
+  --shadow-modal: var(--shadow-2xl);
+
+  /* ─── Deprecated aliases (see tokens.css) ─── */
+  --color-surface-panel-shadow: var(--shadow-raised);
+  --color-sidebar-active-shadow: var(--shadow-floating);
+  --shadow-panel: var(--shadow-overlay);
 }

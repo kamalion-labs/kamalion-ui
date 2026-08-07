@@ -1,14 +1,18 @@
 import { cn } from "../../util";
 import type { CardProps, CardSectionProps } from "./types";
+import { cardVariants } from "./variants";
 
-function CardRoot({ className, children, ref, ...props }: CardProps) {
+function CardRoot({
+  variant = "flat",
+  className,
+  children,
+  ref,
+  ...props
+}: CardProps) {
   return (
     <div
       ref={ref}
-      className={cn(
-        "card flex flex-col rounded-(--radius-card) border border-(--color-surface-panel-border) bg-(--color-surface-panel) text-(--color-foreground) shadow-(--color-surface-panel-shadow)",
-        className,
-      )}
+      className={cn(`card-${variant}`, cardVariants({ variant }), className)}
       {...props}
     >
       {children}
@@ -21,7 +25,43 @@ function CardHeader({ className, children, ref, ...props }: CardSectionProps) {
     <div
       ref={ref}
       className={cn(
-        "card-header flex flex-col gap-1 border-b border-(--color-border) p-5",
+        "card-header flex flex-col gap-1.5 border-b border-(--color-border) p-5",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}
+
+/** Heading for a Card.Header. Without it the header has no type treatment. */
+function CardTitle({ className, children, ref, ...props }: CardSectionProps) {
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "card-title text-base leading-none font-semibold tracking-tight text-(--color-foreground)",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}
+
+function CardDescription({
+  className,
+  children,
+  ref,
+  ...props
+}: CardSectionProps) {
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "card-description text-sm text-(--color-foreground-muted)",
         className,
       )}
       {...props}
@@ -59,6 +99,8 @@ function CardFooter({ className, children, ref, ...props }: CardSectionProps) {
  */
 export const Card = Object.assign(CardRoot, {
   Header: CardHeader,
+  Title: CardTitle,
+  Description: CardDescription,
   Body: CardBody,
   Footer: CardFooter,
 });

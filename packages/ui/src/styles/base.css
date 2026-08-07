@@ -1,0 +1,63 @@
+/**
+ * Global base layer.
+ *
+ * Imported LAST in `index.css` because it reads tokens assigned by the theme
+ * files (e.g. `::selection` uses `--color-accent-soft`).
+ */
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-size-adjust: 100%;
+
+    /* Reserve the scrollbar gutter so the modal's scroll-lock doesn't shift
+     * the whole page sideways when a dialog opens. */
+    scrollbar-gutter: stable;
+    scrollbar-color: var(--color-border-hover) transparent;
+  }
+
+  /* Headings wrap on meaning rather than on the right margin; body copy avoids
+   * orphans. Both are single-property wins that read as typographic care. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  dd,
+  figcaption {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-soft);
+    color: var(--color-foreground);
+  }
+
+  /* `PRODUCT.md` promises this under Accessibility & Inclusion.
+   *
+   * IMPORTANT: neutralise to `1ms`, never to `animation: none`. Radix's
+   * `Presence` (Dialog, Popover, Tooltip, Select, Collapsible) keeps content
+   * mounted until `animationend` fires — `none` suppresses the event entirely
+   * and leaves closed modals permanently in the DOM. `1ms` still fires.
+   *
+   * `!important` outranks layer order, so this wins over the utilities layer. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 1ms !important;
+      animation-delay: 0ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 1ms !important;
+      transition-delay: 0ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

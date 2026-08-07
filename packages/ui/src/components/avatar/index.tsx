@@ -7,6 +7,7 @@ import type {
   AvatarOverlayProps,
   AvatarProps,
   AvatarSize,
+  AvatarStatus,
 } from "./types";
 
 const sizeClass: Record<AvatarSize, string> = {
@@ -55,7 +56,7 @@ function AvatarFallback({ className, ref, ...props }: AvatarFallbackProps) {
     <RadixAvatar.Fallback
       ref={ref}
       className={cn(
-        "avatar-fallback flex size-full items-center justify-center rounded-(--radius-pill) bg-(--color-accent-soft) font-medium text-(--color-accent)",
+        "avatar-fallback flex size-full items-center justify-center rounded-(--radius-pill) bg-(--color-accent-soft) font-medium tracking-tight text-(--color-accent) uppercase select-none",
         className,
       )}
       {...props}
@@ -63,8 +64,16 @@ function AvatarFallback({ className, ref, ...props }: AvatarFallbackProps) {
   );
 }
 
+const statusClass: Record<AvatarStatus, string> = {
+  online: "bg-(--color-success)",
+  offline: "bg-(--color-foreground-subtle)",
+  busy: "bg-(--color-danger)",
+  away: "bg-(--color-warning)",
+};
+
 function AvatarOverlay({
   placement = "bottom-right",
+  status = "online",
   className,
   ref,
   ...props
@@ -72,8 +81,10 @@ function AvatarOverlay({
   return (
     <span
       ref={ref}
+      data-status={status}
       className={cn(
-        "avatar-overlay absolute z-10 block size-3 rounded-(--radius-pill) ring-2 ring-(--color-surface-panel) bg-(--color-success)",
+        "avatar-overlay absolute z-10 block size-3 rounded-(--radius-pill) ring-2 ring-(--color-surface-panel)",
+        statusClass[status],
         placementClass[placement],
         className,
       )}

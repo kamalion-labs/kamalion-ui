@@ -30,14 +30,19 @@ export function InputSwitch({
         disabled={field.disabled}
         aria-invalid={field.invalid || undefined}
         className={cn(
-          "input-switch relative inline-flex h-6 w-10 shrink-0 cursor-pointer items-center rounded-(--radius-pill) border border-transparent transition-colors outline-none",
-          "bg-(--color-surface-panel-muted) data-[state=checked]:bg-(--color-accent)",
-          "focus-visible:ring-2 focus-visible:ring-(--color-accent-soft)",
+          // `p-0.5` + a `size-5` thumb means the travel distance is derived
+          // from the track width instead of a magic translate offset, so the
+          // geometry survives any future size change.
+          "input-switch relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-(--radius-pill) border border-(--color-border) p-0.5",
+          "transition-colors duration-(--duration-normal) ease-standard",
+          "bg-(--color-surface-panel-muted)",
+          "data-[state=checked]:border-(--color-accent) data-[state=checked]:bg-(--color-accent)",
+          "outline-none focus-ring",
           "disabled:cursor-not-allowed disabled:opacity-60",
           className,
         )}
       >
-        <RadixSwitch.Thumb className="pointer-events-none block size-5 translate-x-0.5 rounded-(--radius-pill) bg-(--color-surface-panel) shadow-(--shadow-sm) transition-transform data-[state=checked]:translate-x-[1.125rem]" />
+        <RadixSwitch.Thumb className="pointer-events-none block size-4.5 rounded-(--radius-pill) bg-(--color-surface-panel) shadow-(--shadow-floating) transition-transform duration-(--duration-normal) ease-standard data-[state=checked]:translate-x-5" />
       </RadixSwitch.Root>
       <FieldError error={field.error} />
     </>

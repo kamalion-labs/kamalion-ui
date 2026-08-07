@@ -135,7 +135,7 @@ In Light mode (`.theme-light`), the outer shell provides soft translucent glass,
   --radius-window: var(--radius-3xl);
   --radius-panel: var(--radius-2xl);
   --radius-card: var(--radius-xl);
-  --radius-pill: var(--radius-full);
+  --radius-pill: calc(infinity * 1px); /* NOT var(--radius-full) — no such Tailwind v4 theme var */
 
   /* ─── Shadows ─── */
   --shadow-sm: var(--shadow-sm);
@@ -208,7 +208,7 @@ In Dark mode (`.theme-dark`), the root shell features translucent obsidian glass
   --radius-window: var(--radius-3xl);
   --radius-panel: var(--radius-2xl);
   --radius-card: var(--radius-xl);
-  --radius-pill: var(--radius-full);
+  --radius-pill: calc(infinity * 1px); /* NOT var(--radius-full) — no such Tailwind v4 theme var */
 
   /* ─── Shadows ─── */
   --shadow-sm: var(--shadow-sm);
@@ -267,6 +267,10 @@ Every component maps its tokens based on whether it belongs to the translucent w
 
 > [!IMPORTANT]
 > **TailwindCSS v4 Native Variables**: **Always** map theme semantic tokens using Tailwind CSS v4 native variables (e.g., `var(--color-white)`, `var(--color-slate-900)`, `var(--color-violet-600)`, `var(--radius-2xl)`, `var(--radius-full)`, `var(--shadow-md)`). **Never** hardcode raw hex values, pixel radii, or raw box-shadow definitions when standard TailwindCSS v4 variables are available.
+>
+> **Sanctioned exception — dark-mode inset highlights.** `dark/theme.css` writes literal `inset 0 1px 0 0 color-mix(…)` values for `--shadow-raised` / `--shadow-floating` / `--shadow-raised-hover`. Every Tailwind `--inset-shadow-*` is a *dark* inset, so no built-in variable can express the light top-edge highlight that dark surfaces need in place of a drop shadow. This is the only place a raw box-shadow may be authored.
+>
+> **Sanctioned exception — theme-invariant foundations.** `styles/typography.css` and `styles/motion.css` declare REAL values in a global `@theme` rather than `initial` + per-theme assignment. The two-tier rule exists for tokens that vary per theme; font stacks and easing curves are infrastructure and are identical in light and dark. There is also a correctness reason: `.theme-light` may be applied to a wrapper `<div>`, and Tailwind's preflight resolves `html { font-family: var(--default-font-family) }` at the root, where a theme-scoped value would never reach it. A theme may still override them.
 >
 > **Window Glass vs Panel Surface Separation**: The application root shell uses translucent glass with backdrop blur (`var(--color-window-glass)` + `backdrop-filter: blur(var(--backdrop-blur-amount))`). Sidebar navigation elements rest directly on this glass shell (`bg-transparent`). Content areas (photo grid, AI drawer) are rendered as elevated surface panels (`var(--color-surface-panel)` / `rounded-2xl`).
 >

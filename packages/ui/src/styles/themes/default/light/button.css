@@ -23,6 +23,6 @@
 
   /* danger */
   --button-danger-bg: var(--color-danger);
-  --button-danger-bg-hover: color-mix(in srgb, var(--color-danger) 88%, black);
+  --button-danger-bg-hover: var(--color-red-700);
   --button-danger-fg: var(--color-accent-foreground);
 }

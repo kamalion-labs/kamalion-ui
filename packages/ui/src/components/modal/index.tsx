@@ -7,19 +7,36 @@ import { ModalContext, useModal } from "./context";
 import type { ModalOptions, ModalPosition } from "./types";
 
 const overlayClass =
-  "modal-overlay fixed inset-0 z-50 bg-black/50 backdrop-blur-(--backdrop-blur-header)";
+  "modal-overlay fixed inset-0 z-50 bg-(--color-overlay) backdrop-blur-(--backdrop-blur-overlay) data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 duration-(--duration-normal)";
 
-const positionClass: Record<ModalPosition, string> = {
-  center: "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-  top: "top-16 left-1/2 -translate-x-1/2",
+/**
+ * The dialog is centred by a flex POSITIONER, not by
+ * `-translate-x-1/2 -translate-y-1/2` on the content itself.
+ *
+ * That matters: the `zoom-in-95` / `slide-in-*` keyframes animate `transform`
+ * wholesale (`translate3d(…) scale(…)`), which would replace a centering
+ * transform outright — the dialog would jump to the viewport's centre POINT
+ * (i.e. its own top-left corner landing there) and snap back for the duration
+ * of every open. Keeping the content transform-free at rest makes the enter
+ * and exit animations safe.
+ *
+ * `pointer-events-none` on the positioner preserves click-outside-to-close,
+ * since the overlay underneath still receives the click.
+ */
+const positionerClass: Record<ModalPosition, string> = {
+  center: "items-center",
+  top: "items-start pt-16",
 };
 
-function contentClass(position: ModalPosition = "center") {
-  return cn(
-    "modal-content fixed z-50 flex w-[calc(100%-2rem)] max-w-lg flex-col overflow-hidden rounded-(--radius-panel) border border-(--color-surface-panel-border) bg-(--color-surface-panel) text-(--color-foreground) shadow-(--shadow-panel) outline-none",
-    positionClass[position],
-  );
-}
+const contentClass = cn(
+  "modal-content pointer-events-auto relative z-50 flex w-full max-w-lg flex-col overflow-hidden",
+  "max-h-[calc(100dvh-2rem)]",
+  "rounded-(--radius-panel) border border-(--color-surface-panel-border)",
+  "bg-(--color-surface-panel) text-(--color-foreground) shadow-(--shadow-modal)",
+  "outline-none duration-(--duration-normal) ease-standard",
+  "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-bottom-2",
+  "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
+);
 
 // ─── Declarative parts ────────────────────────────────────────────────────
 
@@ -47,21 +64,35 @@ function ModalContent({
   return (
     <RadixDialog.Portal>
       <RadixDialog.Overlay className={overlayClass} />
-      <RadixDialog.Content
-        ref={ref}
-        className={cn(contentClass(position), className)}
-        {...props}
-      >
-        {children}
-        {showClose && (
-          <RadixDialog.Close
-            aria-label="Close"
-            className="absolute top-4 right-4 rounded-(--radius-card) p-1 text-(--color-foreground-subtle) transition-colors hover:bg-(--color-surface-panel-muted) hover:text-(--color-foreground)"
-          >
-            <X className="size-4" />
-          </RadixDialog.Close>
+      <div
+        className={cn(
+          "modal-positioner pointer-events-none fixed inset-0 z-50 flex justify-center p-4",
+          positionerClass[position],
         )}
-      </RadixDialog.Content>
+      >
+        <RadixDialog.Content
+          ref={ref}
+          className={cn(contentClass, className)}
+          {...props}
+        >
+          {children}
+          {showClose && (
+            <RadixDialog.Close
+              aria-label="Close"
+              className={cn(
+                // 32px target — the old `p-1` around a 16px glyph gave 24px,
+                // under the 24px minimum for a comfortable pointer target.
+                "absolute top-3.5 right-3.5 inline-flex size-8 cursor-pointer items-center justify-center",
+                "rounded-(--radius-inline) text-(--color-foreground-subtle) transition-colors",
+                "hover:bg-(--color-surface-panel-hover) hover:text-(--color-foreground)",
+                "outline-none focus-ring",
+              )}
+            >
+              <X className="size-4" />
+            </RadixDialog.Close>
+          )}
+        </RadixDialog.Content>
+      </div>
     </RadixDialog.Portal>
   );
 }
@@ -72,13 +103,33 @@ interface SectionProps extends React.HTMLAttributes<HTMLDivElement> {
   ref?: React.Ref<HTMLDivElement>;
 }
 
+/**
+ * Header band. The type treatment lives on `Modal.Title`, not here — putting
+ * `text-lg font-semibold` on the container meant any description nested inside
+ * the header inherited it and rendered as a second bold heading.
+ */
 function ModalHeader({ className, children, ref, ...props }: SectionProps) {
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "modal-header flex flex-col gap-1.5 border-b border-(--color-border) px-5 py-4 pr-12",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}
+
+function ModalTitle({ className, children, ref, ...props }: SectionProps) {
   return (
     <RadixDialog.Title asChild>
       <div
         ref={ref}
         className={cn(
-          "modal-header flex flex-col gap-1 border-b border-(--color-border) p-5 pr-12 text-lg font-semibold",
+          "modal-title text-lg leading-none font-semibold tracking-tight text-(--color-foreground)",
           className,
         )}
         {...props}
@@ -86,6 +137,23 @@ function ModalHeader({ className, children, ref, ...props }: SectionProps) {
         {children}
       </div>
     </RadixDialog.Title>
+  );
+}
+
+function ModalDescription({ className, children, ref, ...props }: SectionProps) {
+  return (
+    <RadixDialog.Description asChild>
+      <div
+        ref={ref}
+        className={cn(
+          "modal-description text-sm font-normal text-(--color-foreground-muted)",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </div>
+    </RadixDialog.Description>
   );
 }
 
@@ -159,12 +227,18 @@ export function ModalProvider({ children }: { children?: ReactNode }) {
         }}
       >
         <ModalContent position={options?.position ?? "center"}>
-          {options?.title ? <ModalHeader>{options.title}</ModalHeader> : null}
+          {options?.title ? (
+            <ModalHeader>
+              <ModalTitle>{options.title}</ModalTitle>
+            </ModalHeader>
+          ) : (
+            // Radix requires a Title for screen readers even when the dialog
+            // shows none visually.
+            <ModalTitle className="sr-only">Dialog</ModalTitle>
+          )}
           <ModalBody>
             {options?.description ? (
-              <RadixDialog.Description className="text-sm text-(--color-foreground-muted)">
-                {options.description}
-              </RadixDialog.Description>
+              <ModalDescription>{options.description}</ModalDescription>
             ) : null}
             {options?.content}
           </ModalBody>
@@ -203,6 +277,8 @@ export const Modal = Object.assign(ModalRoot, {
   Trigger: RadixDialog.Trigger,
   Content: ModalContent,
   Header: ModalHeader,
+  Title: ModalTitle,
+  Description: ModalDescription,
   Body: ModalBody,
   Footer: ModalFooter,
   Close: RadixDialog.Close,

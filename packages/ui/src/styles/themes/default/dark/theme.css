@@ -15,7 +15,6 @@
   --color-sidebar-fg-muted: var(--color-stone-400);
   --color-sidebar-active-bg: color-mix(in srgb, var(--color-white) 12%, transparent);
   --color-sidebar-active-fg: var(--color-white);
-  --color-sidebar-active-shadow: var(--shadow-sm);
 
   /* ─── Elevated Floating Content Panels ─── */
   --color-surface-panel: var(--color-slate-900);
@@ -25,7 +24,20 @@
     var(--color-white) 8%,
     transparent
   );
-  --color-surface-panel-shadow: var(--shadow-2xl);
+  --color-surface-panel-hover: color-mix(
+    in srgb,
+    var(--color-white) 6%,
+    transparent
+  );
+  --color-surface-panel-active: color-mix(
+    in srgb,
+    var(--color-white) 10%,
+    transparent
+  );
+
+  /* ─── Scrim behind modals & drawers ─── */
+  --color-overlay: color-mix(in srgb, var(--color-slate-950) 70%, transparent);
+  --backdrop-blur-overlay: var(--blur-xs);
 
   /* ─── Sticky Panel Headers (translucent on scroll) ─── */
   --color-panel-header-glass: color-mix(
@@ -45,33 +57,83 @@
   --color-foreground-muted: var(--color-slate-400);
   --color-foreground-subtle: var(--color-slate-500);
 
+  /* ─── Inverted Surface (tooltips) ─── */
+  --color-tooltip-bg: var(--color-slate-100);
+  --color-tooltip-fg: var(--color-slate-900);
+
   /* ─── Primary & Brand Accents ─── */
   --color-accent: var(--color-violet-500);
   --color-accent-hover: var(--color-violet-600);
   --color-accent-active: var(--color-violet-700);
   --color-accent-foreground: var(--color-white);
   --color-accent-soft: color-mix(in srgb, var(--color-violet-500) 20%, transparent);
+  --color-accent-subtle: color-mix(in srgb, var(--color-violet-500) 12%, transparent);
+
+  /* ─── Focus ───
+   * Brighter than `--color-accent`: violet-500 on slate-900 falls short of the
+   * 3:1 non-text contrast WCAG 2.1 SC 1.4.11 requires of a focus indicator. */
+  --color-focus-ring: var(--color-violet-400);
+  --color-focus-ring-danger: var(--color-red-400);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
 
   /* ─── Feedback & Status Colors ─── */
   --color-danger: var(--color-red-500);
   --color-danger-soft: color-mix(in srgb, var(--color-red-500) 18%, transparent);
+  --color-danger-border: color-mix(in srgb, var(--color-red-500) 35%, transparent);
+  --color-danger-fg: var(--color-red-200);
   --color-success: var(--color-green-500);
   --color-success-soft: color-mix(in srgb, var(--color-green-500) 18%, transparent);
+  --color-success-border: color-mix(in srgb, var(--color-green-500) 35%, transparent);
+  --color-success-fg: var(--color-green-200);
   --color-warning: var(--color-amber-500);
   --color-warning-soft: color-mix(in srgb, var(--color-amber-500) 18%, transparent);
+  --color-warning-border: color-mix(in srgb, var(--color-amber-500) 35%, transparent);
+  --color-warning-fg: var(--color-amber-200);
   --color-info: var(--color-blue-500);
   --color-info-soft: color-mix(in srgb, var(--color-blue-500) 18%, transparent);
+  --color-info-border: color-mix(in srgb, var(--color-blue-500) 35%, transparent);
+  --color-info-fg: var(--color-blue-200);
 
   /* ─── Borders & Dividers ─── */
   --color-border: color-mix(in srgb, var(--color-white) 10%, transparent);
   --color-border-hover: color-mix(in srgb, var(--color-white) 20%, transparent);
 
   /* ─── Radii ─── */
-  --radius-window: var(--radius-3xl);
-  --radius-panel: var(--radius-2xl);
-  --radius-card: var(--radius-xl);
+  --radius-window: var(--radius-3xl); /* 24px */
+  --radius-panel: var(--radius-2xl); /*  16px */
+  --radius-card: var(--radius-xl); /*    12px */
+  --radius-control: var(--radius-lg); /*  8px */
+  --radius-inline: var(--radius-md); /*   6px */
+  /* NOT `var(--radius-full)` — Tailwind v4 ships no such theme variable
+   * (`rounded-full` is a static utility), so referencing it yields an invalid
+   * value and every pill in the library renders square. */
   --radius-pill: calc(infinity * 1px);
 
-  /* ─── Elevations ─── */
-  --shadow-panel: var(--shadow-2xl);
+  /* ─── Elevations ───
+   * Dark mode inverts the strategy. A drop shadow works by darkening what is
+   * behind it — on a dark surface over a dark backdrop there is nothing left
+   * to darken, so a large blur just reads as mud. The resting cue becomes a
+   * 1px inner highlight along the top edge (light-from-above), which is how
+   * the surface actually separates from what is under it.
+   *
+   * These raw `inset` values are a sanctioned exception to the "never hardcode
+   * a box-shadow" rule in `themes/default/AGENTS.md`: every Tailwind
+   * `--inset-shadow-*` is a DARK inset, so no built-in variable can express a
+   * light top highlight. */
+  --shadow-raised: inset 0 1px 0 0
+    color-mix(in srgb, var(--color-white) 5%, transparent);
+  --shadow-raised-hover: inset 0 1px 0 0
+    color-mix(in srgb, var(--color-white) 12%, transparent);
+  --shadow-floating: inset 0 1px 0 0
+    color-mix(in srgb, var(--color-white) 8%, transparent);
+  --shadow-overlay: var(--shadow-2xl),
+    inset 0 1px 0 0 color-mix(in srgb, var(--color-white) 6%, transparent);
+  --shadow-modal: var(--shadow-2xl),
+    inset 0 1px 0 0 color-mix(in srgb, var(--color-white) 8%, transparent);
+
+  /* ─── Deprecated aliases (see tokens.css) ─── */
+  --color-surface-panel-shadow: var(--shadow-raised);
+  --color-sidebar-active-shadow: var(--shadow-floating);
+  --shadow-panel: var(--shadow-overlay);
 }

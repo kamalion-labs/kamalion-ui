@@ -11,11 +11,38 @@
  * light/dark mapping below — keep the sections in the marked order.
  */
 
+/* 0. Declare `vendor` FIRST so it has the lowest precedence of all layers.
+ *    Third-party stylesheets are unlayered by default, and unlayered author
+ *    styles outrank every layered one — which meant `react-day-picker`'s
+ *    `style.css` beat our own Tailwind utilities and the Calendar could not be
+ *    themed at all. A layer statement is one of the few things allowed to
+ *    precede `@import`. */
+@layer vendor;
+
 /* 1. Tailwind v4 engine (preflight + utilities + built-in theme). */
 @import "tailwindcss";
 
+/* 1b. Enter/exit animation utilities (`animate-in`, `fade-in-0`, `zoom-in-95`,
+ *     `slide-in-from-*`, `animate-collapsible-*`) consumed by modal, popover,
+ *     tooltip, select and navbar. CSS-only — no JS runtime.
+ *
+ *     This has to live here and not inside `base.css`: CSS requires every
+ *     `@import` to precede other rules, and `base.css` opens with `@layer`. */
+@import "tw-animate-css";
+
+/* 1c. Third-party component CSS, demoted into the `vendor` layer. Calendar
+ *     needs react-day-picker's grid LAYOUT but overrides every visual
+ *     property; layering is what makes that override actually win. */
+@import "react-day-picker/style.css" layer(vendor);
+
 /* 2. Global semantic token registry (all `initial`). */
 @import "./tokens.css";
+
+/* 2b. Theme-invariant foundations — real values, not `initial`. Font stacks,
+ *     the type ramp, and motion curves are identical across themes; see the
+ *     header comment in each file for why they sidestep the two-tier rule. */
+@import "./typography.css";
+@import "./motion.css";
 
 /* 3. Per-component token registries (all `initial`). ---------------------- */
 /* @kamalion:component-tokens */
@@ -30,7 +57,13 @@
 @import "./themes/default/light/button.css";
 @import "./themes/default/dark/button.css";
 
-/* 6. Tell Tailwind to scan the library source (paths are relative to THIS
+/* 6. Global base layer + shared utilities. Imported after the themes because
+ *    they READ tokens assigned in 2–5 (`::selection` uses `--color-accent-soft`;
+ *    `focus-ring` uses `--color-focus-ring`). */
+@import "./base.css";
+@import "./utilities.css";
+
+/* 7. Tell Tailwind to scan the library source (paths are relative to THIS
  *    file, so they resolve wherever the package physically lives). */
 @source "../components";
 @source "../index.ts";

@@ -635,3 +635,11 @@ url: http://localhost:5173
 > **Icons**: **Always** use the `lucide-react` library for icons.
 >
 > **TailwindCSS v4**: Use TailwindCSS v4 tokens, variables and utilities for styling the components and **Never** use inline styles.
+>
+> **Focus rings**: **Never** hand-roll a `ring-*` stack. Use the shared `focus-ring` utility (or `focus-ring-within` for composite controls whose focus lands on a descendant, or `focus-ring-inset` for elements clipped by an `overflow-hidden` ancestor). They are defined in `src/styles/utilities.css` and are `outline`-based on purpose — `ring-offset-<color>` paints an opaque gap, which is wrong over this theme's translucent shell.
+>
+> **Geometry**: Action controls (Button, Badge, sidebar pills, Switch, Avatar) are `--radius-pill`. Field controls (every `Input.*`) are `--radius-control`. Both share the `sm` 32 / `md` 40 / `lg` 48px height ramp — mirror `buttonVariants` and `input/variants.ts` rather than inventing a new one.
+>
+> **Elevation**: Use the `--shadow-raised` → `--shadow-raised-hover` → `--shadow-floating` → `--shadow-overlay` → `--shadow-modal` ramp. `--color-surface-panel-shadow`, `--color-sidebar-active-shadow` and `--shadow-panel` are deprecated aliases.
+>
+> **Tinted callouts**: Border and fill take *different* tokens — `border-(--color-{status}-border)` over `bg-(--color-{status}-soft)`. Using the `-soft` token for both composites the same tint twice and the border disappears.

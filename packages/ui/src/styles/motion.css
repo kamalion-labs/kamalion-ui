@@ -1,0 +1,30 @@
+/**
+ * Motion foundation — easing curves and duration ramp.
+ *
+ * Real values in a global `@theme` for the same reason as `typography.css`:
+ * motion character does not vary between light and dark.
+ *
+ * Setting `--default-transition-duration` / `--default-transition-timing-function`
+ * means a bare `transition` or `transition-colors` is already correct, so
+ * components can drop the `duration-200 ease-out` noise from every class list.
+ */
+
+@theme {
+  /* One decelerating curve carries almost all UI motion: fast departure, soft
+   * arrival. `--ease-*` is a real Tailwind v4 namespace, so this generates the
+   * `ease-standard` / `ease-entrance` / `ease-exit` utilities. */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-entrance: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
+
+  /* `--duration-*` is NOT a Tailwind namespace — there is no `duration-fast`
+   * class. Reference these with the arbitrary-variable form instead:
+   * `duration-(--duration-slow)`. */
+  --duration-instant: 90ms;
+  --duration-fast: 140ms;
+  --duration-normal: 180ms;
+  --duration-slow: 260ms;
+
+  --default-transition-duration: var(--duration-fast);
+  --default-transition-timing-function: var(--ease-standard);
+}

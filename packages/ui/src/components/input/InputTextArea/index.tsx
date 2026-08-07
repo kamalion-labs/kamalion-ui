@@ -1,7 +1,9 @@
 import type { TextareaHTMLAttributes } from "react";
 import { cn } from "../../../util";
+import { useControlGeometry } from "../context";
 import { useInputField } from "../hooks";
-import { controlBase, FieldError } from "../shared";
+import { FieldError } from "../shared";
+import { textAreaVariants, type ControlShape, type ControlSize } from "../variants";
 
 export interface InputTextAreaProps
   extends Omit<
@@ -10,6 +12,10 @@ export interface InputTextAreaProps
   > {
   value?: string;
   onValueChange?: (value: string) => void;
+  /** Overrides the size inherited from the surrounding `<Input>`. */
+  size?: ControlSize;
+  /** Overrides the shape inherited from the surrounding `<Input>`. */
+  shape?: ControlShape;
   className?: string;
   ref?: React.Ref<HTMLTextAreaElement>;
 }
@@ -18,12 +24,15 @@ export interface InputTextAreaProps
 export function InputTextArea({
   value,
   onValueChange,
+  size,
+  shape,
   className,
   rows = 4,
   ref,
   ...props
 }: InputTextAreaProps) {
   const field = useInputField<string>({ value, onValueChange });
+  const geometry = useControlGeometry({ size, shape });
 
   return (
     <>
@@ -37,7 +46,7 @@ export function InputTextArea({
         aria-invalid={field.invalid || undefined}
         value={field.value ?? ""}
         onChange={(e) => field.setValue(e.target.value)}
-        className={cn(controlBase, "min-h-20 resize-y", className)}
+        className={cn(textAreaVariants(geometry), className)}
         {...props}
       />
       <FieldError error={field.error} />

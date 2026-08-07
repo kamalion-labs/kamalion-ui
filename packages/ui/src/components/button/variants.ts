@@ -11,7 +11,7 @@ export const buttonVariants = cva(
     // Theme customization
     "rounded-(--button-radius)",
     // Animations
-    "transition-colors duration-200 ease-out",
+    "transition-all duration-150 ease-out active:scale-[0.98]",
     // Focus / disabled
     "outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--color-surface-panel)",
     "disabled:pointer-events-none disabled:opacity-50",

@@ -38,22 +38,25 @@ export function InputCheckbox({
           disabled={field.disabled}
           aria-invalid={field.invalid || undefined}
           className={cn(
-            "input-checkbox flex size-5 shrink-0 items-center justify-center rounded-[6px] border border-(--color-border) bg-(--color-surface-panel) outline-none transition-colors",
+            "input-checkbox flex size-5 shrink-0 items-center justify-center rounded-(--radius-inline) border border-(--color-border) bg-(--color-surface-panel)",
+            "transition-[background-color,border-color,box-shadow] ease-standard",
+            "hover:border-(--color-border-hover)",
             "data-[state=checked]:border-(--color-accent) data-[state=checked]:bg-(--color-accent) data-[state=checked]:text-(--color-accent-foreground)",
-            "focus-visible:ring-2 focus-visible:ring-(--color-accent-soft)",
+            "data-[state=checked]:hover:border-(--color-accent)",
+            "outline-none focus-ring",
             "disabled:cursor-not-allowed disabled:opacity-60",
             className,
           )}
         >
-          <RadixCheckbox.Indicator>
-            <Check className="size-3.5" />
+          <RadixCheckbox.Indicator className="animate-in zoom-in-50 duration-(--duration-instant) ease-standard">
+            <Check className="size-3.5" strokeWidth={3} />
           </RadixCheckbox.Indicator>
         </RadixCheckbox.Root>
         {label ? (
           <label
             htmlFor={field.id}
             className={cn(
-              "text-sm text-(--color-foreground) select-none",
+              "cursor-pointer text-sm text-(--color-foreground) select-none",
               classNameLabel,
             )}
           >

@@ -24,13 +24,30 @@ function TooltipContent({
         ref={ref}
         sideOffset={sideOffset}
         className={cn(
-          "tooltip-content z-50 max-w-xs rounded-(--radius-card) bg-(--color-foreground) px-2.5 py-1.5 text-xs font-medium text-(--color-surface-panel) shadow-(--shadow-panel)",
+          "tooltip-content z-50 max-w-64 rounded-(--radius-inline) px-2 py-1",
+          // Inverted surface, on purpose — a tooltip is transient annotation,
+          // not a panel. Tokenised rather than borrowing `--color-foreground`
+          // so the intent is explicit and themeable.
+          "bg-(--color-tooltip-bg) text-xs font-medium text-(--color-tooltip-fg)",
+          "shadow-(--shadow-overlay)",
+          "origin-(--radix-tooltip-content-transform-origin)",
+          "duration-(--duration-fast) ease-standard",
+          // Radix Tooltip emits `instant-open` / `delayed-open` / `closed` —
+          // it NEVER emits `data-state=open`, so a recipe copied from Popover
+          // silently does nothing here.
+          "data-[state=instant-open]:animate-in data-[state=delayed-open]:animate-in",
+          "data-[state=closed]:animate-out",
+          "fade-in-0 fade-out-0 zoom-in-95 zoom-out-95",
+          "data-[side=bottom]:slide-in-from-top-1 data-[side=top]:slide-in-from-bottom-1",
+          "data-[side=left]:slide-in-from-right-1 data-[side=right]:slide-in-from-left-1",
           className,
         )}
         {...props}
       >
         {children}
-        {withArrow && <RadixTooltip.Arrow className="fill-(--color-foreground)" />}
+        {withArrow && (
+          <RadixTooltip.Arrow className="fill-(--color-tooltip-bg)" />
+        )}
       </RadixTooltip.Content>
     </RadixTooltip.Portal>
   );

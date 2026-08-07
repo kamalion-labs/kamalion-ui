@@ -21,7 +21,10 @@ export function InputButton({
       ref={ref}
       type={type}
       className={cn(
-        "input-button flex items-center gap-1.5 px-3 text-sm font-medium text-(--color-accent) transition-colors hover:bg-(--color-accent-soft) disabled:opacity-50 [&_svg]:size-4",
+        "input-button flex shrink-0 cursor-pointer items-center gap-1.5 px-3 text-sm font-medium text-(--color-accent)",
+        "transition-colors hover:bg-(--color-accent-soft)",
+        "outline-none focus-ring-inset",
+        "disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4",
         className,
       )}
       {...props}

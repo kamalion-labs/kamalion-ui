@@ -14,7 +14,10 @@ export function InputIcon({ className, children, ref, ...props }: InputIconProps
       ref={ref}
       aria-hidden="true"
       className={cn(
-        "input-icon flex items-center px-3 text-(--color-foreground-subtle) [&_svg]:size-4",
+        "input-icon flex shrink-0 items-center pl-3 text-(--color-foreground-subtle) [&_svg]:size-4",
+        // Only pad the far side when the icon isn't adjacent to the control,
+        // so a leading icon sits close to the text it labels.
+        "first:pr-2 last:pr-3 last:pl-2",
         className,
       )}
       {...props}

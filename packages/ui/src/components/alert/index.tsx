@@ -46,7 +46,9 @@ function AlertIcon({ className, children, ref, ...props }: AlertIconProps) {
       ref={ref}
       aria-hidden="true"
       className={cn(
-        "alert-icon mt-0.5 inline-flex shrink-0 [&_svg]:size-5",
+        // `mt-px` rather than `mt-0.5`: optically centres a 20px glyph against
+        // the cap-height of a semibold 16/24 title.
+        "alert-icon mt-px inline-flex shrink-0 [&_svg]:size-5",
         alertIconColor[variant],
         className,
       )}
@@ -73,7 +75,10 @@ function AlertTitle({ className, children, ref, ...props }: AlertSlotProps) {
   return (
     <div
       ref={ref}
-      className={cn("alert-title font-semibold text-(--color-foreground)", className)}
+      className={cn(
+        "alert-title font-semibold tracking-tight text-(--color-foreground)",
+        className,
+      )}
       {...props}
     >
       {children}

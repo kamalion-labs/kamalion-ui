@@ -18,29 +18,34 @@ function createText(tag: ElementType, base: string, displayName: string) {
 
 const fg = "text-(--color-foreground)";
 
+// Headings map onto the semantic ramp in `styles/typography.css`, which
+// carries size, line-height, weight AND optical tracking together. Tracking
+// tightens with size rather than being a flat `tracking-tight` everywhere —
+// Inter applies no optical sizing of its own, so large type set at default
+// tracking reads loose and unresolved.
 const TextH1 = createText(
   "h1",
-  cn(fg, "scroll-m-20 text-4xl font-bold tracking-tight text-balance"),
+  cn(fg, "scroll-m-20 text-display text-balance"),
   "Text.H1",
 );
 const TextH2 = createText(
   "h2",
-  cn(fg, "scroll-m-20 text-3xl font-semibold tracking-tight"),
+  cn(fg, "scroll-m-20 text-title text-balance"),
   "Text.H2",
 );
 const TextH3 = createText(
   "h3",
-  cn(fg, "scroll-m-20 text-2xl font-semibold tracking-tight"),
+  cn(fg, "scroll-m-20 text-subtitle text-balance"),
   "Text.H3",
 );
 const TextH4 = createText(
   "h4",
-  cn(fg, "scroll-m-20 text-xl font-semibold tracking-tight"),
+  cn(fg, "scroll-m-20 text-section"),
   "Text.H4",
 );
 const TextH5 = createText(
   "h5",
-  cn(fg, "text-lg font-semibold"),
+  cn(fg, "text-lg font-semibold tracking-tight"),
   "Text.H5",
 );
 const TextH6 = createText(
@@ -48,14 +53,17 @@ const TextH6 = createText(
   cn(fg, "text-base font-semibold"),
   "Text.H6",
 );
+// Prose, not UI chrome — stays at 1rem/1.75 for comfortable long-form reading.
+// The 0.875rem "body" in DESIGN.md describes UI text (labels, cells, buttons),
+// which components hit via `text-sm` / `text-body`.
 const TextParagraph = createText(
   "p",
-  cn(fg, "text-base leading-7"),
+  cn(fg, "text-base leading-7 text-pretty"),
   "Text.Paragraph",
 );
 const TextLead = createText(
   "p",
-  "text-xl text-(--color-foreground-muted)",
+  "text-xl leading-relaxed text-pretty text-(--color-foreground-muted)",
   "Text.Lead",
 );
 const TextLarge = createText("div", cn(fg, "text-lg font-semibold"), "Text.Large");
@@ -76,7 +84,7 @@ const TextCaption = createText(
 );
 const TextCode = createText(
   "code",
-  "relative rounded-(--radius-card) bg-(--color-surface-panel-muted) px-1.5 py-0.5 font-mono text-sm text-(--color-foreground)",
+  "relative rounded-(--radius-inline) bg-(--color-surface-panel-muted) px-1.5 py-0.5 font-mono text-[0.85em] text-(--color-foreground)",
   "Text.Code",
 );
 const TextBlockquote = createText(

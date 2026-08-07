@@ -1,11 +1,18 @@
 import { Loader2 } from "lucide-react";
 import { cn } from "../../util";
-import type { LoadingGlobalProps, LoadingLocalProps, LoadingSize } from "./types";
+import type {
+  LoadingGlobalProps,
+  LoadingLocalProps,
+  LoadingSize,
+  LoadingSkeletonProps,
+  SkeletonVariant,
+} from "./types";
 
 const spinnerSize: Record<LoadingSize, string> = {
   sm: "size-4",
   md: "size-6",
   lg: "size-8",
+  xl: "size-10",
 };
 
 function LoadingLocal({
@@ -39,6 +46,7 @@ function LoadingLocal({
 
 function LoadingGlobal({
   open = true,
+  size = "xl",
   label,
   className,
   classNameSpinner,
@@ -59,7 +67,11 @@ function LoadingGlobal({
       {...props}
     >
       <Loader2
-        className={cn("size-10 animate-spin text-(--color-accent)", classNameSpinner)}
+        className={cn(
+          "animate-spin text-(--color-accent)",
+          spinnerSize[size],
+          classNameSpinner,
+        )}
         aria-hidden="true"
       />
       {label ? (
@@ -70,13 +82,58 @@ function LoadingGlobal({
   );
 }
 
+const skeletonVariant: Record<SkeletonVariant, string> = {
+  text: "h-4 w-full rounded-(--radius-inline)",
+  circle: "size-10 rounded-(--radius-pill)",
+  rect: "h-24 w-full rounded-(--radius-control)",
+};
+
+/**
+ * Placeholder shape for content that is still loading.
+ *
+ * Prefer this over a centred spinner for list and table loading states: it
+ * reserves the layout, so nothing jumps when the data resolves.
+ */
+function LoadingSkeleton({
+  variant = "text",
+  lines = 1,
+  className,
+  ref,
+  ...props
+}: LoadingSkeletonProps) {
+  const base = cn(
+    "loading-skeleton animate-pulse bg-(--color-surface-panel-muted)",
+    skeletonVariant[variant],
+  );
+
+  if (variant === "text" && lines > 1) {
+    return (
+      <div
+        ref={ref}
+        aria-hidden="true"
+        className={cn("flex flex-col gap-2", className)}
+        {...props}
+      >
+        {Array.from({ length: lines }, (_, i) => (
+          // Ragged last line reads as a paragraph rather than a solid block.
+          <div key={i} className={cn(base, i === lines - 1 && "w-3/5")} />
+        ))}
+      </div>
+    );
+  }
+
+  return <div ref={ref} aria-hidden="true" className={cn(base, className)} {...props} />;
+}
+
 /**
  * Visual indicators for background activity. `Loading.Local` is an inline
- * spinner; `Loading.Global` is a full-page translucent overlay.
+ * spinner, `Loading.Global` a full-page translucent overlay, and
+ * `Loading.Skeleton` a layout-preserving content placeholder.
  */
 export const Loading = Object.assign(LoadingLocal, {
   Local: LoadingLocal,
   Global: LoadingGlobal,
+  Skeleton: LoadingSkeleton,
 });
 
 export type * from "./types";

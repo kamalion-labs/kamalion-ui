@@ -1,10 +1,27 @@
-import { X } from "lucide-react";
+import {
+  Bell,
+  CheckCircle2,
+  Info,
+  TriangleAlert,
+  X,
+  XCircle,
+  type LucideIcon,
+} from "lucide-react";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "../../util";
 import { ToastContext, useToast } from "./context";
-import { toastVariants } from "./variants";
+import { toastIconChip, toastVariants } from "./variants";
 import type { ToastItem, ToastOptions } from "./types";
+
+/** Same glyph vocabulary as Alert, so the two read as one system. */
+const iconByVariant: Record<string, LucideIcon> = {
+  default: Bell,
+  success: CheckCircle2,
+  danger: XCircle,
+  warning: TriangleAlert,
+  info: Info,
+};
 
 export interface ToastProviderProps {
   children?: ReactNode;
@@ -27,6 +44,8 @@ function ToastCard({
   }, []);
 
   const shown = entered && item.open;
+  const variant = item.variant ?? "default";
+  const Icon = iconByVariant[variant] ?? Bell;
 
   return (
     <li
@@ -34,13 +53,25 @@ function ToastCard({
       aria-live="polite"
       className={cn(
         toastVariants({ variant: item.variant }),
-        "transition-all duration-200 ease-out",
-        shown ? "translate-x-0 opacity-100" : "translate-x-4 opacity-0",
+        "transition-[transform,opacity] duration-(--duration-normal) ease-standard",
+        shown
+          ? "translate-x-0 scale-100 opacity-100"
+          : "translate-x-2 scale-[0.98] opacity-0",
       )}
     >
-      <div className="flex min-w-0 flex-1 flex-col gap-1">
+      <span
+        aria-hidden="true"
+        className={cn(
+          "toast-icon flex size-8 shrink-0 items-center justify-center rounded-(--radius-control)",
+          toastIconChip[variant],
+        )}
+      >
+        <Icon className="size-4" />
+      </span>
+
+      <div className="flex min-w-0 flex-1 flex-col gap-0.5 pt-1">
         {item.title ? (
-          <div className="text-sm font-semibold text-(--color-foreground)">
+          <div className="text-sm font-semibold tracking-tight text-(--color-foreground)">
             {item.title}
           </div>
         ) : null}
@@ -50,11 +81,17 @@ function ToastCard({
           </div>
         ) : null}
       </div>
+
       <button
         type="button"
         aria-label="Close"
         onClick={() => onClose(item.id)}
-        className="shrink-0 rounded-(--radius-card) p-1 text-(--color-foreground-subtle) transition-colors hover:bg-(--color-surface-panel-muted) hover:text-(--color-foreground)"
+        className={cn(
+          "-mt-1 -mr-1 flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-(--radius-inline)",
+          "text-(--color-foreground-subtle) transition-colors",
+          "hover:bg-(--color-surface-panel-hover) hover:text-(--color-foreground)",
+          "outline-none focus-ring",
+        )}
       >
         <X className="size-4" />
       </button>
@@ -106,7 +143,10 @@ export function ToastProvider({ children, duration = 4000 }: ToastProviderProps)
       {children}
       {mounted &&
         createPortal(
-          <ol className="toast-viewport fixed top-0 right-0 z-[100] flex max-h-screen w-full flex-col gap-2 p-4 sm:w-auto">
+          // `pointer-events-none` matters: on mobile this `<ol>` is full-width
+          // and would otherwise swallow taps across the whole top strip even
+          // with zero toasts queued. Each card re-enables events on itself.
+          <ol className="toast-viewport pointer-events-none fixed top-0 right-0 z-100 flex max-h-screen w-full flex-col gap-2 p-4 sm:w-auto">
             {items.map((item) => (
               <ToastCard key={item.id} item={item} onClose={dismiss} />
             ))}

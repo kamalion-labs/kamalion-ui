@@ -28,9 +28,13 @@ export type AvatarOverlayPlacement =
   | "top-left"
   | "bottom-left";
 
+export type AvatarStatus = "online" | "offline" | "busy" | "away";
+
 export interface AvatarOverlayProps
   extends React.HTMLAttributes<HTMLSpanElement> {
   placement?: AvatarOverlayPlacement;
+  /** Presence tone. Defaults to `online`. */
+  status?: AvatarStatus;
   className?: string;
   ref?: React.Ref<HTMLSpanElement>;
 }

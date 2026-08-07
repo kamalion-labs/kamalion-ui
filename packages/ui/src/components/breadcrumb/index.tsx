@@ -18,7 +18,9 @@ function BreadcrumbRoot({
   ...props
 }: BreadcrumbProps) {
   const items = Children.toArray(children).filter(isValidElement);
-  const sep = separator ?? <ChevronRight className="size-4" aria-hidden="true" />;
+  const sep = separator ?? (
+    <ChevronRight className="size-3.5 opacity-60" aria-hidden="true" />
+  );
 
   return (
     <nav
@@ -80,7 +82,11 @@ function BreadcrumbLink({
     <Component
       ref={ref}
       className={cn(
-        "breadcrumb-link text-(--color-foreground-muted) transition-colors hover:text-(--color-foreground)",
+        // `-mx-1 px-1` keeps the focus ring off the text without shifting the
+        // trail's optical alignment. The link had no focus indicator at all.
+        "breadcrumb-link -mx-1 max-w-40 truncate rounded-(--radius-inline) px-1",
+        "text-(--color-foreground-muted) transition-colors hover:text-(--color-foreground)",
+        "outline-none focus-ring",
         className,
       )}
       {...props}
@@ -101,7 +107,7 @@ function BreadcrumbCurrent({
       ref={ref}
       aria-current="page"
       className={cn(
-        "breadcrumb-current font-medium text-(--color-foreground)",
+        "breadcrumb-current max-w-52 truncate font-medium text-(--color-foreground)",
         className,
       )}
       {...props}

@@ -1,4 +1,13 @@
-import { Home } from "lucide-react";
+import {
+  CalendarDays,
+  ChartNoAxesColumn,
+  Clapperboard,
+  FolderOpen,
+  Home,
+  Images,
+  Lock,
+  Users,
+} from "lucide-react";
 import { Navbar, Page, Resizable, Text, usePage } from "@kamalion/web-ui";
 
 function DashboardView() {
@@ -39,17 +48,45 @@ export function AppShellPage() {
                 </Navbar.Header>
                 <Navbar.Content>
                   <Navbar.Menu>
-                    <Navbar.Menu.Item active>
-                      <Home />
+                    <Navbar.Menu.Item active icon={<Home />} trailing="128">
                       Home
                     </Navbar.Menu.Item>
+                    <Navbar.Menu.Item icon={<Users />} trailing="58">
+                      People
+                    </Navbar.Menu.Item>
+                    <Navbar.Menu.Item icon={<Lock />} trailing={<Lock />}>
+                      Archived
+                    </Navbar.Menu.Item>
+
+                    <Navbar.Menu.Category>Projects</Navbar.Menu.Category>
+
+                    {/* Parent and children both carry icons; the submenu
+                        indents so its icons align under this label. */}
                     <Navbar.Menu.Item defaultOpen>
-                      <Navbar.Menu.Item.Trigger>
+                      <Navbar.Menu.Item.Trigger icon={<FolderOpen />}>
+                        Media Type
+                      </Navbar.Menu.Item.Trigger>
+                      <Navbar.Menu.Item.Content>
+                        <Navbar.Menu.Item icon={<Images />} trailing="1,284">
+                          Memories
+                        </Navbar.Menu.Item>
+                        <Navbar.Menu.Item icon={<Clapperboard />} trailing="146">
+                          Video
+                        </Navbar.Menu.Item>
+                      </Navbar.Menu.Item.Content>
+                    </Navbar.Menu.Item>
+
+                    <Navbar.Menu.Item>
+                      <Navbar.Menu.Item.Trigger icon={<ChartNoAxesColumn />}>
                         Reports
                       </Navbar.Menu.Item.Trigger>
                       <Navbar.Menu.Item.Content>
-                        <Navbar.Menu.Item>Monthly</Navbar.Menu.Item>
-                        <Navbar.Menu.Item>Yearly</Navbar.Menu.Item>
+                        <Navbar.Menu.Item icon={<CalendarDays />}>
+                          Monthly
+                        </Navbar.Menu.Item>
+                        <Navbar.Menu.Item icon={<CalendarDays />}>
+                          Yearly
+                        </Navbar.Menu.Item>
                       </Navbar.Menu.Item.Content>
                     </Navbar.Menu.Item>
                   </Navbar.Menu>

@@ -2,6 +2,7 @@ import { useId, type HTMLAttributes, type ReactNode } from "react";
 import type { FieldPath, FieldValues } from "react-hook-form";
 import { cn } from "../../../util";
 import { InputContext } from "../context";
+import type { ControlShape, ControlSize } from "../variants";
 
 export interface InputProps<T extends FieldValues = FieldValues>
   extends Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
@@ -10,19 +11,28 @@ export interface InputProps<T extends FieldValues = FieldValues>
   required?: boolean;
   disabled?: boolean;
   id?: string;
+  /**
+   * Control height, shared with Button: `sm` 32px, `md` 40px (default),
+   * `lg` 48px. Applies to every control nested in this field.
+   */
+  size?: ControlSize;
+  /** `control` = rounded rect (default); `pill` = capsule, for search bars. */
+  shape?: ControlShape;
   className?: string;
   children: ReactNode;
 }
 
 /**
  * Structural wrapper for a form field. Establishes shared context (id, name,
- * required) for its Label and control subcomponents.
+ * required, geometry) for its Label and control subcomponents.
  */
 export function InputRoot<T extends FieldValues = FieldValues>({
   name,
   required,
   disabled,
   id,
+  size,
+  shape,
   className,
   children,
   ...props
@@ -35,6 +45,8 @@ export function InputRoot<T extends FieldValues = FieldValues>({
         id: id ?? autoId,
         required,
         disabled,
+        size,
+        shape,
       }}
     >
       <div

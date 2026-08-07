@@ -1,4 +1,11 @@
-import { ChevronDown, ChevronsUpDown, ChevronUp } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  ChevronsUpDown,
+  ChevronUp,
+} from "lucide-react";
+import { Button } from "../button";
 import { cn } from "../../util";
 import type {
   TableCellProps,
@@ -15,7 +22,9 @@ function TableContainer({ className, ref, ...props }: TableContainerProps) {
     <div
       ref={ref}
       className={cn(
-        "table-container w-full overflow-x-auto rounded-(--radius-card) border border-(--color-surface-panel-border)",
+        // `bg-*` so the header isn't the only opaque band in the container —
+        // without it the table reads as a floating header over the page.
+        "table-container w-full overflow-x-auto rounded-(--radius-card) border border-(--color-surface-panel-border) bg-(--color-surface-panel)",
         className,
       )}
       {...props}
@@ -23,12 +32,13 @@ function TableContainer({ className, ref, ...props }: TableContainerProps) {
   );
 }
 
-function TableRoot({ className, ref, ...props }: TableProps) {
+function TableRoot({ density = "default", className, ref, ...props }: TableProps) {
   return (
     <table
       ref={ref}
+      data-density={density}
       className={cn(
-        "table w-full border-collapse text-left text-sm text-(--color-foreground)",
+        "table group/table w-full border-collapse text-left text-sm text-(--color-foreground)",
         className,
       )}
       {...props}
@@ -41,7 +51,12 @@ function TableHeader({ className, ref, ...props }: TableSectionProps) {
     <thead
       ref={ref}
       className={cn(
-        "table-header border-b border-(--color-border) bg-(--color-surface-panel-muted)",
+        // Header sits on the PANEL surface and hovered rows on panel-muted.
+        // The reverse (which this was) made a hovered row the exact colour of
+        // the header, so the header stopped reading as a header.
+        // `sticky` also delivers the theme's pinned-header gesture for free
+        // whenever the container scrolls.
+        "table-header sticky top-0 z-10 border-b border-(--color-border) bg-(--color-surface-panel)",
         className,
       )}
       {...props}
@@ -65,6 +80,7 @@ function TableRow({ className, ref, ...props }: TableRowProps) {
       ref={ref}
       className={cn(
         "table-row transition-colors hover:bg-(--color-surface-panel-muted)",
+        "data-[selected]:bg-(--color-accent-subtle)",
         className,
       )}
       {...props}
@@ -99,7 +115,12 @@ function TableHead({
             : undefined
       }
       className={cn(
-        "table-head px-4 py-3 font-medium text-(--color-foreground-muted)",
+        // The "Caption / Small" treatment from DESIGN.md §3 — uppercase at a
+        // wider tracking is what makes a table read as a table at a glance,
+        // and it visually separates the header band from the data below it.
+        "table-head px-4 py-2.5 text-caption font-medium tracking-wider text-(--color-foreground-subtle) uppercase",
+        "first:pl-5 last:pr-5",
+        "group-data-[density=compact]/table:py-1.5",
         className,
       )}
       {...props}
@@ -108,10 +129,23 @@ function TableHead({
         <button
           type="button"
           onClick={onSort}
-          className="inline-flex items-center gap-1 transition-colors hover:text-(--color-foreground)"
+          className={cn(
+            "group inline-flex cursor-pointer items-center gap-1 rounded-(--radius-inline) transition-colors",
+            "hover:text-(--color-foreground)",
+            "outline-none focus-ring",
+          )}
         >
           {children}
-          <SortIcon className="size-3.5" />
+          {/* Idle columns keep the affordance hidden — a full-opacity chevron
+              on every column is pure noise on a dense table. */}
+          <SortIcon
+            className={cn(
+              "size-3.5 shrink-0 transition-opacity",
+              sortDirection
+                ? "text-(--color-accent) opacity-100"
+                : "opacity-0 group-hover:opacity-60 group-focus-visible:opacity-100",
+            )}
+          />
         </button>
       ) : (
         children
@@ -124,7 +158,11 @@ function TableCell({ className, ref, ...props }: TableCellProps) {
   return (
     <td
       ref={ref}
-      className={cn("table-cell px-4 py-3 align-middle", className)}
+      className={cn(
+        "table-cell px-4 py-2.5 align-middle first:pl-5 last:pr-5",
+        "group-data-[density=compact]/table:py-1.5",
+        className,
+      )}
       {...props}
     />
   );
@@ -143,9 +181,6 @@ function TablePagination({
   const from = total === 0 ? 0 : (page - 1) * pageSize + 1;
   const to = Math.min(page * pageSize, total);
 
-  const navBtn =
-    "rounded-(--radius-card) border border-(--color-border) px-3 py-1.5 text-sm transition-colors hover:bg-(--color-surface-panel-muted) disabled:pointer-events-none disabled:opacity-50";
-
   return (
     <div
       ref={ref}
@@ -156,28 +191,37 @@ function TablePagination({
       {...props}
     >
       <span>
-        {from}–{to} of {total}
+        <span className="font-medium text-(--color-foreground)">
+          {from}–{to}
+        </span>{" "}
+        of {total}
       </span>
       <div className="flex items-center gap-2">
-        <button
-          type="button"
-          className={navBtn}
+        {/* Reuses the real Button rather than a local class string, so
+            pagination inherits the system's geometry, focus and motion. */}
+        <Button
+          variant="outline"
+          size="sm"
+          aria-label="Previous page"
           disabled={page <= 1}
           onClick={() => onPageChange(page - 1)}
         >
+          <ChevronLeft className="size-4" />
           Previous
-        </button>
-        <span className="text-(--color-foreground)">
+        </Button>
+        <span className="tabular-nums text-(--color-foreground)">
           {page} / {totalPages}
         </span>
-        <button
-          type="button"
-          className={navBtn}
+        <Button
+          variant="outline"
+          size="sm"
+          aria-label="Next page"
           disabled={page >= totalPages}
           onClick={() => onPageChange(page + 1)}
         >
           Next
-        </button>
+          <ChevronRight className="size-4" />
+        </Button>
       </div>
     </div>
   );

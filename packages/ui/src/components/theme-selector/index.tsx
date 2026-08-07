@@ -5,6 +5,10 @@ import { useTheme, type Theme } from "../theme";
 
 export interface ThemeSelectorProps {
   className?: string;
+  /** Styles each segment. Required by the Styling Exposition rule. */
+  classNameItem?: string;
+  classNameIcon?: string;
+  classNameLabel?: string;
   /** Hide the "system" option. */
   hideSystem?: boolean;
 }
@@ -16,7 +20,13 @@ const options: { value: Theme; label: string; icon: typeof Sun }[] = [
 ];
 
 /** Segmented control for switching between light / dark / system themes. */
-export function ThemeSelector({ className, hideSystem }: ThemeSelectorProps) {
+export function ThemeSelector({
+  className,
+  classNameItem,
+  classNameIcon,
+  classNameLabel,
+  hideSystem,
+}: ThemeSelectorProps) {
   const { theme, setTheme } = useTheme();
   const items = hideSystem
     ? options.filter((o) => o.value !== "system")
@@ -38,13 +48,18 @@ export function ThemeSelector({ className, hideSystem }: ThemeSelectorProps) {
           value={value}
           aria-label={label}
           className={cn(
-            "flex items-center gap-1.5 rounded-(--radius-pill) px-2.5 py-1 text-xs font-medium text-(--color-foreground-muted) transition-colors",
+            "theme-selector-item flex cursor-pointer items-center gap-1.5 rounded-(--radius-pill) px-2.5 py-1",
+            "text-xs font-medium text-(--color-foreground-muted)",
+            "transition-[color,background-color,box-shadow] ease-standard",
             "hover:text-(--color-foreground)",
-            "data-[state=on]:bg-(--color-surface-panel) data-[state=on]:text-(--color-foreground) data-[state=on]:shadow-(--shadow-sm)",
+            "data-[state=on]:bg-(--color-surface-panel) data-[state=on]:text-(--color-foreground) data-[state=on]:shadow-(--shadow-floating)",
+            // The segments had no focus indicator at all.
+            "outline-none focus-ring",
+            classNameItem,
           )}
         >
-          <Icon className="size-3.5" />
-          <span className="hidden sm:inline">{label}</span>
+          <Icon className={cn("size-3.5 shrink-0", classNameIcon)} />
+          <span className={cn("hidden sm:inline", classNameLabel)}>{label}</span>
         </ToggleGroup.Item>
       ))}
     </ToggleGroup.Root>

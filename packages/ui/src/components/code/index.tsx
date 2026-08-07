@@ -6,7 +6,7 @@ function CodeInline({ className, children, ref, ...props }: CodeInlineProps) {
     <code
       ref={ref}
       className={cn(
-        "code-inline relative rounded-(--radius-card) bg-(--color-surface-panel-muted) px-1.5 py-0.5 font-mono text-sm text-(--color-foreground)",
+        "code-inline relative rounded-(--radius-inline) border border-(--color-border) bg-(--color-surface-panel-muted) px-1.5 py-0.5 font-mono text-[0.85em] text-(--color-foreground)",
         className,
       )}
       {...props}
@@ -27,7 +27,9 @@ function CodeBlock({
     <pre
       ref={ref}
       className={cn(
-        "code-block overflow-x-auto rounded-(--radius-panel) border border-(--color-surface-panel-border) bg-(--color-surface-panel-muted) p-4 text-sm text-(--color-foreground)",
+        "code-block overflow-x-auto rounded-(--radius-card) border border-(--color-surface-panel-border) bg-(--color-surface-panel-muted) p-4 text-sm text-(--color-foreground)",
+        // 2-wide tabs keep nested code readable inside a narrow panel.
+        "[tab-size:2]",
         className,
       )}
       {...props}

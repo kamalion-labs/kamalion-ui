@@ -1,3 +1,4 @@
+import { XCircle } from "lucide-react";
 import {
   FormProvider,
   useFormContext,
@@ -57,11 +58,17 @@ function FormErrors({ className }: FormErrorsProps) {
     <div
       role="alert"
       className={cn(
-        "form-errors rounded-(--radius-card) border border-(--color-danger-soft) bg-(--color-danger-soft) p-3 text-sm text-(--color-danger)",
+        "form-errors flex items-start gap-2.5 rounded-(--radius-card) p-3 text-sm",
+        "border border-(--color-danger-border) bg-(--color-danger-soft) text-(--color-danger-fg)",
+        "animate-in fade-in-0 slide-in-from-top-1 duration-(--duration-fast) ease-standard",
         className,
       )}
     >
-      <ul className="list-inside list-disc space-y-0.5">
+      <XCircle
+        className="mt-0.5 size-4 shrink-0 text-(--color-danger)"
+        aria-hidden="true"
+      />
+      <ul className="min-w-0 flex-1 space-y-0.5">
         {messages.map((message, index) => (
           <li key={index}>{message}</li>
         ))}
