@@ -57,7 +57,9 @@ export function TablePage() {
                 <Table.Cell>{p.name}</Table.Cell>
                 <Table.Cell>{p.role}</Table.Cell>
                 <Table.Cell>
-                  <Badge variant={p.status === "Active" ? "success" : "default"}>
+                  <Badge
+                    variant={p.status === "Active" ? "success" : "default"}
+                  >
                     {p.status}
                   </Badge>
                 </Table.Cell>
@@ -101,9 +103,7 @@ export function DataViewPage() {
 
   const filtered = useMemo(
     () =>
-      PEOPLE.filter((p) =>
-        p.name.toLowerCase().includes(search.toLowerCase()),
-      ),
+      PEOPLE.filter((p) => p.name.toLowerCase().includes(search.toLowerCase())),
     [search],
   );
   const items = filtered.slice((page - 1) * pageSize, page * pageSize);

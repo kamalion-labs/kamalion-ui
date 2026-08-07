@@ -18,9 +18,6 @@ export function ButtonRoot({
 }: ButtonProps) {
   const Component = asChild ? Slot : "button";
 
-  // Slot requires a single child, so only inject the spinner in native mode.
-  const showSpinner = loading && !asChild;
-
   return (
     <Component
       ref={ref}
@@ -33,13 +30,23 @@ export function ButtonRoot({
       aria-busy={loading || undefined}
       {...props}
     >
-      {showSpinner && (
-        <Loader2
-          className={cn("size-4 shrink-0 animate-spin", classNameSpinner)}
-          aria-hidden="true"
-        />
+      {/* In asChild mode `children` must be passed through untouched. A
+          `{cond && <Loader2/>}` expression here would still occupy a slot in
+          the children array even when false — `Children.count` counts booleans
+          — so Slot would see two children and throw. */}
+      {asChild ? (
+        children
+      ) : (
+        <>
+          {loading && (
+            <Loader2
+              className={cn("size-4 shrink-0 animate-spin", classNameSpinner)}
+              aria-hidden="true"
+            />
+          )}
+          {children}
+        </>
       )}
-      {children}
     </Component>
   );
 }

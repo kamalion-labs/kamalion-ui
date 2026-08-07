@@ -1,0 +1,7 @@
+url: http://localhost:5173
+---
+- launchApp
+- openLink:
+    link: http://localhost:5173/empty-state
+- assertVisible: "EmptyState"
+- assertVisible: "No clients yet"

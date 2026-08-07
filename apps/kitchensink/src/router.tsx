@@ -7,7 +7,10 @@ export const router = createBrowserRouter([
     path: "/",
     element: <Layout />,
     children: [
-      { index: true, element: <Navigate to={`/${demoRoutes[0].path}`} replace /> },
+      {
+        index: true,
+        element: <Navigate to={`/${demoRoutes[0].path}`} replace />,
+      },
       ...demoRoutes.map((route) => ({
         path: route.path,
         element: route.element,

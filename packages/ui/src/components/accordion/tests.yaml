@@ -1,0 +1,9 @@
+url: http://localhost:5173
+---
+- launchApp
+- openLink:
+    link: http://localhost:5173/accordion
+- assertVisible: "Accordion"
+- tapOn:
+    text: Scope
+- assertVisible: "What is being delivered"

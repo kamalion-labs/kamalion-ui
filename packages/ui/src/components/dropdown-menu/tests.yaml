@@ -1,0 +1,9 @@
+url: http://localhost:5173
+---
+- launchApp
+- openLink:
+    link: http://localhost:5173/dropdown-menu
+- assertVisible: "DropdownMenu"
+- tapOn:
+    text: Actions
+- assertVisible: "Duplicate"

@@ -76,10 +76,7 @@ export function AvatarPage() {
           <Avatar.Fallback>SM</Avatar.Fallback>
         </Avatar>
         <Avatar size="md">
-          <Avatar.Image
-            src="https://i.pravatar.cc/100?img=12"
-            alt="User"
-          />
+          <Avatar.Image src="https://i.pravatar.cc/100?img=12" alt="User" />
           <Avatar.Fallback>MD</Avatar.Fallback>
           <Avatar.Overlay />
         </Avatar>

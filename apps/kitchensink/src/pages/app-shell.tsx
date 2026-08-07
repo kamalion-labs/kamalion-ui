@@ -70,7 +70,10 @@ export function AppShellPage() {
                         <Navbar.Menu.Item icon={<Images />} trailing="1,284">
                           Memories
                         </Navbar.Menu.Item>
-                        <Navbar.Menu.Item icon={<Clapperboard />} trailing="146">
+                        <Navbar.Menu.Item
+                          icon={<Clapperboard />}
+                          trailing="146"
+                        >
                           Video
                         </Navbar.Menu.Item>
                       </Navbar.Menu.Item.Content>

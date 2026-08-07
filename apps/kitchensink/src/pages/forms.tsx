@@ -16,7 +16,13 @@ type FormValues = z.infer<typeof schema>;
 function FormBoundDemo() {
   const { toast } = useToast();
   const form = useForm<FormValues>(schema, {
-    defaultValues: { name: "", email: "", password: "", role: "editor", agree: true },
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      role: "editor",
+      agree: true,
+    },
   });
 
   return (
@@ -99,7 +105,11 @@ function StandaloneDemo() {
 
       <Input>
         <Input.Label>Bio</Input.Label>
-        <Input.TextArea value={bio} onValueChange={setBio} placeholder="About you" />
+        <Input.TextArea
+          value={bio}
+          onValueChange={setBio}
+          placeholder="About you"
+        />
       </Input>
 
       <Input>
@@ -125,8 +135,12 @@ function StandaloneDemo() {
           placeholder="Start typing…"
         >
           <Input.Autocomplete.Item value="Apple">Apple</Input.Autocomplete.Item>
-          <Input.Autocomplete.Item value="Banana">Banana</Input.Autocomplete.Item>
-          <Input.Autocomplete.Item value="Cherry">Cherry</Input.Autocomplete.Item>
+          <Input.Autocomplete.Item value="Banana">
+            Banana
+          </Input.Autocomplete.Item>
+          <Input.Autocomplete.Item value="Cherry">
+            Cherry
+          </Input.Autocomplete.Item>
           <Input.Autocomplete.Item value="Grape">Grape</Input.Autocomplete.Item>
         </Input.Autocomplete>
       </Input>

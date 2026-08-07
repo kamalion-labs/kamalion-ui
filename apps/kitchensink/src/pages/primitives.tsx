@@ -29,7 +29,9 @@ export function TextPage() {
       <Text.H2>The quick brown fox — H2</Text.H2>
       <Text.H3>The quick brown fox — H3</Text.H3>
       <Text.H4>The quick brown fox — H4</Text.H4>
-      <Text.Lead>A lead paragraph introduces the section with emphasis.</Text.Lead>
+      <Text.Lead>
+        A lead paragraph introduces the section with emphasis.
+      </Text.Lead>
       <Text.Paragraph>
         A standard body paragraph with comfortable line height for reading.
       </Text.Paragraph>

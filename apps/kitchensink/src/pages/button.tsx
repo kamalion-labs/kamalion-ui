@@ -10,8 +10,8 @@ export function ButtonPage() {
       <header>
         <h1 className="text-2xl font-semibold">Button</h1>
         <p className="text-(--color-foreground-muted)">
-          Interactive trigger element supporting variants, sizes, loading states,
-          and slot composition.
+          Interactive trigger element supporting variants, sizes, loading
+          states, and slot composition.
         </p>
       </header>
 

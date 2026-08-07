@@ -1,0 +1,10 @@
+url: http://localhost:5173
+---
+- launchApp
+- openLink:
+    link: http://localhost:5173/tabs
+- assertVisible: "Tabs"
+- assertVisible: "Pending"
+- tapOn:
+    text: Pending
+- assertVisible: "Waiting on you"

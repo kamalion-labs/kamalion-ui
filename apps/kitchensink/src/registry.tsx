@@ -19,6 +19,10 @@ import {
   TextCursorInput,
   TriangleAlert,
   Type,
+  Rows3,
+  Inbox,
+  ListTree,
+  SquareMenu,
 } from "lucide-react";
 import { ButtonPage } from "./pages/button";
 import { BoxPage, TextPage } from "./pages/primitives";
@@ -40,6 +44,12 @@ import {
 import { FormsPage } from "./pages/forms";
 import { CalendarPage, DataViewPage, TablePage } from "./pages/data";
 import { AppShellPage } from "./pages/app-shell";
+import {
+  AccordionPage,
+  DropdownMenuPage,
+  EmptyStatePage,
+  TabsPage,
+} from "./pages/navigation";
 
 export interface DemoRoute {
   /** URL path segment, e.g. "button" → /button. Matches Maestro tests.yaml. */
@@ -58,28 +68,170 @@ export interface DemoRoute {
  * The router and sidebar nav are both generated from this list.
  */
 export const demoRoutes: DemoRoute[] = [
-  { path: "box", label: "Box", group: "Primitives", icon: <SquareDashed />, element: <BoxPage /> },
-  { path: "text", label: "Text", group: "Primitives", icon: <Type />, element: <TextPage /> },
-  { path: "button", label: "Button", group: "Primitives", icon: <MousePointerClick />, element: <ButtonPage /> },
-  { path: "code", label: "Code", group: "Primitives", icon: <Code2 />, element: <CodePage /> },
+  {
+    path: "box",
+    label: "Box",
+    group: "Primitives",
+    icon: <SquareDashed />,
+    element: <BoxPage />,
+  },
+  {
+    path: "text",
+    label: "Text",
+    group: "Primitives",
+    icon: <Type />,
+    element: <TextPage />,
+  },
+  {
+    path: "button",
+    label: "Button",
+    group: "Primitives",
+    icon: <MousePointerClick />,
+    element: <ButtonPage />,
+  },
+  {
+    path: "code",
+    label: "Code",
+    group: "Primitives",
+    icon: <Code2 />,
+    element: <CodePage />,
+  },
 
-  { path: "badge", label: "Badge", group: "Display", icon: <Tag />, element: <BadgePage /> },
-  { path: "alert", label: "Alert", group: "Display", icon: <TriangleAlert />, element: <AlertPage /> },
-  { path: "avatar", label: "Avatar", group: "Display", icon: <CircleUser />, element: <AvatarPage /> },
-  { path: "loading", label: "Loading", group: "Display", icon: <LoaderCircle />, element: <LoadingPage /> },
-  { path: "breadcrumb", label: "Breadcrumb", group: "Display", icon: <ChevronsRight />, element: <BreadcrumbPage /> },
+  {
+    path: "badge",
+    label: "Badge",
+    group: "Display",
+    icon: <Tag />,
+    element: <BadgePage />,
+  },
+  {
+    path: "alert",
+    label: "Alert",
+    group: "Display",
+    icon: <TriangleAlert />,
+    element: <AlertPage />,
+  },
+  {
+    path: "avatar",
+    label: "Avatar",
+    group: "Display",
+    icon: <CircleUser />,
+    element: <AvatarPage />,
+  },
+  {
+    path: "loading",
+    label: "Loading",
+    group: "Display",
+    icon: <LoaderCircle />,
+    element: <LoadingPage />,
+  },
+  {
+    path: "breadcrumb",
+    label: "Breadcrumb",
+    group: "Display",
+    icon: <ChevronsRight />,
+    element: <BreadcrumbPage />,
+  },
 
-  { path: "tooltip", label: "Tooltip", group: "Interactive", icon: <MessageSquare />, element: <TooltipPage /> },
-  { path: "popover", label: "Popover", group: "Interactive", icon: <PanelTop />, element: <PopoverPage /> },
-  { path: "card", label: "Card", group: "Interactive", icon: <SquareStack />, element: <CardPage /> },
-  { path: "toast", label: "Toast", group: "Interactive", icon: <Bell />, element: <ToastPage /> },
-  { path: "modal", label: "Modal", group: "Interactive", icon: <AppWindow />, element: <ModalPage /> },
-  { path: "forms", label: "Form & Input", group: "Interactive", icon: <TextCursorInput />, element: <FormsPage /> },
+  {
+    path: "tooltip",
+    label: "Tooltip",
+    group: "Interactive",
+    icon: <MessageSquare />,
+    element: <TooltipPage />,
+  },
+  {
+    path: "popover",
+    label: "Popover",
+    group: "Interactive",
+    icon: <PanelTop />,
+    element: <PopoverPage />,
+  },
+  {
+    path: "card",
+    label: "Card",
+    group: "Interactive",
+    icon: <SquareStack />,
+    element: <CardPage />,
+  },
+  {
+    path: "toast",
+    label: "Toast",
+    group: "Interactive",
+    icon: <Bell />,
+    element: <ToastPage />,
+  },
+  {
+    path: "modal",
+    label: "Modal",
+    group: "Interactive",
+    icon: <AppWindow />,
+    element: <ModalPage />,
+  },
+  {
+    path: "forms",
+    label: "Form & Input",
+    group: "Interactive",
+    icon: <TextCursorInput />,
+    element: <FormsPage />,
+  },
+  {
+    path: "tabs",
+    label: "Tabs",
+    group: "Interactive",
+    icon: <Rows3 />,
+    element: <TabsPage />,
+  },
+  {
+    path: "dropdown-menu",
+    label: "DropdownMenu",
+    group: "Interactive",
+    icon: <SquareMenu />,
+    element: <DropdownMenuPage />,
+  },
+  {
+    path: "accordion",
+    label: "Accordion",
+    group: "Interactive",
+    icon: <ListTree />,
+    element: <AccordionPage />,
+  },
+  {
+    path: "empty-state",
+    label: "EmptyState",
+    group: "Display",
+    icon: <Inbox />,
+    element: <EmptyStatePage />,
+  },
 
-  { path: "table", label: "Table", group: "Data", icon: <TableIcon />, element: <TablePage /> },
-  { path: "calendar", label: "Calendar", group: "Data", icon: <CalendarDays />, element: <CalendarPage /> },
-  { path: "data-view", label: "DataView", group: "Data", icon: <LayoutList />, element: <DataViewPage /> },
-  { path: "app-shell", label: "Page & Navbar", group: "Data", icon: <PanelLeft />, element: <AppShellPage /> },
+  {
+    path: "table",
+    label: "Table",
+    group: "Data",
+    icon: <TableIcon />,
+    element: <TablePage />,
+  },
+  {
+    path: "calendar",
+    label: "Calendar",
+    group: "Data",
+    icon: <CalendarDays />,
+    element: <CalendarPage />,
+  },
+  {
+    path: "data-view",
+    label: "DataView",
+    group: "Data",
+    icon: <LayoutList />,
+    element: <DataViewPage />,
+  },
+  {
+    path: "app-shell",
+    label: "Page & Navbar",
+    group: "Data",
+    icon: <PanelLeft />,
+    element: <AppShellPage />,
+  },
 ];
 
 /** Sidebar group order. */
