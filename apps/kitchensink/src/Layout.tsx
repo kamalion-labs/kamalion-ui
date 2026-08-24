@@ -39,7 +39,8 @@ export function Layout() {
             </Navbar.Menu>
           </Navbar.Content>
 
-          <Navbar.Footer>
+          <Navbar.Footer className="justify-between">
+            <span className="text-xs font-medium text-(--color-sidebar-fg-muted) group-data-[collapsed]/navbar:hidden">Alternar Tema</span>
             <ThemeSelector />
           </Navbar.Footer>
         </Navbar>

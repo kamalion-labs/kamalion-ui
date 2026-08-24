@@ -165,10 +165,13 @@ function PageHeader({
   );
 }
 
+import { HeaderSearch } from "./HeaderSearch";
+
 const PageHeaderWithParts = Object.assign(PageHeader, {
   Title: PageHeaderTitle,
   Subtitle: PageHeaderSubtitle,
   Breadcrumb: Breadcrumb,
+  Search: HeaderSearch,
 });
 
 function PageFooter({ className, children, ...props }: SlotProps) {
@@ -315,3 +318,6 @@ export { usePage };
 // consumers composing their own header chrome around the metadata.
 export { usePageContext } from "./context";
 export type { PageMeta, PageContextValue } from "./context";
+export { HeaderSearch } from "./HeaderSearch";
+export type { HeaderSearchProps } from "./HeaderSearch";
+

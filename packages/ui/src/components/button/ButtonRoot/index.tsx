@@ -13,6 +13,7 @@ export function ButtonRoot({
   className,
   classNameSpinner,
   children,
+  type = "button",
   ref,
   ...props
 }: ButtonProps) {
@@ -28,6 +29,7 @@ export function ButtonRoot({
       )}
       disabled={disabled || (loading && !asChild)}
       aria-busy={loading || undefined}
+      type={type}
       {...props}
     >
       {/* In asChild mode `children` must be passed through untouched. A

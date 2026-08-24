@@ -20,14 +20,18 @@ export function ButtonDropdown({
   hideChevron = false,
   children,
   ref,
+  size,
   ...buttonProps
 }: ButtonDropdownProps) {
+  const isIconButton = size === "icon" || size === "icon-sm";
+  const shouldHideChevron = hideChevron || isIconButton;
+
   return (
     <Popover>
       <Popover.Trigger asChild>
-        <ButtonRoot ref={ref} {...buttonProps}>
+        <ButtonRoot ref={ref} size={size} {...buttonProps}>
           {children}
-          {!hideChevron && (
+          {!shouldHideChevron && (
             <ChevronDown className="size-4 shrink-0 opacity-70" aria-hidden="true" />
           )}
         </ButtonRoot>

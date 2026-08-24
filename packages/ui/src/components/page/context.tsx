@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 export interface PageMeta {
   title?: ReactNode;
   subtitle?: ReactNode;
+  sidebar?: ReactNode;
 }
 
 export interface PageContextValue {

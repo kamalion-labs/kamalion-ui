@@ -1,4 +1,5 @@
 import {
+  Bell,
   CalendarDays,
   ChartNoAxesColumn,
   Clapperboard,
@@ -6,9 +7,20 @@ import {
   Home,
   Images,
   Lock,
+  Settings,
+  Sparkles,
   Users,
 } from "lucide-react";
-import { Navbar, Page, Resizable, Text, usePage } from "@kamalion/web-ui";
+import {
+  Button,
+  HeaderSearch,
+  Navbar,
+  Page,
+  Resizable,
+  Text,
+  ThemeSelector,
+  usePage,
+} from "@kamalion/web-ui";
 
 function DashboardView() {
   usePage({
@@ -101,7 +113,24 @@ export function AppShellPage() {
 
             <Resizable.Panel minSize={30}>
               <div className="flex h-full flex-col">
-                <Page.Header />
+                <Page.Header
+                  actions={
+                    <div className="flex items-center gap-2">
+                      <HeaderSearch placeholder="Search library…" />
+                      <Button variant="soft" size="sm" className="rounded-full gap-1.5 text-xs bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 border border-indigo-500/20">
+                        <Sparkles className="size-3.5" />
+                        <span>Ask AI</span>
+                      </Button>
+                      <Button variant="glass" size="icon-sm" aria-label="Notifications">
+                        <Bell className="size-3.5" />
+                      </Button>
+                      <Button variant="glass" size="icon-sm" aria-label="Settings">
+                        <Settings className="size-3.5" />
+                      </Button>
+                      <ThemeSelector />
+                    </div>
+                  }
+                />
                 <DashboardView />
               </div>
             </Resizable.Panel>

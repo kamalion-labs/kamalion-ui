@@ -14,7 +14,42 @@
     /* Reserve the scrollbar gutter so the modal's scroll-lock doesn't shift
      * the whole page sideways when a dialog opens. */
     scrollbar-gutter: stable;
-    scrollbar-color: var(--color-border-hover) transparent;
+  }
+
+  /* WebKit / Chromium browsers (Chrome, Edge, Safari, Opera) */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-border-hover);
+    border-radius: var(--radius-pill, 9999px);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-foreground-muted);
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-button {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  /* Firefox fallback — prevents Chromium from disabling ::-webkit-scrollbar */
+  @supports not selector(::-webkit-scrollbar) {
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-border-hover) transparent;
+    }
   }
 
   /* Headings wrap on meaning rather than on the right margin; body copy avoids

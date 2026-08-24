@@ -74,8 +74,8 @@ function NavbarHeader({ className, children, ...props }: SectionProps) {
   return (
     <div
       className={cn(
-        "navbar-header flex h-10 shrink-0 items-center gap-2 px-2 font-semibold tracking-tight text-(--color-foreground)",
-        "group-data-[collapsed]/navbar:justify-center group-data-[collapsed]/navbar:px-0",
+        "navbar-header flex h-11 shrink-0 items-center gap-2 px-2 font-semibold tracking-tight text-(--color-foreground)",
+        "group-data-[collapsed]/navbar:h-auto group-data-[collapsed]/navbar:flex-col group-data-[collapsed]/navbar:items-center group-data-[collapsed]/navbar:justify-center group-data-[collapsed]/navbar:gap-2 group-data-[collapsed]/navbar:px-0 group-data-[collapsed]/navbar:py-1",
         className,
       )}
       {...props}
@@ -104,7 +104,7 @@ function NavbarContent({ className, children, ...props }: SectionProps) {
   return (
     <div
       className={cn(
-        "navbar-content flex-1 overflow-y-auto",
+        "navbar-content flex-1 overflow-y-auto pt-3",
         className,
       )}
       {...props}
@@ -116,20 +116,29 @@ function NavbarContent({ className, children, ...props }: SectionProps) {
 
 function NavbarTrigger({ className }: { className?: string }) {
   const { collapsed, setCollapsed } = useNavbarContext();
+  const label = collapsed ? "Expandir menu" : "Recolher menu";
+
   return (
-    <button
-      type="button"
-      aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-      onClick={() => setCollapsed(!collapsed)}
-      className={cn(
-        "navbar-trigger flex size-8 cursor-pointer items-center justify-center rounded-(--radius-control) text-(--color-sidebar-fg)",
-        "transition-colors hover:bg-(--color-sidebar-active-bg) hover:text-(--color-sidebar-active-fg)",
-        "outline-none focus-ring",
-        className,
-      )}
-    >
-      <PanelLeft className="size-4" />
-    </button>
+    <Tooltip>
+      <Tooltip.Trigger asChild>
+        <button
+          type="button"
+          aria-label={label}
+          onClick={() => setCollapsed(!collapsed)}
+          className={cn(
+            "navbar-trigger flex size-8 cursor-pointer items-center justify-center rounded-(--radius-control) text-(--color-sidebar-fg)",
+            "transition-all duration-150 ease-standard hover:bg-(--color-sidebar-active-bg) hover:text-(--color-sidebar-active-fg)",
+            "active:scale-95 outline-none focus-ring",
+            className,
+          )}
+        >
+          <PanelLeft className="size-4" />
+        </button>
+      </Tooltip.Trigger>
+      <Tooltip.Content side={collapsed ? "right" : "bottom"} sideOffset={8}>
+        {label}
+      </Tooltip.Content>
+    </Tooltip>
   );
 }
 
