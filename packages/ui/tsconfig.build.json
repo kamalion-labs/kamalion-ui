@@ -1,0 +1,29 @@
+{
+  // Config usada SO para emitir os .d.ts do pacote publicado.
+  //
+  // O `tsconfig.json` normal tem `noEmit: true` + `allowImportingTsExtensions`,
+  // que sao incompativeis com emissao. Em vez de mexer nele (e arriscar o
+  // typecheck e o editor), esta variante isola o que o build precisa.
+  //
+  // O JS e emitido pelo Vite (lib mode, um modulo por arquivo); aqui saem
+  // apenas as declaracoes, no mesmo layout, para `exports` apontar os dois
+  // para `dist/`.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "allowImportingTsExtensions": false,
+    "declarationMap": false,
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "include": ["src"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/stories.tsx",
+    "**/*.stories.tsx",
+    "src/vite"
+  ]
+}

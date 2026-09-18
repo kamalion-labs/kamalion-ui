@@ -1,6 +1,6 @@
 {
   "name": "@kamalion/web-ui",
-  "version": "3.0.0-next.1",
+  "version": "3.0.0-next.2",
   "description": "React UI library for the Kamalion ecosystem (Tailwind CSS v4, source-distributed).",
   "license": "MIT",
   "type": "module",
@@ -8,19 +8,20 @@
     "**/*.css"
   ],
   "files": [
-    "src"
+    "dist"
   ],
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     },
     "./vite": {
-      "types": "./src/vite/index.d.mts",
-      "default": "./src/vite/index.mjs"
+      "types": "./dist/vite/index.d.mts",
+      "default": "./dist/vite/index.mjs"
     },
-    "./styles": "./src/styles/index.css",
-    "./styles/*": "./src/styles/*"
+    "./styles": "./dist/styles/index.css",
+    "./styles/*": "./dist/styles/*",
+    "./package.json": "./package.json"
   },
   "publishConfig": {
     "access": "public"
@@ -28,7 +29,11 @@
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "build": "vite build && tsc -p tsconfig.build.json && node scripts/build-css.mjs",
+    "build:js": "vite build",
+    "build:types": "tsc -p tsconfig.build.json",
+    "build:css": "node scripts/build-css.mjs"
   },
   "peerDependencies": {
     "react": "^19.2.0",
@@ -77,5 +82,8 @@
     "@vitejs/plugin-react": "^4.3.4",
     "storybook": "^8.4.7",
     "vite": "^6.0.7"
-  }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts"
 }

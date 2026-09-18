@@ -23,13 +23,8 @@
  * relative to that file wherever the package physically lives) — not here.
  */
 
-import { fileURLToPath } from "node:url";
-import path from "node:path";
 import tailwindcss from "@tailwindcss/vite";
-
-const here = path.dirname(fileURLToPath(import.meta.url));
-// here === <pkg>/src/vite  →  pkgSrc === <pkg>/src
-const pkgSrc = path.resolve(here, "..");
+import { stripColorMixFallbacks } from "./strip-color-mix-fallbacks.js";
 
 const VIRTUAL_ID = "virtual:kamalion.css";
 const RESOLVED_VIRTUAL_ID = "\0" + VIRTUAL_ID;
@@ -41,29 +36,73 @@ const RESOLVED_VIRTUAL_ID = "\0" + VIRTUAL_ID;
 export function kamalion(options = {}) {
   const { injectStyles = false } = options;
 
-  /** @type {import("vite").Plugin} */
+  /**
+   * O alias que existia aqui apontava o specifier `@kamalion/web-ui` para
+   * `<pkg>/src/index.ts`, porque a lib era publicada como codigo-fonte. Agora
+   * ela e publicada compilada e o `exports` do package.json resolve sozinho —
+   * manter o alias quebraria, porque este arquivo passou a morar em
+   * `dist/vite/` e o caminho relativo cairia em `dist/index.ts`, que nao existe.
+   *
+   * O que sobra e garantir instancia unica das bibliotecas com contexto: duas
+   * copias de react-hook-form fazem o FormProvider nao alcancar os campos, e
+   * duas de zod quebram `instanceof` entre schemas.
+   */
   const glue = {
     name: "kamalion",
     enforce: "pre",
     config() {
       return {
+        optimizeDeps: { include: ["@kamalion/web-ui"] },
         resolve: {
-          alias: [
-            // Exact-match only: the bare specifier resolves to the source
-            // entry, while subpaths like `@kamalion/web-ui/styles` are left
-            // for the package `exports` map to resolve.
-            {
-              find: /^@kamalion\/web-ui$/,
-              replacement: path.join(pkgSrc, "index.ts"),
-            },
+          dedupe: [
+            "react",
+            "react-dom",
+            "react-hook-form",
+            "@hookform/resolvers",
+            "zod",
+            "lucide-react",
+            "react-day-picker",
           ],
         },
       };
     },
   };
 
+  /**
+   * Remove os fallbacks progressivos de `color-mix()` que o Tailwind v4 emite.
+   *
+   * Para cada utilitario de cor ele gera o par "valor simples" + o valor real
+   * dentro de `@supports (color: color-mix(in lab, red, red))`. Todo browser
+   * alvo suporta `color-mix` nativamente, entao o par vira so a declaracao
+   * real. Medido no kitchensink: 57 blocos.
+   *
+   * Sao dois hooks porque o Tailwind trabalha em fases diferentes: em dev o
+   * CSS ja esta pronto no `transform`, mas no build ele so e emitido como
+   * asset no fim — sem o `generateBundle` a otimizacao valeria so em dev.
+   */
+  /** @type {import("vite").Plugin} */
+  const semColorMix = {
+    name: "kamalion:strip-color-mix",
+    transform(code, id) {
+      if (!/\.css(\?|$)/.test(id)) return null;
+      const { css, unwrapped } = stripColorMixFallbacks(code);
+      return unwrapped === 0 ? null : { code: css, map: null };
+    },
+    generateBundle(_options, bundle) {
+      for (const file of Object.values(bundle)) {
+        if (file.type !== "asset" || !file.fileName.endsWith(".css")) continue;
+        const original =
+          typeof file.source === "string"
+            ? file.source
+            : Buffer.from(file.source).toString("utf8");
+        const { css, unwrapped } = stripColorMixFallbacks(original);
+        if (unwrapped > 0) file.source = css;
+      }
+    },
+  };
+
   /** @type {import("vite").Plugin[]} */
-  const plugins = [tailwindcss(), glue];
+  const plugins = [tailwindcss(), glue, semColorMix];
 
   if (injectStyles) {
     /** @type {import("vite").Plugin} */
