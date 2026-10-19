@@ -21,6 +21,8 @@ jobs:
         with:
           node-version: 22.x
           registry-url: "https://registry.npmjs.org"
+          # v5 caches by the "packageManager" field (pnpm), but the workspace installs with npm.
+          package-manager-cache: false
 
       - run: npm ci
 
