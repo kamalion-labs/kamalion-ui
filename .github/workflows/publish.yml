@@ -16,10 +16,11 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Use Node.js 22.x
+      - name: Use Node.js 24.x
         uses: actions/setup-node@v5
         with:
-          node-version: 22.x
+          # Node 24 ships npm 11, which publishes through npm Trusted Publishing (OIDC) without a token.
+          node-version: 24.x
           registry-url: "https://registry.npmjs.org"
           # v5 caches by the "packageManager" field (pnpm), but the workspace installs with npm.
           package-manager-cache: false
@@ -34,5 +35,6 @@ jobs:
 
       # Pre-releases (e.g. 3.0.0-next.3) go to the "next" dist-tag so they don't become "latest".
       - run: npm publish --workspace @kamalion/web-ui --provenance --tag ${{ github.event.release.prerelease && 'next' || 'latest' }}
+        # Trusted Publishing (OIDC) is used when configured on npmjs.com; NPM_TOKEN is only a fallback.
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
