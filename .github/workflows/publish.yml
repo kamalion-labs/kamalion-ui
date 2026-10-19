@@ -14,21 +14,23 @@ jobs:
       packages: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v4
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v5
         with:
-          node-version: 20.x
+          node-version: 22.x
           registry-url: "https://registry.npmjs.org"
 
       - run: npm ci
 
-      # The library ships as source — there is no build step. Validate types
-      # and confirm the published tarball contains only src/** (incl. CSS).
+      # The library ships a built dist/ (JS, types, CSS and the Vite plugin). Build it first:
+      # the apps import "@kamalion/web-ui/vite" and the typecheck resolves it from dist/.
+      - run: npm run build --workspace @kamalion/web-ui
       - run: npm run typecheck
       - run: npm pack --dry-run --workspace @kamalion/web-ui
 
-      - run: npm publish --workspace @kamalion/web-ui --provenance
+      # Pre-releases (e.g. 3.0.0-next.3) go to the "next" dist-tag so they don't become "latest".
+      - run: npm publish --workspace @kamalion/web-ui --provenance --tag ${{ github.event.release.prerelease && 'next' || 'latest' }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

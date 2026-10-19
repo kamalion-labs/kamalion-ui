@@ -1,6 +1,6 @@
 {
   "name": "@kamalion/web-ui",
-  "version": "3.0.0-next.2",
+  "version": "3.0.0-next.3",
   "description": "React UI library for the Kamalion ecosystem (Tailwind CSS v4, source-distributed).",
   "license": "MIT",
   "type": "module",
@@ -30,6 +30,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "prepublishOnly": "npm run build",
     "build": "vite build && tsc -p tsconfig.build.json && node scripts/build-css.mjs",
     "build:js": "vite build",
     "build:types": "tsc -p tsconfig.build.json",
