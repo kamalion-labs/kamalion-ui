@@ -34,7 +34,8 @@ jobs:
       - run: npm pack --dry-run --workspace @kamalion/web-ui
 
       # Pre-releases (e.g. 3.0.0-next.3) go to the "next" dist-tag so they don't become "latest".
-      - run: npm publish --workspace @kamalion/web-ui --provenance --tag ${{ github.event.release.prerelease && 'next' || 'latest' }}
-        # Trusted Publishing (OIDC) is used when configured on npmjs.com; NPM_TOKEN is only a fallback.
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # Published through npm Trusted Publishing (OIDC): no token. Run from the package folder so the
+      # OIDC exchange targets @kamalion/web-ui; --loglevel verbose shows the exchange if it fails.
+      - name: npm publish
+        working-directory: packages/ui
+        run: npm publish --provenance --tag ${{ github.event.release.prerelease && 'next' || 'latest' }} --loglevel verbose
